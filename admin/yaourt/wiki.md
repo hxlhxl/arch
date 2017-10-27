@@ -1,0 +1,1 @@
+1. yaourt --needed --noconfirm -S --force redis-desktop-manager
