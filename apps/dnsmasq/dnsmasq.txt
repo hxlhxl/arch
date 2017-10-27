@@ -1,0 +1,50 @@
+ref: 
+
+不要修改dnsmasq上的一些配置，比如设置上游服务器，这样会影响DHCP分配的DNS解析
+1. install
+sudo pacman -S dnsmasq
+
+2. resolvconf
+sudo resolvconf -u
+
+3. NetworkManager
+@1. 默认工作方式
+	a、启动
+	b、默认通过dhclient、internal获取IP地址
+	c、使用DHCP获取的DNS地址，写入到/etc/resolv.conf中，导致原文件被覆盖
+		这也就是为什么修改了/etc/resolv.conf重启还是会覆盖的原因
+
+4. dhcpcd与dhcpd
+	dhcpcd是dhcp客户端
+	dhcpd是dhcp服务器
+
+在NetworkManager中配置使用dhcpcd获取IP地址，这样就可以使用/etc/resolv.conf.head和/etc/resolv.conf.tail文件了
+	如何配置？
+		/etc/NetworkManager/conf.d/dhcp.conf
+			[main]
+			dhcp=dhcpcd
+
+配置dhcpcd daemon
+	/etc/dhcpcd.conf最后加上nohook resolv.conf#
+
+添加/etc/resolv.conf.head文件
+nameserver	127.0.0.1
+
+重启就可以了
+5. 
+
+
+
+
+
+
+
+
+
+DEBUG日志
+1. 查看dhcp服务器
+/var/lib/dhcpcd/dhcpcd-wlp3s0-Mioji-Office.lease
+
+
+2. 查看NetworkManager日志
+/var/lib/NetworkManager中的日志

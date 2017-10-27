@@ -1,0 +1,32 @@
+ 
+安装ruby
+
+1. rvm
+具体情况可以到https://rvm.io/查看
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+curl -sSL https://get.rvm.io | bash -s stable
+
+2. 上面的有时候会失败
+command curl -sSL https://rvm.io/mpapis.asc | sudo gpg2 --import -
+\curl -sSL https://get.rvm.io |sudo bash -s stable
+
+3. 用户
+安装完成之后
+sudo usermod -a -G rvm husa
+    把husa用户添加到rvm组中
+    
+4. 
+source /etc/profile.d/rvm.sh
+
+
+5. rvm
+
+6. ruby gem
+[husa@ArchLinux-husa ~]$ rvm requirements
+Checking requirements for arch.
+Requirements installation successful.
+[husa@ArchLinux-husa ~]$ rvm install 2.4.1
+
+7. 设置默认版本
+rvm use 2.4.1 --default
+

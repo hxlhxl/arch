@@ -1,0 +1,17 @@
+ref: https://wiki.archlinux.org/index.php/Very_Secure_FTP_Daemon
+
+1. install
+
+sudo pacman -S vsftpd
+
+2. enable
+
+sudo systemctl enable vsftpd
+sudo systemctl start vsftpd
+
+3. config
+
+# 上传
+
+
+ 
