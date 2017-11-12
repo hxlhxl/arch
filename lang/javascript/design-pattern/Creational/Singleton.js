@@ -48,5 +48,13 @@ var solution = {
     c: function() {
         // 类负责如何初始化该实例
         // 代理负责确保唯一的实例(使用闭包的形式)
+    },
+    d: function() {
+        var getSingle = function(fn) {
+            var result;
+            return function() {
+                return result || (result = fn.apply(this,arguments));   // this可以适当替换
+            }
+        }
     }
 }
