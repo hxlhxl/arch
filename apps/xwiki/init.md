@@ -65,3 +65,15 @@ quick
 # 最大值为1G
 max_allowed_packet = 1024M
 ```
+
+
+8. 注意事项
+tomcat容器默认不会接受编码过的/或者\，所以编辑tomcat7的配置文件：
+
+```
+vim /etc/tomcat7/catalina.properties
+# 加入下面一行
+# CUSTOMIZE
+org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true
+# 重启OK
+```
