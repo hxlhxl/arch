@@ -1,20 +1,22 @@
-var timeChunk = function(ary,fn,count) {
-    var obj,
-            t;
-    var len = ary.length;
+var Person = function(name) {
+    this.name;
+};
+var p = new Person('hx');
 
-    var start = function() {
-        for (var i =0;i<Math.min(count || 1,ary.length);i++) {
-            var obj = ary.shift();
-            fn(obj);
-        }
-    };
-    return function() {
-        t = setInterval(function() {
-            if (ary.length === 0) {
-                return clearInterval(t);
-            }
-            start();
-        },200);
-    };
+console.log(p.construtor === Person);
+
+
+
+var Person = function(name) {
+    this.name;
+};
+Person.prototype = {
+    getName: function() {
+        return this.name;
+    }
 }
+var p = new Person('hx');
+
+console.log(p.construtor === Person);
+
+
