@@ -1,0 +1,4 @@
+```
+balooctl status
+balooctl disable
+```
