@@ -16,6 +16,7 @@ webpack-cache
 config/local.js
 coverage
 *.pyc
+*.out
 tags
 .idea
 *.sw*
