@@ -16,6 +16,6 @@
     1. 编译器提供的，不会对类成员初始化，垃圾值
     2. 显式构造函数，可以初始化成员和某些初始化任务
     3. 如果有实参构造函数，默认不会创建空构造函数
-
+- explict关键字用于 类构造函数只有一个参数的情况，用于避免默认隐式构造函数存在的副作用，详见：https://www.cnblogs.com/ymy124/p/3632634.html
 - 初始化
     成员初始化列表 (string name,string time) :coursename(name),coursetime(time) {}
