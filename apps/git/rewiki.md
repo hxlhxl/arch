@@ -68,6 +68,7 @@ git add FILENAME_B
 
 
 ## git log
+默认显示当前分支以及和当前分支相关的一些提交对象。
 
 - git log --pretty=oneline
 - git log --pretty=oneline --graph
@@ -76,6 +77,16 @@ git add FILENAME_B
 - git log --oneline --decorate --graph --all: 以图形方式查看提交记录，可以看到分支情况
 
 ## git reset
+本质是移动`HEAD`执行的分支、commit-id的指向
+
+三个步骤：
+    1. (默认--soft)移动HEAD指向的分支的commit-id指向(master或者其他分支的commit-id指向)
+    2. (默认--mixed)重置Index区域中现在commit-id对应的文件快照状态
+    3. (如果有--hard选项)重置WorkingDirectory下commit-id对应的文件快照状态
+
+- git reset HEAD~ --hard: 恢复到前一版本，可以撤销合并
+- git reset --hard HEAD~ readme.md: 直接更改文件状态，但是commit-id还在
+- git reset <commit-id> FILENAME: 重置FILENAME文件到指定commit-id下的内容快照状态
 
 ## git checkout
 git_checkout的本质是移动`HEAD`指针指向分支/提交SHA/TAG，并恢复快照内的内容到工作目录。
@@ -87,7 +98,7 @@ git_checkout的本质是移动`HEAD`指针指向分支/提交SHA/TAG，并恢复
 - git checkout -b <branch-name> origin/<branch-name>: 在本地建立跟踪远程origin的分支
 - git checkout --track origin/<branch-name>: 和上条命令一样
 - git checkout -b sf origin/server-fix: 本地创建sf分支，跟踪远程origin/server-fix分支
-
+- git checkout -- FILENAME: 取消文件修改，相当于`git reset --hard HEAD FILENAME`
 ## git remote
 
 - git remote
@@ -99,8 +110,12 @@ git_checkout的本质是移动`HEAD`指针指向分支/提交SHA/TAG，并恢复
 - git remote rm <shortname>: 删除一个远程仓库
 
 ## git fetch
+本地仓库在clone的时候，默认就会有一个origin/master远程分支，而git fetch的本质就是更新本地仓库确实的远程仓库数据，并移动本地远程仓库分支。
+
 git fetch不会自动合并冲突，必须手动去合并。
 git fetch会更新本地没有的数据(如果有他人提交的话)，本地分支不会移动，但是远程分支(origin/master)会和服务器一样。所以，如果fetch了数据，需要人工合并即`git merge origin/master`，从这个角度看，`git pull`的本质，就是`git fetch`+`git merge`
+
+[from_learngitbranch.org]:  从远程仓库下载本地仓库中缺失的提交记录,更新远程分支指针(如 o/master)
 
 - git fetch [remote-name]: 从`remote-name`中拉取本地仓库中还没有的数据，可供查看和合并
 - git fetch 
@@ -161,8 +176,9 @@ Your branch is ahead of 'origin/master' by 1 commit.
 
 ## git pull
 当前分支有服务器上游分支的情况下，git会自动的从服务其抓取数据并合并到当前分支。
-
+如果本地仓库首先执行了`git fetch origin`，那么要更新本地分支，可以使用`git merge origin/master`、`git cherry-pick origin/master`、`git rebase origin/master`
 - git checkout -b <branch-name> origin/<branch-name>: 创建一个远程跟踪分支
+- git pull --rebase: 更新分支，变基
 
 ## git push
 git push默认不会提交标签tag到远程服务器上
@@ -174,6 +190,9 @@ git push默认不会提交标签tag到远程服务器上
 - git push origin <tag-name>: 提交本地的标签`tag-name`到远程服务器
 - git push origin --tags: 提交本地所有标签到远程服务器
 - git push origin --delete <branch-name>: 删除远程服务器上的`branch-name`分支
+- git push -f origin <branch-name>: 
+
+
 
 ## git tag
 打标签的本质是将提交校验和保存下来，使用git checkout的时候可以直接切换到指定的commit-id处，不过此时修改文件将会比较危险，需要额外注意。
@@ -198,7 +217,7 @@ git push默认不会提交标签tag到远程服务器上
 - git branch --no-merged: 查看当前分支上，还没有合并的分支；如果尝试删除该分支，会失败
 - git branch -u origin/<branch-name>: 在当前分支上，设置其上游跟踪分支
 - git branch --set-upstream-to origin/<branch-name>: 在当前分支上，设置其上游跟踪分支
-
+- git branch <branch-name> <commit-id/HEAD^>: 在指定提交对象上创建分支
 
 ## git merge
 合并的原理是，两个分支最近的提交和二者共同的最近祖先进行一次合并。
@@ -219,9 +238,9 @@ Auto-merging
 变基，本质上就是把一个分支的变化在要合并的分支上重演一遍。一般发生在PR、维护开源项目时，这样其他人就不用合并了。
 
 - git rebase master: 找到当前分支(experiment)和master分支的最近祖先，计算当前分支上的变更为临时文件，并在master分支上重新'播放一遍'，之后还需要执行`git checkout master;git merge experiment`。
-- git rebase master server: 无论当前处在什么分支，该命令表示直接把server分支的变化重演到master分支上，之后还需执行`git checkout master;git merge server`
+- git rebase master server: 无论当前处在什么分支，该命令(会首先checkout到server分支，然后)表示直接把server分支的变化重演到master分支上，之后还需执行`git checkout master;git merge server`
 - git rebase --onto master server client: 无论当前处在什么分支，该命令表示把server和client公共祖先下的client修改重演到master上，之后还需执行`git checkout master;git merge client`
-
+- git rebase origin/master: 当前提交(master)和本地的origin/master分支计算一个差，重演到origin/master上，然后`git checkout origin/master;git merge master`;
 
 
 ## git stash
@@ -231,8 +250,60 @@ Auto-merging
 - git stash drop stash@{n}: 丢弃第n个stash
 - git stash pop: 弹出stash并应用且丢弃
 
-# 底层
+# git工具
 
+## 选择修订版本
+- git log
+- git show <branch-name>: 分支引用
+- git reflog: 引用日志
+- git show HEAD/HEAD^/HEAD^^: 祖先引用,提交链表的上游提交;如果当前提交对象是合并的提交，那么使用`git show HEAD^1`和`git show HEAD^2`可以显示其父母提交对象；单分支情况下，`git show HEAD^n`那么n的最大值是1，输入其他值会报错。
+- git show HEAD/HEAD~1/HEAD~2: HEAD^^和HEAD~2是等价的
+- git show HEAD~5^2: 显示前5个提交对象的第2个父提交对象
+## 提交区间
+本质上就是两个分支上交集、差集运算
+
+- git log master..feature: 在feature分支中而不在master分支中的提交对象
+- git log feature..master: 在master分支中而不在feature分支中的提交对象
+- git log origin/master..HEAD: 在当前分支中而不在远程master分支中的提交对象
+- git log origin/master..: git默认使用HEAD填补..留空的一边
+- git log ..origin/master: git默认使用HEAD填补..留空的一边
+- git log refA..refB: 在refB中而不在refA中的提交对象
+- git log ^refA refB: 在refB中而不在refA中的提交对象
+- git log refB --not refA: 在refB中而不在refA中的提交对象
+- git log refA refB ^refC: 在refA和refB中而不在refC中的提交对象
+- git log --left-right master...feature: 两者不拥有对方各自提交的提交对象列表
+
+## 重写历史
+
+- git commit --amend: 之前可以使用git add/git rm等命令，然后修改上一次提交信息，生成一个新的提交对象覆盖上次提交。所以，如果该提交对象已经提交，就不要再使用该命令。
+
+- git rebase 
+
+
+
+## 选择提交
+- git cherry-pick <commit-id>: 
+
+
+# 底层
+## "三棵树"
+ 
+- HEAD
+- Index
+- WorkingDreictory
+
+```
+mkdir gitrepo
+cd gitrepo
+git init
+git remote add origin https://github.com/github/gitrepo
+echo 'hello' > readme.md    # WorkingDirectory中有一个文件'readme.md'
+git add readme.md           # Index中有一个文件'readme.md'
+git commit -m 'add readme'  # HEAD空间中保留有一个提交对象，是'readme.md'的文件快照,HEAD默认指向master分支会指向这个commit-id
+git push                    # 同步当前分支master到远程服务器origin的master分支
+```
+
+## ..
 分支的本质： 指向一次提交对象的引用(指针)
     git show master
     git rev-parse master
@@ -244,8 +315,9 @@ Auto-merging
 
 # 高级用法
 
-- HEAD： 表示工作区当前的指向
-- ^ : HEAD^表示上次提交，HEAD^2表示上两次提交
+
+- HEAD： 表示工作区当前的指向分支的指向
+- ^ : 工作区当前分支(提交对象)上，HEAD^表示当前分支(提交对象)上次提交，HEAD^2表示当前分支(提交对象)上两次提交
 - ~ : 连续 HEAD^2~4，表示前6次提交;HEAD~3表示前3次提交
 - 合并多个提交信息
     git rebase -i HEAD~3
