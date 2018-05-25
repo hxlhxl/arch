@@ -173,6 +173,7 @@ Your branch is ahead of 'origin/master' by 1 commit.
 ## git clone
 本地设置一个master分支，而且本地master分支会自动跟踪origin/master分支。
 
+- git clone --recursive: 可以递归的克隆git子模块
 
 ## git pull
 当前分支有服务器上游分支的情况下，git会自动的从服务其抓取数据并合并到当前分支。
