@@ -1,3 +1,6 @@
+- 标准库ref: http://www.cplusplus.com/reference/
+            http://zh.cppreference.com/w/cpp/header
+
 - 在每个声明语句中只声明一个变量，并提供说明该变量在程序中用途的注释
 - 变量名尽量避免使用下划线或者双下划綫，因为C++编译器可能采用类似的名字为其内部的某些用途提供服务
 - std::endl一是换行，二是刷新输出缓冲区
