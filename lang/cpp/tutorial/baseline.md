@@ -29,7 +29,10 @@
 - C++标准中，size_t表示的是一种无符号整型。建议任何表示array对象大小和下标的变量都采用这个类型。该类型定义于 cstddef头文件中。
 - const关键字用于声明一个常量变量(命名常量、只读变量)，之后再也不能修改该变量。对const声明的变量修改会产生一个编译错误, error: assignment of read-only variable 'y'。对const声明的变量没有初始化会产生一个编译错误，error: uninitialized const 'z' [-fpermissive]。 ch07.project02
 - 对array对象使用static关键字修饰，使得array对象不会在每次调用函数的时候都进行数组的创建和初始化，也不会在每次函数调用完毕后销毁，这样在使用大型array对象时，可以有效提高程序性能。 ch07.project05
-- C++11 基于范围的for语法可以有效规避下标越界问题。 ch07.project06
+- C++11 基于范围的for语法可以有效规避下标越界问题,这种语法可以应用于大多数容器，包括array和vector。 ch07.project06
+- C++中成员变量的初始化，必须使用static const修饰
+- 引用传参可以有效降低程序的消耗，避免按值传参的缺点。而引用传参中为了避免错误地改变原有值，可以使用const修饰，在编译期间就可以发现问题。  `error: assignment of read-only location '(& gradesArray)->std::array<int, 10>::operator[](0)'`
+- C++11 auto关键字用于通知编译器根据这个变量的初始化值来确定它的数据类型,IDE中，鼠标移到变量上会提示该变量的类型。 ch07.project09
 -----------------
 数据结构
 # array
