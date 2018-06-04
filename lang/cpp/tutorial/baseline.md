@@ -33,6 +33,13 @@
 - C++中成员变量的初始化，必须使用static const修饰
 - 引用传参可以有效降低程序的消耗，避免按值传参的缺点。而引用传参中为了避免错误地改变原有值，可以使用const修饰，在编译期间就可以发现问题。  `error: assignment of read-only location '(& gradesArray)->std::array<int, 10>::operator[](0)'`
 - C++11 auto关键字用于通知编译器根据这个变量的初始化值来确定它的数据类型,IDE中，鼠标移到变量上会提示该变量的类型。 ch07.project09
+- vector模板在我的理解中就是数组。
+    vector和array的显著区别如下：
+        vector动态大小，array必须重新分配内存，再将成员赋值
+        vector可以赋值、初始化另一个vector，array不能初始化另一个数组，也不能赋值
+        
+        array在定义的时候，必须给定数组元素的个数
+- 
 -----------------
 数据结构
 # array
