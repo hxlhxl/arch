@@ -22,10 +22,11 @@ int main() {
 
     cout << "Enter 17 integers: " << endl;
     inputVector(integer1);
-    inputVector(integer2);
+    // inputVector(integer2);
 
     cout << "After input,the vector contains:\n" << "integer1: " << endl;
     outputVector(integer1);
+    cout << "-----------" << endl;
     return 0;
 }
 
@@ -38,7 +39,7 @@ void outputVector(const vector<int> &items) {
 }
 
 void inputVector(vector<int> &items) {
-    for(int item: items) {
+    for(int &item: items) { // 必须为引用，否则不会改变vector元素的值！
         cin >> item;
     }
 }
