@@ -39,7 +39,7 @@ void outputVector(const vector<int> &items) {
 }
 
 void inputVector(vector<int> &items) {
-    for(int &item: items) { // 必须为引用，否则不会改变vector元素的值！
-        cin >> item;
+    for(int item: items) { // 必须为引用，否则不会改变vector元素的值！
+        item = 1000;
     }
 }
