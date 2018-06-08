@@ -33,6 +33,7 @@
     基于范围的for的深层理解
         for (auto item: items)
         for (auto &item: items)
+    基于范围的for如果遍历使用普通变量，会发生赋值操作；如果使用引用变量，就会使用引用，可以改变容器中的值。
 - C++中成员变量的初始化，必须使用static const修饰
 - 引用传参可以有效降低程序的消耗，避免按值传参的缺点。而引用传参中为了避免错误地改变原有值，可以使用const修饰，在编译期间就可以发现问题。  `error: assignment of read-only location '(& gradesArray)->std::array<int, 10>::operator[](0)'`
 - C++11 auto关键字用于通知编译器根据这个变量的初始化值来确定它的数据类型,IDE中，鼠标移到变量上会提示该变量的类型。 ch07.project09
