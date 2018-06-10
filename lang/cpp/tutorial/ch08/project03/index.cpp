@@ -29,5 +29,8 @@ int main() {
     cout << "sizeof arr is: " << sizeof(arr) << endl;
     cout << "sizeof a[0] is: " << sizeof(arr[0]) << endl;
     cout << "sizeof a is: " << sizeof(a) << endl;
+
+    int dArr[5][2] = {{1,2}, {3,4},{5,6},{7,8},{9,10}};
+    cout << "sizeof dArr is: " << sizeof(dArr) << endl;
     return 0;
 }   
