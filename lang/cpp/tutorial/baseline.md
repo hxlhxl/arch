@@ -67,9 +67,14 @@
 
 
 - C字符串
+    初始化：
+        `char color[] = "blue";`
+        `char const *color = "pink";`
+        `char color[] = {'c', 'y', 'a', 'n', '\0'};`
     基于指针的字符串是一个以空字符`\0`结尾的内置`字符数组`，因此sizeof运算符对C字符串计算时，也会把`\0`计算进去。
     字符串指针： `char *ptr = "pink"`这样初始化会警告(`warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]`)，使用 `char const *ptr = "pink"` 是可以的.
-
+    cin读取字符串： `char word[20];cin >> word`
+    getline读取字符串: `char word[20];cin.getline(word, 20, '\n');`
 
 - const关键字: https://www.cnblogs.com/chogen/p/4574118.html
     修饰常量：
