@@ -235,7 +235,8 @@ Auto-merging
 
 ## git rebase
 原则： 不要对在你的仓库外有副本的分支执行变基。如果遵循这条金科玉律，就不会出差错；否则，人民群众会仇恨你，你的朋友和家人也会嘲笑你，唾弃你。
-
+    意思就是不要对已经提交(push)过得<commit-id>进行变基！
+    
 变基，本质上就是把一个分支的变化在要合并的分支上重演一遍。一般发生在PR、维护开源项目时，这样其他人就不用合并了。
 
 - git rebase master: 找到当前分支(experiment)和master分支的最近祖先，计算当前分支上的变更为临时文件，并在master分支上重新'播放一遍'，之后还需要执行`git checkout master;git merge experiment`。
