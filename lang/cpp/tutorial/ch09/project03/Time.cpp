@@ -5,13 +5,20 @@
 
 using namespace std;
 
-Time::Time():hour(0), minute(0), second(0) {
+// Time::Time():hour(0), minute(0), second(0) {
 
+// }
+Time::Time(int _hour) {
+    Time(_hour, 0, 0);
 }
+
 Time::Time(int _hour, int _minute, int _second) {
     setTime(_hour, _minute, _second);
     publicData = 1000;
 }
+// Time::Time(int _hour):minute(0), second(0) {
+//     hour = _hour;
+// }
 void Time::setTime(int _hour, int _minute, int _second) {
     if ( (_hour >= 0 && _hour <= 23) && (_minute >= 0 && _minute <= 59) && (_second >= 0 && _second <= 59)) {
         hour = _hour;

@@ -24,6 +24,23 @@ int main() {
 
     cout << "access member by reference '.' " << tRef.publicData << endl;
     cout << "access member by pointer '->' " << tPtr -> publicData << endl;
+
+    cout << "-------" <<endl;
+    Time t1 = Time(10);
+    t1.printStandard();
+
+    cout << "-------" <<endl;
+    Time t2(20);
+    t2.printStandard();
+
+    cout << "-------" <<endl;
+    Time t3 {20, 30, 40};
+    t3.printStandard();
+
+    cout << "-------" <<endl;
+    Time t4 {20, 30, 40};
+    t4.printStandard();
+
     return 0;
 }
 

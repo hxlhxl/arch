@@ -5,9 +5,9 @@
 
 using namespace std;
 
-Time::Time():hour(0), minute(0), second(0) {
+// Time::Time():hour(0), minute(0), second(0) {
 
-}
+// }
 Time::Time(int _hour, int _minute, int _second) {
     setTime(_hour, _minute, _second);
     publicData = 1000;
