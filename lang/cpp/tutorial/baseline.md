@@ -106,6 +106,16 @@
         据此，可以间接获得数组的元素个数。sizeof(array) / sizeof(array[0])
     数组作为函数参数：
         如果数组作为函数参数，但是在函数中对这个参数使用sizeof运算符，那么返回值将会是指针的大小。  warning: 'sizeof' on array function parameter 'arr' will return size of 'int*' [-Wsizeof-array-argument]
+
+- 在编译期间，如果一个头文件被重复包含，那么会发生编译错误。
+    预处理器指令： `#ifndef`、`#define`、`#endif`，这组指令可以预防多次包含同一个头文件，在include一个头文件之后，编译器不会再次声明相同的定义。
+    
+
+- 类
+    在类定义内部定义成员函数内联`inline`该成员函数(如果编译器选择这样做)，可以提高程序的性能。这样的函数一般都是简单和稳定的，否则应该在外部定义成员函数。
+    对象大小实际上是很小的，直觉上我们我们会觉得对象包含了成员变量和成员函数，看起来很大；而实际上，对象只包含成员变量(数据)，而成员函数是不变的，被所有对象共享。
+    对象句柄(handle): 对象名称、 对象引用、 对象指针。(隐式句柄)
+
 -----------------
 数据结构
 # array
@@ -272,3 +282,4 @@ Month month = Month::Apri;
 - explict关键字用于 类构造函数只有一个参数的情况，用于避免默认隐式构造函数存在的副作用，详见：https://www.cnblogs.com/ymy124/p/3632634.html
 - 初始化
     成员初始化列表 (string name,string time) :coursename(name),coursetime(time) {}
+- setfill(粘性)、setw(非粘性)
