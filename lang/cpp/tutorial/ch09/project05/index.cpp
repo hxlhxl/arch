@@ -5,7 +5,7 @@ using namespace std;
 
 int gNum = 100;
 int & getRef(int num) {
-    return gNum;
+    return num;
 }
 int main() {
     int myNum = 111;

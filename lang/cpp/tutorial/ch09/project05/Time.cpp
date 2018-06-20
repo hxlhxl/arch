@@ -31,5 +31,5 @@ unsigned int &Time::badSetHour(int hh) {
     } else {
         throw invalid_argument("hour must be --23");
     }
-    return this->hour;
+    return hour;
 }
