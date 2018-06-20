@@ -1,0 +1,19 @@
+[root@osboxes ~]# cat /etc/pacman.d/mirrorlist
+##
+## Arch Linux repository mirrorlist
+## Filtered by mirror score from mirror status page
+## Generated on 2018-04-01
+##
+
+## China-hust
+Server = http://mirrors.hust.edu.cn/archlinux/$repo/os/$arch
+## Brazil
+Server = http://br.mirror.archlinux-br.org/$repo/os/$arch
+## Italy
+Server = http://mi.mirror.garr.it/mirrors/archlinux/$repo/os/$arch
+## Luxembourg
+Server = http://archlinux.mirror.root.lu/$repo/os/$arch
+## Canada
+Server = http://mirror.csclub.uwaterloo.ca/archlinux/$repo/os/$arch
+## Denmark
+Server = http://mirrors.dotsrc.org/archlinux/$repo/os/$arch
