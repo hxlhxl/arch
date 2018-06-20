@@ -158,7 +158,11 @@
     const对象：
         const关键字可以修饰对象的初始化
         const修饰的对象，不可以对其成员变量做任何变更操作，否则，在编译阶段会发生报错；而且const对象，不可以随意调用成员函数，必须调用由const关键字修饰的成员函数，否则也会在编译期间发生报错。`error: passing 'const Date' as 'this' argument discards qualifiers [-fpermissive]`
-    
+        将修改对象的数据成员的成员函数定义为const将导致编译错误。
+        定义为const的成员函数如果又调用同一类的同一实例的非const成员函数，将导致编译错误。
+        在const对象上调用非const成员函数将导致编译错误。
+        将构造函数和析构函数声明为const将会导致编译错误，实例的const的意义在于构造函数和析构函数之间的常量性。
+        
 -----------------
 数据结构
 # array
