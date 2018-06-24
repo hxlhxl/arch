@@ -176,11 +176,14 @@
         友元函数就是能访问类成员的函数，但是友元函数绝对不会成为类的成员函数，即使友元函数在类中定义。
         友元函数的声明与定义和public、private、protected关键无关，friend关键字可以在类中任何地方声明，但是最好放在类的最开始位置。
 
-    this:
+    this: ch09.project09
         每个对象都可以使用一个称为this的指针来访问自己的地址，对象的this指针不是对象本身的一部分，也就是说，this指针占用的内存大小，不会反映在sizeof对对象的运算上。this指针作为一个隐式的参数，被编译器传递给对象的每个非static成员函数。
         this指针可以避免名字冲突。
         this指针的类型取决于对象的类型以及使用this的成员函数是否被声明为const，在非const成员函数中，this类型为Type *const;在const成员函数中，this类型为const Type *const，表示不可以改变this的内容。
-        
+        隐式与显式this: ch09.project09
+            成员函数中直接使用成员变量即为隐式this
+            成员函数中使用`this->`记号引用成员变量即为显示this
+
 -----------------
 数据结构
 # array
