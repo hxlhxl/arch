@@ -41,7 +41,7 @@ char c;
 - 
 ## Using Pointers
 - Passing Values Back from a Function(将指针作为参数，间接地修改指针指向的变量) ch04.project02
-- Pointers and Arrays()
+- Pointers and Arrays(数组名字可以隐式地当做指针使用) ch04.project03
 - 
 # Input/Output
 
