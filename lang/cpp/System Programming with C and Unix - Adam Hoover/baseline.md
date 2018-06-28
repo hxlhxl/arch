@@ -42,7 +42,11 @@ char c;
 ## Using Pointers
 - Passing Values Back from a Function(将指针作为参数，间接地修改指针指向的变量) ch04.project02
 - Pointers and Arrays(数组名字可以隐式地当做指针使用) ch04.project03
-- 
+- Dynamic Memory Allocation ch04.project04
+    静态变量一般是通过静态内存分配的，这也就意味着每个变量的大小在程序运行前就已经知道。一般runtime大小不会发生变化。
+    在程序进入runtime的之前，OS会为这些变量分配一个位置(called data segment)
+    在程序进入函数时(普通函数、main函数)，函数中的变量和参数会在栈（stack)中分配。
+    OS具备管理内存的能力，使用`malloc`，程序可以向OS申请内存块(memory chunk)，而这些内存块是从堆(heap)中分配来的。
 # Input/Output
 
 # Program Management
