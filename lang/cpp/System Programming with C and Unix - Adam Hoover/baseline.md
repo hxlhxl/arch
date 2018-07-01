@@ -62,7 +62,15 @@ char c;
 - Definitions and Scope
 - Nested Structures
 - Pointers and Structures ch04.project07(野指针导致coredump)
+
 # Input/Output
+
+## Streams
+An I/O transaction occurs when a program receives bytes from a source or sends bytes to a destionation.
+    source： keyboard, mouse, file, sensor, other process
+    destination: display, file, printer, actuator, other process
+##
+
 
 # Program Management
 
