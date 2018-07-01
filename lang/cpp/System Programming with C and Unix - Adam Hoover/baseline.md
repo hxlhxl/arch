@@ -57,6 +57,11 @@ char c;
 - Double Pointers(双重指针)   ch04.project05
 - Double Pointers as Function paramter  ch04.project06
 
+## Structures
+- Arrays and Structures ch04.project07
+- Definitions and Scope
+- Nested Structures
+- Pointers and Structures ch04.project07(野指针导致coredump)
 # Input/Output
 
 # Program Management
