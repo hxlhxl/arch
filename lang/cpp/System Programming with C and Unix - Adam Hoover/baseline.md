@@ -69,7 +69,18 @@ char c;
 An I/O transaction occurs when a program receives bytes from a source or sends bytes to a destionation.
     source： keyboard, mouse, file, sensor, other process
     destination: display, file, printer, actuator, other process
-##
+
+### IO Model(Stream) 
+- any input or output transaction can be viewed as a flow of bytes from a source to a destination. ch05.project01
+
+
+### Transporting Bytes on Streams
+
+### System I/O Functions
+
+### Standard Streams
+
+## Buffers
 
 
 # Program Management
