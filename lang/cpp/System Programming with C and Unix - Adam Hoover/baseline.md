@@ -73,8 +73,10 @@ An I/O transaction occurs when a program receives bytes from a source or sends b
 ### IO Model(Stream) 
 - any input or output transaction can be viewed as a flow of bytes from a source to a destination. ch05.project01
 
-
 ### Transporting Bytes on Streams
+- fprintf/fscanf    ch05.project02
+- fread/fwrite      ch05.project03
+
 
 ### System I/O Functions
 
