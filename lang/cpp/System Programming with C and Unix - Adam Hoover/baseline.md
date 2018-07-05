@@ -76,16 +76,73 @@ An I/O transaction occurs when a program receives bytes from a source or sends b
 ### Transporting Bytes on Streams
 - fprintf/fscanf    ch05.project02
 - fread/fwrite      ch05.project03
-
+- fgetc/fputc
+- gets/puts
 
 ### System I/O Functions
+- [system calls] open/close/read/write
+- [C library] fopen/fclose/fread/fwrite
+
+**system calls differed from different operating system**
+**f-versions always buffered while system version may buffered depending on operating system implemetion**
 
 ### Standard Streams
+**Every time a program is started, the OS automatically createas three streams**
+printf
+scanf
+
+- stdin
+- stdout
+- strerr
+
 
 ## Buffers
+A buffer is a temporary storage between the sender and receiver of bytes on an address.
+When a stream is created, one can think of it as having an address from which bytes are sent and an address at which bytes are received.
+Each adress is at a memory location controlled by operating system.
+The buffer is an additional piece of memory that is used to moderate the flow of bytes from the source to the destination.
+
+- block buffer(达到一定的size flush)
+- line buffer(遇到换行flush) ch05.project04
+- no buffer(没有buffer)
+
+- fflush(刷新buffer)
+
+## Pipes
+```
+>
+<
+|
+```
+- pipe ch05.project05
+- pipeline chaining
+
+## Files
+
+- file pointer
+fseek
+ftell
+- directory
+direnct.h
+    opendir()
+    readdir()
+    closedir()
+- device
+- device driver
 
 
 # Program Management
+
+## Program Building
+
+source_code ->(gcc -E/preprocess) -> source_code ->(gcc -S) -> assembly_code ->(gcc -c) -> object_code ->(gcc -o -lpthread -lc) -> execute_file
+- dynamic link(gcc): when the program is run, if machine code is needed, it is loaded into memory directly from the library file.
+- static link (gcc -static): the library is built into the execute program
+
+
+## Code Organization
+- Makefile
+
 
 # System Calls
 
