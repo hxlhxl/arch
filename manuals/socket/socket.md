@@ -1,3 +1,12 @@
+socket是一种进程间通信的方式。
+socket的通信是以Address Family作为基础的，进程间通信的载体是Address Family，比如AF_INET, AF_IPX，不同的Address Family，应用的方面可能不同，比如有Bluetooth、IPX等。
+而在Address Family的基础上，通信可以采用不同的策略，常见的策略有：
+    Datagram socket
+    Stream socket
+    Raw socket
+    Other
+在Address Family和策略的基础上，还需要具体的协议去实现，因此就会有TCP、UDP等这种协议出现。
+
 NAME
     socket - create an endpoint for communication
 SYNOPSIS
@@ -9,7 +18,7 @@ SYNOPSIS
 DESCRIPTION
     socket() creates an endpoint for communication and returns a file descriptor that refers to that endpoint. The file descriptor returned by a successful call will be the lowest-numbered file descriptor not currently open for the process.
 
-    The domain argument specifies a communication domain; this selects the protocol family which will be used for communication. These families are defined in <sys/socket.h>. The currently understood formats include: 
+    The domain argument specifies a communication domain; this selects the protocol family which will be used for communication. These families are defined in <sys/socket.h>. The currently understood formats include: (here AF means `address family`, and only particular address type can communicate with socket when domain is assigned)
     Name                Purpose                                 Man Page
     AF_UNIX, AF_LOCAL   Local communication                     unix(7)
     AF_INET             IPv4 Internet protocols                 ip(7)
