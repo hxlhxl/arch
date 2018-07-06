@@ -205,6 +205,39 @@ Bootloading -> kernel running -> init process -> spawn all other processes -> ke
 - library is more compatiable with different OS(more portable)
 - man pages(man 1 APINAME|system program, man 2 APINAME| system call, man 3 APINAME|library)
 - system call fail return `-1` and can debugging using `perror()`
+
+
+
+# Libraries
+
+## Header files
+- gcc -I/usr/local/myInclude
+- contains function prototypes
+- preprocessing(预处理器处理)
+- location
+    /usr/include/stdio.h
+    C:\Program Files\Microsoft Visual Studio\VC98\Include
+
+## Libraries files
+- gcc -lpthread -L/usr/local/myLib
+- brought into target during linking stage
+- location
+    /usr/lib/libpthread.a
+    /usr/lib/libpthread-2.0.so.0
+    windows: .lib .dll
+        C:\Program Files\Microsoft Visual Studio\VC98\Lib
+    
+## install lib
+- ./configure --prefix=/usr/local
+    /usr/local/lib
+    /usr/local/include
+
+## LD_LIBRARY_PATH
+LD_LIBRARY_PATH环境变量用于指定查找共享库(动态链接库 .dll, .so)位置，默认情况下，Linux程序会在`/lib`,`/usr/lib`目录下查找动态链接库，所以如果`.so`文件在自定义的位置，需要定义该目录位置，只有指定这个目录，程序才能正常执行，所以可以写一个脚本，在每次程序启动之前设置这个环境变量
+
+比如： `export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH`
+
+
 # Appendix
 ## ASCII Table
 ## Common Shell Commands
