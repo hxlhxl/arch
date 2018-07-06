@@ -145,7 +145,66 @@ source_code ->(gcc -E/preprocess) -> source_code ->(gcc -S) -> assembly_code ->(
 
 
 # System Calls
+Bootloading -> kernel running -> init process -> spawn all other processes -> kernel act as a moderator between applications and the resources of the computer.
 
+## system calls
+- functions provided by kernel to user space applications
+- system calls usually provides request access to resource of the machine, availability of communicating between programs and start new process.
+- usually refered as an application programming interface(API)
+- POSIX
+
+## system call taxonomy
+- memory management
+    mmap()
+    brk()
+    shmget()
+    mprotect()
+    mlock()
+    shmctl()
+- time management
+    time()
+    gettimer()
+    settimer()
+    settimeofday()
+    alarm()
+- file system management
+    open()
+    read()
+    write()
+    close()
+    creat()
+    lseek()
+    link()
+- process management
+    fork()
+    execl()
+    execv()
+    wait()
+- signal system
+    signal()
+    pause()
+    kill()
+    sigaction()
+- socket system
+    socket()
+    bind()
+    connect()
+    listen()
+    accept()
+    send()
+    recv()
+- message passing
+- shared memory
+- semaphores
+- thread management
+
+## Libraries and System Calls
+- library built upon system calls
+- library simplify the low level operation
+- library provides more options
+- library is more compatiable with different OS(more portable)
+- man pages(man 1 APINAME|system program, man 2 APINAME| system call, man 3 APINAME|library)
+- system call fail return `-1` and can debugging using `perror()`
 # Appendix
 ## ASCII Table
 ## Common Shell Commands
