@@ -57,3 +57,8 @@ let g:ackprg='ag --nogroup --nocolor --column'
 " 搜索高亮
 highlight Search cterm=NONE ctermfg=grey ctermbg=blue
 set hlsearch
+set shiftwidth=4
+" tab大小
+set tabstop=4
+" 禁用某个插件
+set runtimepath-=~/.vim/bundle/auto-pairs
