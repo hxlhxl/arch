@@ -206,6 +206,13 @@ Bootloading -> kernel running -> init process -> spawn all other processes -> ke
 - man pages(man 1 APINAME|system program, man 2 APINAME| system call, man 3 APINAME|library)
 - system call fail return `-1` and can debugging using `perror()`
 
+## Process Programming
+
+## Signal System Programming
+
+
+## Socket Programming
+
 
 
 # Libraries
