@@ -1,3 +1,9 @@
+# 安装Vundle Plugin管理器
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# 初始化
+vim
+:PluginInstall
+两步即可初始化vim方案
 
 # 查找替换
 ```
