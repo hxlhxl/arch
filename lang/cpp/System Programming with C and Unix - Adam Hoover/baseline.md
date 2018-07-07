@@ -206,6 +206,13 @@ Bootloading -> kernel running -> init process -> spawn all other processes -> ke
 - man pages(man 1 APINAME|system program, man 2 APINAME| system call, man 3 APINAME|library)
 - system call fail return `-1` and can debugging using `perror()`
 
+## Process Programming
+
+## Signal System Programming
+
+
+## Socket Programming
+
 
 
 # Libraries
@@ -217,7 +224,16 @@ Bootloading -> kernel running -> init process -> spawn all other processes -> ke
 - location
     /usr/include/stdio.h
     C:\Program Files\Microsoft Visual Studio\VC98\Include
+	```
+	[husa@archlinux helloworld]$ gcc -E -Wp,-v -
+忽略不存在的目录“/usr/lib/gcc/x86_64-pc-linux-gnu/8.1.1/../../../../x86_64-pc-linux-gnu/include”
+#include "..." 搜索从这里开始：
+#include <...> 搜索从这里开始：
+ /usr/lib/gcc/x86_64-pc-linux-gnu/8.1.1/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-pc-linux-gnu/8.1.1/include-fixed
 
+	```
 ## Libraries files
 - gcc -lpthread -L/usr/local/myLib
 - brought into target during linking stage
