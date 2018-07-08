@@ -1,3 +1,8 @@
+# Socket Programming
+
+http://users.pja.edu.pl/~jms/qnx/help/tcpip_4.25_en/prog_guide/sock_advanced_tut.html
+
+
 # TCP Model
 - 3-way handshake
     SYN(client) -> SYN/ACK(server) -> ACK(client)
@@ -24,7 +29,18 @@ accept()并不是天生阻塞(blocking)的，这个要看调用accept方法时�
 - Synchronous  IO
 - Asynchronous IO
 - Blocking IO
-- Non-block IO
+- Non-blocking IO
+
+Synchronous IO和Asynchronous IO的区别在于： 用户空间的进程是否被阻塞
+    Synchronous IO
+        Blocking IO
+        Non-blocking IO
+        IO Multiplexing
+    Asynchronous IO
+        aio_read()
+
+Bloking IO和Non-blocking IO的区别在于： read系统调用是否是阻塞性的
+
 
 ## Linux IO model
 - Blocking IO
