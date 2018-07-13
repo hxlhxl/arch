@@ -144,4 +144,117 @@ Deleted: sha256:2cb0d9787c4dd17ef9eb03e512923bc4db10add190d3f84af63b744e353a9b34
     Deleted: 删除镜像，当一个镜像的所有标签都是Untagged，那么就会触发Delete操作，删除这个镜像
 ## docker system
 
-- docker system ls
+- docker system df
+
+
+## docker exec
+Usage: docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+Run a command in a running container
+
+Options:
+    
+    -i: interactive,Keep STDIN open even if not attached
+    -t: Allocate a pesudo-TTY
+
+```
+[root@osboxes ~]# docker run --name webserver -d -p 80:80 nginx
+[root@osboxes ~]# curl 192.168.145.132:80
+[root@osboxes ~]# docker exec -it webserver bash
+root@39695edfe799:/# echo '<h1>Hello,Docker!</h1>' > /usr/share/nginx/html/index.html
+
+[root@osboxes ~]# curl 192.168.145.132:80
+<h1>Hello,Docker!</h1>
+
+
+```
+## docker diff
+Usage: docker diff CONTAINER
+Inspect changes to files or directories on a container's filesystem
+
+
+## docker commit
+
+Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+Caution: docker commit会发生额外的操作，不利于制作image，应该使用`Dockerfile`制作image
+Create a new image from a container's changes
+
+
+```
+[root@osboxes ~]# docker run --name webserver -d -p 80:80 nginx
+39695edfe799a2e34434fcd9e5478160b6407464951d7a839c53bdf6e5f89174
+[root@osboxes ~]# docker exec -it webserver bash
+root@39695edfe799:/# echo '<h1>Hello,Docker!</h1>' > /usr/share/nginx/html/index.html
+
+[root@osboxes ~]# docker diff webserver
+C /usr
+C /usr/share
+C /usr/share/nginx
+C /usr/share/nginx/html
+C /usr/share/nginx/html/index.html
+C /run
+A /run/nginx.pid
+C /var
+C /var/cache
+C /var/cache/nginx
+A /var/cache/nginx/client_temp
+A /var/cache/nginx/fastcgi_temp
+A /var/cache/nginx/proxy_temp
+A /var/cache/nginx/scgi_temp
+A /var/cache/nginx/uwsgi_temp
+
+[root@osboxes ~]# docker commit --author "huax01 huaxiongcool@gmail.com" --message "custom inex.htm
+l" webserver nginx:v2
+sha256:cfbf1418c1bdc3f3c6c7f10423a3f203a8a52315c2311fd4a51b366e24ef21c9
+
+
+[root@osboxes ~]# docker image ls nginx
+REPOSITORY          TAG                 IMAGE ID            CREATED                  SIZE
+nginx               latest              3c5a05123222        Less than a second ago   109MB
+nginx               v2                  cfbf1418c1bd        42 seconds ago           109MB
+
+[root@osboxes ~]# docker history nginx:v2
+IMAGE               CREATED                  CREATED BY                                      SIZE                COMMENT
+cfbf1418c1bd        About a minute ago       nginx -g daemon off;                            165B                custom inex.html
+
+
+[root@osboxes ~]# docker run --name webserver2 -d -p 81:80 nginx:v2
+da7f6f297a7558de4ea55fcaf03096ee0b7a464ab646d8eec322aa5fdc12bd20
+
+[root@osboxes ~]# curl 192.168.145.132:81
+<h1>Hello,Docker!</h1>
+
+```
+
+## docker history
+Show the history of an image
+
+- docker history -H ubuntu
+
+
+## docker build
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+
+### 指令
+
+- FROM
+- RUN
+- COPY
+- ADD
+- CMD
+- ENTRYPOINT
+
+
+### 镜像构建上下文(Image build context)
+
+
+### example
+
+1. 最简单的Linux定制(ch04.project01)
+2. 
+
+
+
+

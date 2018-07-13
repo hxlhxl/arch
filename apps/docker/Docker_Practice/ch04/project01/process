@@ -1,0 +1,10 @@
+[root@osboxes docker-build]# docker build -t nginx:v3 .
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : FROM nginx
+ ---> 3c5a05123222
+Step 2/2 : RUN echo '<h1>Hello,Docker!</h1>' > /usr/share/nginx/html/index.html
+ ---> Running in f41eb7380304
+Removing intermediate container f41eb7380304
+ ---> 0bbc5a7e6aee
+Successfully built 0bbc5a7e6aee
+Successfully tagged nginx:v3
