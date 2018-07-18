@@ -1,0 +1,8 @@
+[husa@archlinux project02]$ sudo sh build.sh
+Sending build context to Docker daemon  5.632kB
+Step 1/2 : FROM nginx
+ ---> 8b89e48b5f15
+Step 2/2 : COPY ./src/index.html /usr/share/nginx/html/
+ ---> c709e59d2b58
+Successfully built c709e59d2b58
+Successfully tagged nginx:v4

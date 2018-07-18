@@ -98,7 +98,7 @@ For more examples and ideas, visit:
 
 # 使用镜像
 
-## docker run
+## docker pull
 
 ```
 [husa@archlinux ~]$ docker pull fvrmctxg.mirror.aliyuncs.com/library/ubuntu:latest
@@ -241,14 +241,26 @@ Build an image from a Dockerfile
 
 - FROM
 - RUN
-- COPY
-- ADD
-- CMD
-- ENTRYPOINT
+- COPY: 从context复制文件到引擎
+     COPY <源路径>...<目标路径>
+     COPY ["<源路径1>",..."<目标路径>"]
+- ADD： 非最佳实践，仅用于自动解压场合
+- CMD： 用于指定默认的容器主进程的启动命令
+    docker中运行的是进程，其中的进程不需要使用进程管理器去管理，而直接使用命令最好
+    CMD <命令>
+    CMD ["可执行文件", "参数1", "参数2", ...]
+
+    ```
+    CMD ["nginx", "-g", "daemon off;"]
+    ```
+- ENTRYPOINT: CMD整体作为命令，docker客户端命令行参数作为该命令的参数
+    ch04.project03
 
 
 ### 镜像构建上下文(Image build context)
 
+Docker build的原理： Docker在运行时分为`Docker引擎`（服务端守护进程）和客户端进程。Docker引擎提供了一组RESTFUL API，被称为`Docker Remote API`，而`docker`命令是客户端工具，它通过这组`Docker Remote API`和`Docker引擎`交互通信，从而完成各种功能。而`docker build`实际上是在`Docker引擎`上构建的。
+而上下文就是引擎拿去本地文件的环境。
 
 ### example
 
@@ -257,4 +269,93 @@ Build an image from a Dockerfile
 
 
 
+## docker run
 
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+
+
+```
+[root@archlinux project02]# docker rm 6248
+6248
+[root@archlinux project02]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                  PORTS                NAMES
+9b2016c60fc6        nginx:v3            "nginx -g 'daemon of…"   32 hours ago        Up 32 hours             0.0.0.0:80->80/tcp   haha
+9ef51b99f2b7        nginx:v3            "-d -p 80:80"            32 hours ago        Created                 80/tcp               fervent_hypatia
+a84a7ee507eb        2cb0d9787c4d        "/hello"                 6 days ago          Exited (0) 6 days ago                        determined_keldysh
+afc6452861a1        2cb0d9787c4d        "/hello"                 6 days ago          Exited (0) 6 days ago                        distracted_nobel
+[root@archlinux project02]# docker run --name hehe -d -p 81:80 nginx:v4
+d3a7b351736109be3659dbcb78a620b5faa82cab1fafbcee543f027f2129e534
+[root@archlinux project02]#
+[root@archlinux project02]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                  PORTS                NAMES
+d3a7b3517361        nginx:v4            "nginx -g 'daemon of…"   6 seconds ago       Up 3 seconds            0.0.0.0:81->80/tcp   hehe
+9b2016c60fc6        nginx:v3            "nginx -g 'daemon of…"   32 hours ago        Up 32 hours             0.0.0.0:80->80/tcp   haha
+9ef51b99f2b7        nginx:v3            "-d -p 80:80"            32 hours ago        Created                 80/tcp               fervent_hypatia
+a84a7ee507eb        2cb0d9787c4d        "/hello"                 6 days ago          Exited (0) 6 days ago                        determined_keldysh
+afc6452861a1        2cb0d9787c4d        "/hello"                 6 days ago          Exited (0) 6 days ago                        distracted_nobel
+[root@archlinux project02]# curl localhost:81
+<h1>Hello,Docker!</h1>
+
+```
+
+
+
+
+## docker ps
+
+Usage:  docker ps [OPTIONS]
+
+List containers
+
+Options:
+  -a, --all             Show all containers (default shows just running)
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print containers using a Go template
+  -n, --last int        Show n last created containers (includes all states) (default -1)
+  -l, --latest          Show the latest created container (includes all states)
+      --no-trunc        Don't truncate output
+  -q, --quiet           Only display numeric IDs
+  -s, --size            Display total file sizes
+
+
+## docker kill
+
+
+Usage:  docker kill [OPTIONS] CONTAINER [CONTAINER...]
+
+Kill one or more running containers
+
+Options:
+  -s, --signal string   Signal to send to the container (default "KILL")
+
+
+## docker rm
+
+
+Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+Remove one or more containers
+
+Options:
+  -f, --force     Force the removal of a running container (uses SIGKILL)
+  -l, --link      Remove the specified link
+  -v, --volumes   Remove the volumes associated with the container
+
+
+
+# docker login
+
+```
+[root@archlinux project03]# docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: huaxiongcooldocker
+Password:
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+
+```
