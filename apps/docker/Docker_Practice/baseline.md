@@ -255,8 +255,13 @@ Build an image from a Dockerfile
     ```
 - ENTRYPOINT: CMD整体作为命令，docker客户端命令行参数作为该命令的参数
     ch04.project03
-
-
+- ENV: 设置环境变量，构建和容器运行时都可以直接使用
+    容器运行时是在默认的bash中可以使用，传递的运行参数是不会读取这些环境变量的。
+    ch04.project04
+- ARG: 设置环境变量，仅在构建时生效。build的时候用户可以传递参数来覆盖环境变量的默认值
+    --build-arg
+- VOLUMN: 防止运行时用户忘记将动态文件所保存目录挂载为卷，在Dockerfile中，可以事先指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器层写入大量数据。
+- 
 ### 镜像构建上下文(Image build context)
 
 Docker build的原理： Docker在运行时分为`Docker引擎`（服务端守护进程）和客户端进程。Docker引擎提供了一组RESTFUL API，被称为`Docker Remote API`，而`docker`命令是客户端工具，它通过这组`Docker Remote API`和`Docker引擎`交互通信，从而完成各种功能。而`docker build`实际上是在`Docker引擎`上构建的。

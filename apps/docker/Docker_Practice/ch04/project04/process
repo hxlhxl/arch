@@ -1,0 +1,19 @@
+[root@archlinux project04]# sh build.sh
+Sending build context to Docker daemon  3.072kB
+Step 1/3 : FROM ubuntu:latest
+ ---> 113a43faa138
+Step 2/3 : ENV NODE_ENV="development"     NODE_VERSION="7.1.0"
+ ---> Running in 2f5ba2782fea
+Removing intermediate container 2f5ba2782fea
+ ---> df494d0f5dd7
+Step 3/3 : RUN /bin/bash
+ ---> Running in 0105af99f517
+Removing intermediate container 0105af99f517
+ ---> 45bfef2f97b3
+Successfully built 45bfef2f97b3
+Successfully tagged env-demo:latest
+[root@archlinux project04]# docker run -ti env-demo bash
+root@0d3ae7a5aa31:/# echo $NODE_ENV
+development
+root@0d3ae7a5aa31:/# echo $NODE_VERSION
+7.1.0
