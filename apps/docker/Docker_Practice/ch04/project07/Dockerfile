@@ -1,0 +1,1 @@
+FROM my-node    # 这时base中的ONBUILD指令会开始执行

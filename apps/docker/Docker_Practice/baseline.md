@@ -260,8 +260,24 @@ Build an image from a Dockerfile
     ch04.project04
 - ARG: 设置环境变量，仅在构建时生效。build的时候用户可以传递参数来覆盖环境变量的默认值
     --build-arg
-- VOLUMN: 防止运行时用户忘记将动态文件所保存目录挂载为卷，在Dockerfile中，可以事先指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器层写入大量数据。
-- 
+- VOLUME: 防止运行时用户忘记将动态文件所保存目录挂载为卷，在Dockerfile中，可以事先指定某些目录挂载为匿名卷，这样在运行时如果用户不指定挂载，其应用也可以正常运行，不会向容器层写入大量数据。
+    命令行可以覆盖Dockerfile中的VOLUME指令
+    -v list
+    --volume list
+    ```docker run -d -v mydata:/data DOCKER_IMAGE```
+        表示使用`mydata`这个命名卷挂载到`/data/`路径，替代Dockerfile中的匿名卷挂载配置
+- EXPOSE <端口1> [<端口2>,,,]: 声明容器运行时提供的服务端口，不过只是声明，不会再容器运行时真正起作用。
+    -- docker run -P DOCKER_IMAGE: 把Dockerfile中的EXPORT声明的端口作为容器的服务端口，而宿主机端口随机
+    -- docker run -p <宿主端口>:<容器端口> DOCKER_IMAGE: 
+- WORKDIR: 指定各层容器的工作空间，可以多次声明覆盖
+    ``` 正确的写法
+        WORKDIR /app
+        RUN echo "hello" > /app/world.txt
+    ```
+- USER <用户名>: 改变之后的容器指令CMD、RUN、ENTRYPOINT等的执行用户身份,在执行USER指令的时候，必须事先创建用户
+- HEALTHCHECK: 健康检查... ch04.project06
+- ONBUILD <其他指令>>: 提供一个基础镜像，在构建当前镜像时并不会执行，只有作为下一级镜像构建的时候才会执行。 ch04.project07
+
 ### 镜像构建上下文(Image build context)
 
 Docker build的原理： Docker在运行时分为`Docker引擎`（服务端守护进程）和客户端进程。Docker引擎提供了一组RESTFUL API，被称为`Docker Remote API`，而`docker`命令是客户端工具，它通过这组`Docker Remote API`和`Docker引擎`交互通信，从而完成各种功能。而`docker build`实际上是在`Docker引擎`上构建的。
