@@ -291,8 +291,15 @@ Docker build的原理： Docker在运行时分为`Docker引擎`（服务端守�
 
 
 ## docker run
-
 Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+Under_the_hood: 
+1. 检查本地是否存在指定的镜像，不存在就从共有仓库下载
+2. 利用镜像创建并启动一个容器
+3. 分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
+4. 从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+5. 从地址池配置一个IP地址给容器
+6. 执行用户指定的应用程序
+7. 指向性完毕后容器被终止(stopped)
 
 Run a command in a new container
 
@@ -340,6 +347,37 @@ Options:
   -q, --quiet           Only display numeric IDs
   -s, --size            Display total file sizes
 
+## docker container
+Manage container
+
+Usage: docker container COMMAND
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  inspect     Display detailed information on one or more containers
+  kill        Kill one or more running containers
+  logs        Fetch the logs of a container
+  ls          List containers
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  prune       Remove all stopped containers
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  run         Run a command in a new container
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
 
 ## docker kill
 
@@ -380,3 +418,25 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 
 ```
+
+
+
+
+# Sonatype/nexus
+
+```
+[root@archlinux ~]# docker run -d -p 60001:8081 --name nexus3 --restart=always --mount src=nexus-data,target=/nexus-data sonatype/nexus3
+Unable to find image 'sonatype/nexus3:latest' locally
+latest: Pulling from sonatype/nexus3
+7dc0dca2b151: Pull complete
+68f6b3431de1: Pull complete
+3d53a2c6a5ef: Pull complete
+Digest: sha256:e57d22b59b607d055f9241f1613073ec1b46c37afae30d67707072f19a87d244
+Status: Downloaded newer image for sonatype/nexus3:latest
+ac7dc1aec2faad7ff43a7aad785795c471f08de888458815f0899b8127c99b6f
+
+```
+
+
+
+# 数据管理
