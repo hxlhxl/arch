@@ -142,6 +142,12 @@ Deleted: sha256:2cb0d9787c4dd17ef9eb03e512923bc4db10add190d3f84af63b744e353a9b34
 ```
     Untagged: 删除标签
     Deleted: 删除镜像，当一个镜像的所有标签都是Untagged，那么就会触发Delete操作，删除这个镜像
+
+
+## docker tag
+Usage: docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
 ## docker system
 
 - docker system df
@@ -425,7 +431,8 @@ Login Succeeded
 # Sonatype/nexus
 
 ```
-[root@archlinux ~]# docker run -d -p 60001:8081 --name nexus3 --restart=always --mount src=nexus-data,target=/nexus-data sonatype/nexus3
+# 搭建Nexus3
+[root@archlinux ~]# docker run -d -p 60001:8081 -p 60002:60002 --name nexus3 --restart=always --mount src=nexus-data,target=/nexus-data sonatype/nexus3
 Unable to find image 'sonatype/nexus3:latest' locally
 latest: Pulling from sonatype/nexus3
 7dc0dca2b151: Pull complete
@@ -435,6 +442,91 @@ Digest: sha256:e57d22b59b607d055f9241f1613073ec1b46c37afae30d67707072f19a87d244
 Status: Downloaded newer image for sonatype/nexus3:latest
 ac7dc1aec2faad7ff43a7aad785795c471f08de888458815f0899b8127c99b6f
 
+# 创建dockerhub，略
+
+# 搭建dockerhub的本地Nginx反向代理
+[root@archlinux ~]# cat /etc/nginx/conf.d/dockerhub.conf
+upstream register {
+    server 127.0.0.1:60002;
+    # check interval=3000 rise=2 fall=10 timeout=1000 type=http;
+    #check_http_send "HEAD / HTTP/1.0/\r\n\r\n";
+    #check_http_expect_alive http_4xx;
+}
+
+
+server {
+    server_name _ 127.0.0.1;
+    listen 60003;
+    #listen 443 ssl;
+    #
+    #ssl_certificate key/example.crt;
+    #ssl_certificate_key key/example.key;
+
+    #ssl_session_timeout 5m;
+    #ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    #ssl_ciphers HIGH: !aNULL: !MD5;
+    #ssl_prefer_server_ciphers on;
+
+    large_client_header_buffers 4 32k;
+    client_max_body_size 300m;
+    client_body_buffer_size 512k;
+
+    proxy_connect_timeout 600;
+    proxy_read_timeout 600;
+    proxy_send_timeout 600;
+    proxy_buffer_size 128k;
+    proxy_buffers 4 64k;
+    proxy_busy_buffers_size 128k;
+    proxy_temp_file_write_size 512k;
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #proxy_set_header Upgrade $http_upgrade;
+        #proxy_set_header Connection $connection_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_redirect off;
+        proxy_pass http://register;
+        proxy_read_timeout 900s;
+        proxy_http_version 1.1;
+
+    }
+
+    error_page 500 502 503 504  /50x.html;
+}
+
+# docker daemon.json
+[root@archlinux ~]# cat /etc/docker/daemon.json
+{
+        "registry-mirrors": [
+                "https://fvrmctxg.mirror.aliyuncs.com"
+        ],
+        "insecure-registries": ["http://127.0.0.1:60003"]
+}
+
+# 登录
+[root@archlinux ~]# docker login http://127.0.0.1:60003/repository/archhub
+Username: huaxiongcooldocker
+Password:
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+
+# 提交自制镜像
+[root@archlinux ~]# docker tag ubuntu 127.0.0.1:60003/nexus_ubuntu
+[root@archlinux ~]# docker push 127.0.0.1:60003/nexus_ubuntu
+The push refers to repository [127.0.0.1:60003/nexus_ubuntu]
+b6f13d447e00: Pushed
+a20a262b87bd: Pushed
+904d60939c36: Pushed
+3a89e0d8654e: Pushed
+db9476e6d963: Pushed
+latest: digest: sha256:e7def0d56013d50204d73bb588d99e0baa7d69ea1bc1157549b898eb67287612 size: 1357
 ```
 
 
