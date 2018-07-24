@@ -726,3 +726,19 @@ PING busybox1 (172.18.0.2): 56 data bytes
 64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.220 ms
 64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.152 ms
 ```
+
+
+## DNS
+
+```
+[root@archlinux webapp]# docker exec -ti webapp /bin/bash
+
+root@3c203fe10d9b:/opt/webapp# mount|grep etc
+/dev/sdb2 on /etc/resolv.conf type btrfs (rw,relatime,space_cache,subvolid=5,subvol=/var/lib/docker/containers/3c203fe10d9b46119274b40646c839bdb332eb438b8af7bf07ec7103ec29fb88/resolv.conf)
+/dev/sdb2 on /etc/hostname type btrfs (rw,relatime,space_cache,subvolid=5,subvol=/var/lib/docker/containers/3c203fe10d9b46119274b40646c839bdb332eb438b8af7bf07ec7103ec29fb88/hostname)
+/dev/sdb2 on /etc/hosts type btrfs (rw,relatime,space_cache,subvolid=5,subvol=/var/lib/docker/containers/3c203fe10d9b46119274b40646c839bdb332eb438b8af7bf07ec7103ec29fb88/hosts)
+```
+
+-h或者--hostname=HOSTNAME会设定容器的主机名，并写入/etc/hostname和/etc/hosts中
+--dns=IP_ADDRESS会添加DNS到容器的/etc/resolv.conf中，让这个容器来解析所有不再/etc/hosts中的主机名。
+--dns-search=DOMAIN设定容器的搜索域，当设定搜索域为`example.com`时，在搜索一个名为host的主机时，DNS不仅搜索host文件，还会搜索`host.example/com`
