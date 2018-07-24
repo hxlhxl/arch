@@ -410,7 +410,7 @@ Options:
 
 
 
-# docker login
+## docker login
 
 ```
 [root@archlinux project03]# docker login
@@ -424,6 +424,66 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 
 ```
+
+
+## docker port
+
+Usage:  docker port CONTAINER [PRIVATE_PORT[/PROTO]]
+
+List port mappings or a specific mapping for the container
+
+```
+[root@archlinux webapp]# docker port webapp
+5000/tcp -> 0.0.0.0:32782
+
+```
+
+## docker logs
+
+Usage:  docker logs [OPTIONS] CONTAINER
+
+Fetch the logs of a container
+
+Options:
+      --details        Show extra details provided to logs
+  -f, --follow         Follow log output
+      --since string   Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+      --tail string    Number of lines to show from the end of the logs (default "all")
+  -t, --timestamps     Show timestamps
+      --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+
+```
+[root@archlinux webapp]# docker logs -f webapp
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+
+^C
+```
+
+
+
+
+## docker network
+Usage:  docker network COMMAND
+
+Manage networks
+
+Commands:
+  connect     Connect a container to a network
+  create      Create a network
+  disconnect  Disconnect a container from a network
+  inspect     Display detailed information on one or more networks
+  ls          List networks
+  prune       Remove all unused networks
+  rm          Remove one or more networks
+
+
+
+
+
+
+
+
+
 
 
 
@@ -580,3 +640,89 @@ Hello world!
 
 # 网络管理
 
+安装Docker之后，Docker会自动生成一张网卡(网桥,docker0)，而每启动一个容器，docker就会自动创建一个(Virtual Ethernet Pair)设备，这个设备会加入到之前的网桥中(docker0)，在`veth`两端，容器段一般为`eth0`这种借口名称，而宿主机中一般为`veth6478..`，正因为这种机制，docker容器才有和外部通信的机会。
+
+```
+[root@archlinux webapp]# ifconfig
+docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+        inet6 fe80::42:f5ff:fe3e:212c  prefixlen 64  scopeid 0x20<link>
+        ether 02:42:f5:3e:21:2c  txqueuelen 0  (Ethernet)
+        RX packets 106773  bytes 21422015 (20.4 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 144343  bytes 186281001 (177.6 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth08767b9: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::2062:70ff:fec8:8f33  prefixlen 64  scopeid 0x20<link>
+        ether 22:62:70:c8:8f:33  txqueuelen 0  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 86  bytes 11572 (11.3 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth647820e: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::40dc:38ff:fe36:31b4  prefixlen 64  scopeid 0x20<link>
+        ether 42:dc:38:36:31:b4  txqueuelen 0  (Ethernet)
+        RX packets 3003  bytes 4064740 (3.8 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 6485  bytes 32471125 (30.9 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+## Docker网络模式
+
+- host
+    容器依附在宿主机上, 和宿主机共用一个`Network Namespace`
+- container
+    容器依附在另一个容器上, 多个容器共享一个`Network Namespace`
+- none
+    容器无网路配置,每个容器拥有一个`Network Namespace`
+- bridge
+    Docker默认网络模式，容器使用vbridge模式,每个容器拥有一个`Network Namespace`
+
+```
+[root@archlinux ~]# docker network create -d bridge my-net
+b0b92728b2a9a18ea1e238f884a710013397920a843b39cf4aef043a620a439a
+[root@archlinux ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+6c5400cee0bd        bridge              bridge              local
+c956c9414c14        host                host                local
+b0b92728b2a9        my-net              bridge              local
+8579fea8d08b        none                null                local
+```
+
+
+
+## 外部容器访问
+容器中可以运行一些网络应用，要让外部也可以访问这些应用，可以通过`-p`或者`-P`参数来指定端口映射。
+容器有自己的网络，可以使用`docker inspect`查看内部docker容器的IP地址等。
+
+-p支持的格式为： `-p ip:hostPort:containerPort [ip::containerPort] [hostPort:containerPort]`
+-p支持多次绑定，即容器中的多个端口映射到宿主机的多个端口。
+
+## 容器互联
+
+可以看到`busybox1`和`busybox2`已经建立起了互联。
+
+```
+# container one
+[root@archlinux ~]# docker run -ti --rm --name busybox1 --network my-net busybox sh
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+75a0e65efd51: Pull complete
+Digest: sha256:d21b79794850b4b15d8d332b451d95351d14c951542942a816eea69c9e04b240
+Status: Downloaded newer image for busybox:latest
+/ # ping busybox2
+PING busybox2 (172.18.0.3): 56 data bytes
+64 bytes from 172.18.0.3: seq=0 ttl=64 time=0.143 ms
+64 bytes from 172.18.0.3: seq=1 ttl=64 time=0.182 ms
+
+
+# container two
+[root@archlinux webapp]# docker run -ti --rm --name busybox2 --network my-net busybox sh
+/ # ping busybox1
+PING busybox1 (172.18.0.2): 56 data bytes
+64 bytes from 172.18.0.2: seq=0 ttl=64 time=0.220 ms
+64 bytes from 172.18.0.2: seq=1 ttl=64 time=0.152 ms
+```
