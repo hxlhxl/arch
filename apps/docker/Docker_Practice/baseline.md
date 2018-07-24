@@ -532,3 +532,51 @@ latest: digest: sha256:e7def0d56013d50204d73bb588d99e0baa7d69ea1bc1157549b898eb6
 
 
 # 数据管理
+
+
+`数据卷`是一个可供一个或多个容器使用的特殊目录，它绕过UFS，可以提供很多有用的特性：
+- `数据卷`可以在容器之间共享和重用
+- 对`数据卷`的修改会立马生效
+- 对`数据卷`的更新，不会影响镜像
+- `数据卷`默认会一直存在，即使容器被删除
+
+注意点： 刚开始我还没理解什么是挂载，现在我稍微理解了一点。就是docker在启动容器的时候，会把`数据卷`或者`宿主目录`挂载进入容器中(这里我理解就是容器中映射的那个目录，物理上就是写入在宿主机上，要么是自定义目录，要么是/var/lib/docker/volumes/VOLUME_NAME/_data)，所以，如果映射到的目录在容器中本身已经存在，那么容器就有可能无法正常运行。比如下面这个命令：`docker run -d -P --name webapp --mount type=bind,source=/tmp/webapp,target=/opt/webapp training/webapp`。`training/webapp`这个容器的运行本身就需要使用到路径`/opt/webapp`下的`app.py`文件，但是现在把宿主机的`/tmp/webapp`映射到了容器中，容器中现在的内容就是空了，所以容器一运行就直接报错退出了。
+
+
+```
+[root@archlinux ~]# docker volume ls
+DRIVER              VOLUME NAME
+local               nexus-data
+[root@archlinux ~]# docker volume inspect nexus-data
+[
+    {
+        "CreatedAt": "2018-07-24T14:25:11Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/nexus-data/_data",
+        "Name": "nexus-data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+```
+
+## 挂载数据卷
+``` 
+[root@archlinux ~]# docker run -d -P --name webapp --mount source=webapp,target=/webapp training/webapp python app.py
+
+[root@archlinux ~]# curl localhost:32768
+Hello world!
+
+```
+
+## 挂载主机目录
+
+```
+[root@archlinux ~]# docker run -d -P --name webapp --mount type=bind,source=/tmp/webapp,target=/webapp training/webapp
+
+```
+
+
+# 网络管理
+
