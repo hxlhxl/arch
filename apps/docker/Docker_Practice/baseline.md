@@ -739,6 +739,514 @@ root@3c203fe10d9b:/opt/webapp# mount|grep etc
 /dev/sdb2 on /etc/hosts type btrfs (rw,relatime,space_cache,subvolid=5,subvol=/var/lib/docker/containers/3c203fe10d9b46119274b40646c839bdb332eb438b8af7bf07ec7103ec29fb88/hosts)
 ```
 
+全局DNS配置：直接在docker启动的时候使用其配置文件
+
+``` daemon.json
+{
+    "dns": [
+        "114.114.114.114",
+        "8.8.8.8"
+    ]
+}
+
+```
+
+容器DNS配置：
 -h或者--hostname=HOSTNAME会设定容器的主机名，并写入/etc/hostname和/etc/hosts中
 --dns=IP_ADDRESS会添加DNS到容器的/etc/resolv.conf中，让这个容器来解析所有不再/etc/hosts中的主机名。
 --dns-search=DOMAIN设定容器的搜索域，当设定搜索域为`example.com`时，在搜索一个名为host的主机时，DNS不仅搜索host文件，还会搜索`host.example/com`
+
+
+
+
+
+# Docker Compose
+`Compose`是Docker官方项目，负责实现对Docker容器集群的快速编排。其定位是[定义和运行多个Docker容器的应用(Defining and running multi-container Docker applications)]
+
+我们知道使用`Dockerfile`一个文件模板文件，可以让用户很方便的定义一个单独的应用容器。然而，在日常的工作中，经常会碰到需要多个容器相互配合来完成某项任务的情况。例如要实现一个Web项目，除了Web服务器本身，往往还需要再加上后端的数据库服务容器，甚至还包括负载均衡容器等。
+
+`Compose`恰好满足了这样的需求，它允许用户通过一个单独的`docker-compose.yml`模板文件来定义一组相关联的应用容器为一个项目。
+
+两个概念：
+    服务(service): 一个应用的容器，实际上可以包含若干运行相同镜像的容器实例。
+    项目(project): 由一组相关联的应用容器组成的一个完整的业务单元。在`docker-compose.yml`文件中定义。
+
+`Compose`的默认管理对象是项目，通过子命令对项目中的一组容器进行便捷地生命周期管理。
+`Compose`项目由`Python`编写，实现上调用了`Docker API`来对容器进行管理。因此，只要所操作的平台支持`DockerAPI`，就可以在其上利用`Compose`进行编排管理。
+
+## 安装
+
+- 二进制
+- pip
+- docker
+
+```
+[root@archlinux ~]# pip install docker-compose
+Collecting docker-compose
+[root@archlinux ~]# cd /usr/share/bash-completion/
+[root@archlinux completions]# curl -L https://raw.githubusercontent.com/docker/compose/1.21.2/contrib/completion/bash/docker-compose -o docker-compose
+```
+
+## demo
+
+```
+[root@archlinux compose]# docker-compose up
+Creating network "compose_default" with the default driver
+Building web
+Step 1/5 : From python:3.6-alpine
+3.6-alpine: Pulling from library/python
+911c6d0c7995: Pull complete
+01a7b783f4b1: Pull complete
+bf478bc51524: Pull complete
+69697aed758a: Pull complete
+2f2645628ab4: Pull complete
+Digest: sha256:d4198a2dc7f52a1b7996f1d7812808b7e763d3a83627683c89599546086fddb1
+Status: Downloaded newer image for python:3.6-alpine
+ ---> 2068eb9e7f62
+Step 2/5 : Add . /code
+ ---> 4d2581d148f4
+Step 3/5 : WORKDIR /code
+Removing intermediate container 8d6bb4276137
+ ---> a9fdb885a5e1
+Step 4/5 : RUN pip install redis flask
+ ---> Running in 17130ca5ec0b
+Collecting redis
+  Downloading https://files.pythonhosted.org/packages/3b/f6/7a76333cf0b9251ecf49efff635015171843d9b977e4ffcf59f9c4428052/redis-2.10.6-py2.py3-none-any.whl (64kB)
+Collecting flask
+  Downloading https://files.pythonhosted.org/packages/7f/e7/08578774ed4536d3242b14dacb4696386634607af824ea997202cd0edb4b/Flask-1.0.2-py2.py3-none-any.whl (91kB)
+Collecting itsdangerous>=0.24 (from flask)
+  Downloading https://files.pythonhosted.org/packages/dc/b4/a60bcdba945c00f6d608d8975131ab3f25b22f2bcfe1dab221165194b2d4/itsdangerous-0.24.tar.gz (46kB)
+Collecting Jinja2>=2.10 (from flask)
+  Downloading https://files.pythonhosted.org/packages/7f/ff/ae64bacdfc95f27a016a7bed8e8686763ba4d277a78ca76f32659220a731/Jinja2-2.10-py2.py3-none-any.whl (126kB)
+Collecting click>=5.1 (from flask)
+  Downloading https://files.pythonhosted.org/packages/34/c1/8806f99713ddb993c5366c362b2f908f18269f8d792aff1abfd700775a77/click-6.7-py2.py3-none-any.whl (71kB)
+Collecting Werkzeug>=0.14 (from flask)
+  Downloading https://files.pythonhosted.org/packages/20/c4/12e3e56473e52375aa29c4764e70d1b8f3efa6682bef8d0aae04fe335243/Werkzeug-0.14.1-py2.py3-none-any.whl (322kB)
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.10->flask)
+  Downloading https://files.pythonhosted.org/packages/4d/de/32d741db316d8fdb7680822dd37001ef7a448255de9699ab4bfcbdf4172b/MarkupSafe-1.0.tar.gz
+Building wheels for collected packages: itsdangerous, MarkupSafe
+  Running setup.py bdist_wheel for itsdangerous: started
+  Running setup.py bdist_wheel for itsdangerous: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/2c/4a/61/5599631c1554768c6290b08c02c72d7317910374ca602ff1e5
+  Running setup.py bdist_wheel for MarkupSafe: started
+  Running setup.py bdist_wheel for MarkupSafe: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/33/56/20/ebe49a5c612fffe1c5a632146b16596f9e64676768661e4e46
+Successfully built itsdangerous MarkupSafe
+Installing collected packages: redis, itsdangerous, MarkupSafe, Jinja2, click, Werkzeug, flask
+Successfully installed Jinja2-2.10 MarkupSafe-1.0 Werkzeug-0.14.1 click-6.7 flask-1.0.2 itsdangerous-0.24 redis-2.10.6
+You are using pip version 10.0.1, however version 18.0 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+Removing intermediate container 17130ca5ec0b
+ ---> def100eaeabd
+Step 5/5 : CMD ["python", "app.py"]
+ ---> Running in eb422b1d94dd
+Removing intermediate container eb422b1d94dd
+ ---> bfe50c3e9faf
+Successfully built bfe50c3e9faf
+Successfully tagged compose_web:latest
+WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
+Pulling redis (redis:alpine)...
+alpine: Pulling from library/redis
+8e3ba11ec2a2: Already exists
+1f20bd2a5c23: Pull complete
+782ff7702b5c: Pull complete
+cd719ead7ee3: Pull complete
+01018940af9a: Pull complete
+3f1bfdda9588: Pull complete
+Digest: sha256:e57274dac037e5b0c7680717fcaaa0efeffb23430e54e839c50819c9d842a38c
+Status: Downloaded newer image for redis:alpine
+Creating compose_redis_1 ... done
+Creating compose_web_1   ... done
+Attaching to compose_redis_1, compose_web_1
+redis_1  | 1:C 25 Jul 13:25:35.905 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_1  | 1:C 25 Jul 13:25:35.905 # Redis version=4.0.10, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_1  | 1:C 25 Jul 13:25:35.905 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis_1  | 1:M 25 Jul 13:25:35.907 * Running mode=standalone, port=6379.
+redis_1  | 1:M 25 Jul 13:25:35.907 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+redis_1  | 1:M 25 Jul 13:25:35.907 # Server initialized
+redis_1  | 1:M 25 Jul 13:25:35.907 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis_1  | 1:M 25 Jul 13:25:35.907 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+redis_1  | 1:M 25 Jul 13:25:35.907 * Ready to accept connections
+web_1    |  * Serving Flask app "app" (lazy loading)
+web_1    |  * Environment: production
+web_1    |    WARNING: Do not use the development server in a production environment.
+web_1    |    Use a production WSGI server instead.
+web_1    |  * Debug mode: on
+web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+web_1    |  * Restarting with stat
+web_1    |  * Debugger is active!
+web_1    |  * Debugger PIN: 336-031-622
+
+
+web_1    | 172.19.0.1 - - [25/Jul/2018 13:25:59] "GET / HTTP/1.1" 200 -
+web_1    | 172.19.0.1 - - [25/Jul/2018 13:26:00] "GET / HTTP/1.1" 200 -
+web_1    | 172.19.0.1 - - [25/Jul/2018 13:26:00] "GET / HTTP/1.1" 200 -
+
+
+[root@archlinux webapp]# curl localhost:5000
+Hello World! 该页面已被访问1 次。
+[root@archlinux webapp]# curl localhost:5000
+Hello World! 该页面已被访问2 次。
+[root@archlinux webapp]# curl localhost:5000
+Hello World! 该页面已被访问3 次。
+```
+
+
+## Compose模板文件
+
+默认的模板文件名称为`docker-compose.yml`，格式为YAML格式。
+每个服务都必须通过`image`命令指定镜像，或者通过`build`命令(需要Dockerfile)等来自动构建生成镜像。
+如果使用`build`命令，在Dockerfile中设置的选项(例如：CMD、EXPOSE、VOLUME、ENV等)将会自动被获取，无需在docker-compose.yml中再次设置
+
+- build
+指定`Dockerfile`所在文件夹的路径(可以是绝对路径，或者相对路径)。`compose`将会利用它自动构建这个镜像，然后使用这个镜像。
+
+```
+version: '3'
+services:
+  webapp:
+    build: ./dir
+```
+
+也可以使用build的子指令(`context`,`arg`等)指令达到相同的功能。
+
+```
+version: '3'
+services:
+  webapp:
+    build:
+      context: ./dir
+      dockerfile: Dockerfile-alternate
+      args:
+        buildno: 1
+      cache_from:  # 指定构建镜像的缓存
+        - alpine:latest
+        - corp/web_app:3.14
+```
+
+- cap_add, cap_drop
+指定容器的内核能力(capacity)分配。
+
+```
+cap_add:
+  - ALL # 让容器拥有所有能力
+```
+
+```
+cap_drop:
+  - NET_ADMIN   # 去掉NET_ADMIN能力
+```
+
+
+
+- command
+覆盖容器启动后默认执行的命令。
+
+```
+command: echo "hello world"
+
+```
+
+- configs
+仅用于`Swarm mode`
+
+- cgroup_parent
+指定父`cgroup`组，意味着将继承该组的资源限制。
+
+```
+cgroup_parent: cgroups_1    # 创建了一个cgroup组名称为cgroups_1
+```
+
+- container_name
+指定容器名称。默认将会使用`项目名称_服务名称_序号`这样的格式。
+注意： 指定容器名称后，该服务将无法进行扩展(scale)，因为Docker不允许多个容器具有相同的名称
+
+```
+container_name: docker-web-container
+```
+
+- depoly
+仅用于`Swarm mode`
+
+- devices
+指定设备映射关系
+
+```
+devices:
+  - "/dev/ttyUSB1:/dev/ttyUSB0"
+
+```
+
+
+- depends_on
+解决容器的依赖、启动先后问题。下面的配置指定先启动redis和db之后再启动web
+
+```
+version: '3'
+services:
+  web:
+    build: .
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+  db:
+    image: postgres
+```
+
+
+- dns
+自定义`DNS`服务器。可以是一个值，也可以是一个列表。
+
+```
+dns: 8.8.8.8
+
+dns:
+  - 8.8.8.8
+  - 114.114.114.114
+```
+
+- dns_search
+配置`DNS`搜索域。可以是一个值，也可以是一个列表。[什么是DNS搜索域](https://support.apple.com/kb/PH25577?locale=zh_CN&viewlocale=zh_CN)
+
+```
+dns_search: example.com
+
+dns_search:
+  - domain1.example.com
+  - domain2.example.com
+
+```
+
+- tmpfs
+挂载一个`tmpfs`文件系统到容器
+
+
+```
+tmpfs: /run
+tmpfs:
+  - /run
+  - /tmp
+```
+
+- env_file
+从文件中获取环境变量，可以为单独的文件路径或列表。
+如果通过`docker-compose -f FILE`的形式来指定Compose模板文件，则`env_file`中变量的路径会基于模板文件路径。
+如果有变量名称与`environment`指令冲突，则按照惯例，以后者为准。
+
+```
+env_file: .env
+
+env_file:
+  - ./common.env
+  - ./apps/web.env
+  - /opt/secrets.env
+```
+
+- environment
+设置环境变量。可以使用数组或者字典两种形式。
+只给定名称的变量会自动获取运行Compose主机上对应变量的值，可以用来防止泄露不必要的数据。
+
+```
+environment:
+  RACK_ENV: development
+  SESSION_SECRET: 
+
+environment:
+  - RACK_ENV=development
+  - SESSION_SECRET
+```
+
+- expose
+暴露端口，但不映射到宿主机，只被链接的服务访问。
+尽可以指定内部端口为参数。
+
+```
+expose:
+  - "3000"
+  - "8000"
+```
+
+- external_links
+链接到`docker-compose.yml`外部的容器，不建议使用该指令。
+
+- extra_hosts
+类似Docker的`--add-host`参数，指定格外的host名称映射信息。这里的映射就类似于`/etc/hosts`的作用。
+
+```
+extra_hosts:
+  - "googledns:8.8.8.8"
+  - "dockerhub:52.1.157.61"
+```
+
+
+- healthcheck
+通过命令检查容器是否健康运行
+
+```
+healthcheck:
+  test: ["CMD", "curl", "-f", "http://localhost"]
+  interval: 1m30s
+  timeout: 10s
+  retries: 3
+```
+
+
+- image
+指定为镜像名称或镜像ID。如果镜像在本地不存在，Compose将会尝试拉取这个镜像。
+
+```
+image: ubuntu
+image: orchardup/postgresql
+image: a4bc65fd
+```
+
+- labels
+为容器添加Docker元数据(metadata)信息。例如可以为容器添加辅助说明信息。
+
+```
+labels:
+  com.startupteam.description: "webapp for a startup team"
+  com.startupteam.department: "devops apartment"
+  com.startupteam.release: "rc3 for v1.0"
+```
+
+- links
+
+- logging
+配置日志选项。
+
+```
+logging:
+  driver: syslog
+  options:
+    syslog-address: "tcp://192.168.0.42:123"
+```
+
+目前支持三种日志驱动类型
+```
+driver: "json-file"
+driver: "syslog"
+driver: "none"
+```
+`options`配置日志驱动相关的参数
+```
+options:
+  max-size: "200k"
+  max-file: "10"
+```
+
+- network_mode
+设置网络模式。使用和docker run的`--network`参数一样的值。
+```
+network_mode: "bridge"
+network_mode: "host"
+network_mode: "none"
+network_mode: "service:[service name]"
+network_mode: "contanier:[container name/id]"
+```
+
+- networks
+配置容器连接的网络。
+
+```
+version: "3"
+services:
+  some-service:
+    networks:
+      - some-network
+      - other-network
+networks:
+  some-network:
+  other-network:
+```
+
+- pid
+跟主机系统共享进程命名空间。打开该选项的容器之间，以及容器和宿主机系统之间可以通过进程ID来相互访问和操作
+```
+pid: "host"
+```
+
+- ports
+暴露端口信息。
+
+```
+ports:
+  - "3000"
+  - "8000:8000"
+  - "49100:22"
+  - "127.0.0.1:8001:8001"
+```
+
+- secrets
+存储敏感数据，例如`mysql`密码。
+
+```
+version: "3.1"
+services:
+
+mysql:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+  secrets:
+    - db_root_password
+    - my_other_secret
+
+secrets::
+  my_secret:
+    file: ./my_secret.txt
+  my_other_secret:
+    external: true
+```
+
+
+- security_opt
+指定容器模板标签(label)机制的默认属性(用户、角色、类型、级别等)。例如配置标签的用户名和角色名。
+```
+security_opt:
+  - label:user:USER
+  - label:role:ROLE
+```
+
+
+- stop_signal
+设置另一个信号来停止容器。在默认情况下使用的是`SIGTERM`停止容器。
+```
+stop_signal: SIGUSR1
+```
+
+- sysctls
+配置容器内核参数
+
+```
+sysctls:
+  net.core.somaxconn: 1024
+  net.ipv4.tcp_syncookies: 0
+sysctls:
+  - net.core.somaxconn=1024
+  - net.ipv4.tcp_syncookies=0
+```
+
+- ulimits
+指定容器的ulimits限制值。
+例如，指定最大进程数为65535，指定文件句柄数为20000(软限制，应用可以随时修改，不能超过硬限制)和40000(系统硬限制，智能root用户提高)
+```
+ulimits:
+  nproc: 65535
+  nofile:
+    soft: 20000
+    hard: 40000
+```
+
+- volumes
+数据卷所挂载路径设置。可以设置宿主机路径(HOST:CONTAINER)或加上访问模式(HOST:COntAINER:ro)。该指令中路径支持相对路径
+
+```
+volumes:
+  - /var/lib/mysql
+  - cache/:/tmp/cache
+  - ~/configs:/etc/configs/:ro
+```
+

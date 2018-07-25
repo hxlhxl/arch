@@ -31,7 +31,10 @@ sudo resolvconf -u
 nameserver	127.0.0.1
 
 重启就可以了
-5. 
+5. DNS搜索域
+域名系统 (DNS) 服务器将域名映射到互联网协议 (IP) 地址。与搜索域同时使用时，可快速前往您常访问的网站和服务器，而无需输入完整的地址。
+
+例如，如果您指定搜索域为 apple.com，在您的网页浏览器中键入“store”将会前往 store.apple.com。或者，如果使用 campus.university.edu 作为搜索域，那么您可以在 Finder 的“连接服务器”对话框中键入“server1”来连接到 server1.campus.university.edu。
 
 
 
