@@ -1,0 +1,13 @@
+{
+    "logging": {
+        "disable_file_logging": false,
+        "log_level": "INFO",
+        "lilyzt-crawler_log_file": "/tmp/lilyzt-crawler.log"
+    },
+    "autorestart": true,
+    "developer_mode": true,
+    "process": {
+        "start_port": 51866,
+        "thread_number": 30
+    }
+}
