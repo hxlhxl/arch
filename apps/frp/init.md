@@ -24,3 +24,13 @@ frp /usr/share/licenses/
 frp /usr/share/licenses/frp/
 frp /usr/share/licenses/frp/LICENSE
 ```
+
+
+
+
+# 客户端连接
+
+```
+
+[husa@archlinux ~]$ ssh husa@35.194.248.176 -p 6000
+```
