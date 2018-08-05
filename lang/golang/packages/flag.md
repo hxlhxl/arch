@@ -4,3 +4,6 @@ Package flag implements command-line flag parsing
 
 func Parse()
     `Parse` parses the command-line flags from os.Args[1:].Must be called after all flags are defined and before flags are accessed by the program.
+
+func (*FlagSet) NArg()
+    NArg is the number of arguments remaining after flags have been processed.
