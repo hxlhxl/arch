@@ -5,6 +5,7 @@ import 'angular-route';
 import angular from 'angular';
 
 import {coreModule} from './core/core'; // bilibili.core
+import {setupNgRoutes} from './routes/routes';
 
 export class App {
     ngModuleDependecies: any[];
@@ -24,8 +25,10 @@ export class App {
         app.controller('IndexCtrl', ['$scope', function($scope) {
             $scope.name = "World!";
         }]);
-        app.controller('ErrorCtrl', []);
-        coreModule.config();
+        app.controller('ErrorCtrl', ['$scope', function($scope) {
+            $scope.status = '404 Not Found';
+        }]);
+        coreModule.config(setupNgRoutes);
 
         angular.bootstrap(document, this.ngModuleDependecies);
     }
