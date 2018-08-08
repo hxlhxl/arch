@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "outDir": "app/dist",
+      "target": "es5",
+      "lib": [
+        "es6",
+        "dom"
+      ],
+      "rootDir": "app/",
+      "jsx": "react",
+      "module": "esnext",
+      "declaration": false,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "importHelpers": true, // importing helper functions from tslib
+      "noEmitHelpers": true, // disable emitting inline helper functions
+      "removeComments": false, // comments are needed by angular injections
+      "inlineSourceMap": false,
+      "sourceMap": true,
+      "noEmitOnError": false,
+      "emitDecoratorMetadata": false,
+      "experimentalDecorators": true,
+      "noImplicitReturns": true,
+      "noImplicitThis": false,
+      "noImplicitUseStrict": false,
+      "noImplicitAny": false,
+      "noUnusedLocals": true,
+      "baseUrl": "app",
+      "pretty": true,
+      "paths": {
+        "app": [
+          "app"
+        ]
+      }
+    },
+    "include": [
+      "app/**/*.ts",
+      "app/**/*.tsx",
+      "app/test/**/*.ts"
+    ]
+  }
