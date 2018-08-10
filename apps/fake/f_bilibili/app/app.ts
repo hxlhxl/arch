@@ -22,12 +22,7 @@ export class App {
         const app = angular.module('bilibili', []);
         // app.config();
         // app.constant()
-        app.controller('IndexCtrl', ['$scope', function($scope) {
-            $scope.name = "World!";
-        }]);
-        app.controller('ErrorCtrl', ['$scope', function($scope) {
-            $scope.status = '404 Not Found';
-        }]);
+        
         coreModule.config(setupNgRoutes);
 
         angular.bootstrap(document, this.ngModuleDependecies);

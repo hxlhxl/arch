@@ -7,7 +7,7 @@
         "es6",
         "dom"
       ],
-      "rootDir": "app/",
+      "rootDir": "./",
       "jsx": "react",
       "module": "esnext",
       "declaration": false,
@@ -30,8 +30,8 @@
       "baseUrl": "app",
       "pretty": true,
       "paths": {
-        "app": [
-          "app"
+        "app/*": [
+          "./app/*"
         ]
       }
     },

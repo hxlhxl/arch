@@ -16,13 +16,13 @@ module.exports = {
             '.tsx',
             '.js',
             '.json',
-            '.html'
         ],
         alias: {
-
+            'app': path.resolve(__dirname, '../../app'),
         },
         modules: [
-            path.resolve('app'),
+            // 项目搜索模块路径
+            path.resolve('./'),
             path.resolve('node_modules')
         ]
     },
@@ -65,6 +65,10 @@ module.exports = {
                         transpileOnly: true
                     }
                 }
+            },
+            {
+                test: /\.html$/,
+                loader: "html-loader"
             }
         ]
     },

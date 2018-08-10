@@ -3,8 +3,11 @@ npm install --save-dev webpack
 npm install --save-dev webpack-merge
 npm install --save-dev webpack-dev-server
 npm install --save-dev webpack-cli
+npm install --save-dev html-loader
 npm install --save-dev html-webpack-plugin
 npm install --save-dev html-webpack-harddisk-plugin
+npm install --save-dev write-file-webpack-plugin
+npm install --save-dev copy-webpack-plugin
 npm install --save-dev typescript
 npm install --save-dev tslint-loader
 npm install --save-dev tslint

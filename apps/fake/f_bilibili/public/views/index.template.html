@@ -5,8 +5,10 @@
     <title>Webpack App</title>
     <base href="/" />
   </head>
-  <body>
-    <div ng-view></div>
+  <body ng-cloak>
+    <bilibili-app>
+        <div ng-view></div>
+    </bilibili-app>
     <script>
       window.$app = {
         info: 'awesome app!'
