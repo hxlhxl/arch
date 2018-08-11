@@ -46,6 +46,9 @@ module.exports = merge(base, {
         publicPath: '/public/build/',
         inline: true,
         hot: true,
+        allowedHosts: [
+            'hashnode.lilyzt.com'
+        ],
         port: 8090, //端口改为9000
         // open:true // 自动打开浏览器，适合懒人
     }

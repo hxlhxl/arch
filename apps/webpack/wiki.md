@@ -14,7 +14,7 @@
 ## [write-file-webpack-plugin]()
 
 
-## webpack-dev-server
+## [webpack-dev-server](https://webpack.js.org/configuration/dev-server/)
 
 - publicPath
     webpack-dev-server打包的時候，是不認webpack.output.path選項的，默認把所有的js放在執行webpack-dev-server的根(/)路徑下，而且打包的输出也不会写在磁盘上，都会输出到在内存里。而publicPath的作用在于设置了之后，访问`/webpack-dev-server`可以看到一些webpack-dev-server的输出，但是这个时候，webpack的js资源只能使用`/[publicPath]/bundle.js`才能访问。
