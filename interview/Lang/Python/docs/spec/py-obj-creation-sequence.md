@@ -1,0 +1,1 @@
+[Python object creation sequence](http://blog.xiayf.cn/2012/04/26/python-object-creation-sequence/)

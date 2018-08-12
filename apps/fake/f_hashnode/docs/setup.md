@@ -1,4 +1,10 @@
-# dependency
+# server
+## prerequirement(ArchLinux)
+```
+pacman -S mongodb
+```
+# client
+## dependency
 npm install --save-dev webpack
 npm install --save-dev webpack-merge
 npm install --save-dev webpack-dev-server
@@ -15,8 +21,10 @@ npm install --save-dev ts-loader
 npm install --save jquery
 npm install --save angular
 npm install --save angular-route
+npm install --save eventemitter3
+npm install --save localforage
 
-# dev
+## dev
 http://localhost:8080/
 
 

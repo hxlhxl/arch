@@ -1,0 +1,19 @@
+仿站
+	https://github.com/zbhgit
+算法
+	https://www.zhihu.com/question/19981544
+socketio
+	https://github.com/Aaaaaaaty/Blog/issues/2
+
+
+SocketServer
+	ThreadingMixIn
+	ForkingMixIn
+
+BaseHTTPServer
+	HTTPServer
+	BaseHTTPRequestHandler
+
+[http://pages.cs.wisc.edu/~remzi/OSTEP/](http://pages.cs.wisc.edu/~remzi/OSTEP/)
+[https://teachyourselfcs.com/](https://teachyourselfcs.com/)
+[How to make your HTML responsive by adding a single line of CSS](https://medium.freecodecamp.org/how-to-make-your-html-responsive-by-adding-a-single-line-of-css-2a62de81e431)

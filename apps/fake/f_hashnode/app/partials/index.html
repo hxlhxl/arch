@@ -1,3 +1,12 @@
-<div>
-    hello, {{name}} 
+<div ng-show="!loading">
+    <div>
+        <a href="/login">Sign in</a>
+    </div>
+    <div ng-if="user">
+        hello, {{user.login}} 
+        <img ng-src="{{user.avatar_url}}"/>
+    </div>
+</div>
+<div ng-show="loading">
+    Loading...
 </div>

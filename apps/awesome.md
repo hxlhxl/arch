@@ -10,13 +10,22 @@
 ## Animation
 [Velocity.js]
 
+## Event
+[eventemitter3](https://github.com/primus/eventemitter3): EventEmitter3 - Because there's also a number 2. And we're faster.
+
+## Storage
+[localforage](https://github.com/localForage/localForage): 💾 Offline storage, improved. Wraps IndexedDB, WebSQL, or localStorage using a simple but powerful API. https://localforage.github.io/localFo…
+
 ## Validation
 [v8n]
-
+[cerberus](https://github.com/pyeve/cerberus): Lightweight, extensible data validation library for Python http://python-cerberus.org
 ## Markdown
 [bisheng]
 
 # Web Server
+## file server
+[whitenoise](https://github.com/evansd/whitenoise): Radically simplified static file serving for Python web apps http://whitenoise.evans.io/
+
 # Secure
 ## HTTPS
 [mkcert](https://github.com/FiloSottile/mkcert): 快速搭建本地CA证书体系

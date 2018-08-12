@@ -1,0 +1,23 @@
+{
+  "name": "demo",
+  "homepage": "https://github.com/hxlhxl/arch",
+  "authors": [
+    "DESKTOP-C0VMJDM\\husa <huaxiongcool@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.10"
+  }
+}

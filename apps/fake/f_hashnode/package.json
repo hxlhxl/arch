@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --progress --colors --mode development --config scripts/webpack/webpack.dev.js",
-    "watch": "webpack-dev-server --watch-poll --hot --progress --colors --watch --mode development --config scripts/webpack/webpack.dev.js"
+    "watch": "webpack-dev-server --watch-poll --hot --progress --colors --watch --mode development --config scripts/webpack/webpack.dev.js",
+    "pylint": "pylint server/"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +29,8 @@
   "dependencies": {
     "angular": "^1.7.2",
     "angular-route": "^1.7.2",
-    "jquery": "^3.3.1"
+    "eventemitter3": "^3.1.0",
+    "jquery": "^3.3.1",
+    "localforage": "^1.7.2"
   }
 }

@@ -1,0 +1,1 @@
+[collections — Container Data Types](https://pymotw.com/3/collections/index.html)

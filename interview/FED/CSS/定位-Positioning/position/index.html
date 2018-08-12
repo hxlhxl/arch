@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>POSITION定位DEMO</title>
+    <style>
+        .container {
+            background-color: #CCC;
+            margin-top: 10px;
+            height: 150px;
+        }
+
+        .wrap {
+            width: 600px;
+            background-color: #431AEF;
+        }
+
+        .p-static {
+            position: static;
+            top: 20px;
+            left: 100px;
+        }
+
+        .p-relative {
+            position: relative;
+            top: 20px;
+            left: 100px;
+        }
+
+        .p-sized-relative {
+            height: 100px;
+        }
+
+        .p-absolute {
+            position: absolute;
+            left: 40px;
+            top: 40px;
+            background-color: #742;
+        }
+
+        .p-fixed {
+            position: fixed;
+            right: 40px;
+            bottom: 40px;
+            background-color: #742;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h5>position:static</h5>
+        <div class="wrap p-static">
+            <div class="p-static">世界你好！</div>
+            <div class="p-static">世界你好！</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h5>position:relative</h5>
+        <div class="wrap p-relative">
+            <div>世界你好！</div>
+            <div>世界你好！</div>
+            <div>世界你好！</div>
+        </div>
+    </div>
+    <div class="container">
+        <h5>position:relative + position:absolute</h5>
+        <div class="wrap p-relative">
+            <div class="p-absolute">
+                <div>世界你好！</div>
+                <div>世界你好！</div>
+                <div>世界你好！</div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h5>position:relative(with sized) + position:absolute</h5>
+        <div class="wrap p-relative p-sized-relative">
+            <div class="p-absolute">
+                <div>世界你好！</div>
+                <div>世界你好！</div>
+                <div>世界你好！</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+            <h5>position:fixed</h5>
+            <div class="wrap p-relative">
+                <div class="p-fixed">
+                    <div>世界你好！</div>
+                    <div>世界你好！</div>
+                    <div>世界你好！</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <h5>position:relative + 多个 position:absolute的碰撞</h5>
+            <div class="wrap p-relative">
+                <div class="p-absolute" style="lef: -100px">
+                    <div>世界你好！</div>
+                    <div>世界你好！</div>
+                    <div>世界你好！</div>
+                </div>
+                <div class="p-absolute" style="z-index: 100">
+                    <div>HelloWorld!</div>
+                    <div>HelloWorld!</div>
+                    <div>HelloWorld!</div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

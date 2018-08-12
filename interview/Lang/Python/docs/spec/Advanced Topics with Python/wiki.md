@@ -1,0 +1,1 @@
+[Advanced Topics](https://www.python-course.eu/advanced_topics.php)

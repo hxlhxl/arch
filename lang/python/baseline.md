@@ -81,6 +81,12 @@ loop.run_until_complete(asyncio.wait(tasks))
 loop.close()
 ```
 
+# yield
+
+- 简单函数中如果有`yield`关键字，那么这个函数在调用的时候，会立即返回，直到去迭代这个函数的返回值，才会真正地调用函数中的语句
+- 
+
+
 
 # Reference
 

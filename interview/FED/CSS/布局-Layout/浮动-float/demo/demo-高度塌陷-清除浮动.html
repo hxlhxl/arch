@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>高度塌陷+清除浮动</title>
+    <style>
+        .container {
+            background-color: #CCC;
+            margin-bottom: 10px;
+            height: 150px;
+        }
+
+        .wrap {
+            width: 600px;
+            background-color: #431AEF;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+
+        .left1 {
+            width: 50%;
+            float: left;
+            height: 60px;
+            background-color: #789;
+        }
+
+        .left2 {
+            width: 10%;
+            height: 30px;
+            float: left;
+            background-color: #345;
+            border: 0px solid red;
+        }
+
+        .footer {
+            border: 1px solid #CCC;
+            background: #EEE;
+            width: 600px;
+            margin: 0px auto 0px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h5>浮动例子</h5>
+        <div class="wrap">
+            <div class="left1">left1</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+        </div>
+        <div class="footer">hahahaah</div>
+    </div>
+    <div class="container">
+        <h5>清除浮动--添加额外标签</h5>
+        <div class="wrap">
+            <div class="left1">left1</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+
+            <div style="clear:both"></div>
+        </div>
+        <div class="footer">hahahaah</div>
+    </div>
+    <div class="container">
+        <h5>清除浮动--使用br标签并使用其clear属性</h5>
+        <div class="wrap">
+            <div class="left1">left1</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+
+            <br clear="all">
+        </div>
+        <div class="footer">hahahaah</div>
+    </div>
+    <div class="container">
+        <h5>清除浮动--父元素使用overflow:hidden/auto等(触发BFC，容器高度把float计算在内)</h5>
+        <div class="wrap" style="overflow:hidden">
+            <div class="left1">left1</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+
+        </div>
+        <div class="footer">hahahaah</div>
+    </div>
+
+    <div class="container">
+        <h5>清除浮动--父元素使用display:table(本质上也是触发了BFC)</h5>
+        <div class="wrap" style="display:table">
+            <div class="left1">left1</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+
+        </div>
+        <div class="footer">hahahaah</div>
+    </div>
+
+    <div class="container">
+        <h5>清除浮动--使用伪元素</h5>
+        <div class="wrap clearfix" >
+        <!-- <div class="wrap" style="overflow:hidden"> -->
+            <div class="left1">left1</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2">left2</div>
+            <div class="left2 clearfix">left2</div>
+        </div>
+        <div class="footer">hahahaah</div>
+    </div>
+</body>
+
+</html>

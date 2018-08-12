@@ -1,0 +1,1 @@
+rsync -avzP interview gcp.lilyzt.com:/home/huaxiongcool/SyncData/
