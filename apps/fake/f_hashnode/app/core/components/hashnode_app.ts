@@ -13,6 +13,6 @@ export function hashnodeAppDirective($location) {
         link: (scope, elem) => {
             console.log("link in hashnode_ctrl");
         }
-    }
+    };
 }
-coreModule.directive('hashnodeApp', hashnodeAppDirective)
+coreModule.directive('hashnodeApp', hashnodeAppDirective);

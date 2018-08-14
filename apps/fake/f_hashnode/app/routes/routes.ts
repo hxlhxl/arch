@@ -19,5 +19,5 @@ export function setupNgRoutes($routeProvider, $locationProvider) {
             // templateUrl: 'app/partials/error.html',
             template: require('app/partials/error.html'),
             controller: 'ErrorCtrl'
-        })
+        });
 }

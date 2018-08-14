@@ -9,6 +9,25 @@ export class IndexCtrl {
         $scope.loading = true;
         $scope.name = "World!";
         this.getData();
+        $scope.type = 'aaa';
+        $scope.filter = {
+            suggText: 'xxxx'
+        };
+        // $scope.filter.suggText = "vscode";
+        $scope.orgList = [
+            {
+                text: '链家',
+                value: '1234-5678'
+            },
+            {
+                text: '中原',
+                value: '9087-4313'
+            },
+            {
+                text: '恒大',
+                value: '1235-9421'
+            }
+        ];
         window.myng = $scope;
         // appEvents.on('oauth:success', (user)=> {
         //     $scope.user = user;
@@ -18,11 +37,9 @@ export class IndexCtrl {
     getData() {
         localForage.getItem('oauth:user')
             .then(res => {
-                console.log(res, 'hahahahah')
                 this.$scope.user = res;
             })
             .catch(err => {
-                console.log(err, 'heheh')
                 this.$scope.user = null;
             })
             .then(() => {
@@ -32,4 +49,4 @@ export class IndexCtrl {
     }
 }
 
-coreModule.controller('IndexCtrl', IndexCtrl)
+coreModule.controller('IndexCtrl', IndexCtrl);
