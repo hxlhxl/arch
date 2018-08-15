@@ -2,6 +2,11 @@
 ## Icons
 [feather](https://github.com/feathericons/feather)
 
+# Search Algo Lib
+
+[fuzzysort](https://github.com/farzher/fuzzysort): Fast SublimeText-like fuzzy search for JavaScript. https://rawgit.com/farzher/fuzzysort/…
+[fuzzywuzzy](https://github.com/seatgeek/fuzzywuzzy): Fuzzy String Matching in Python http://chairnerd.seatgeek.com/fuzzywu…
+
 # Javascript
 ## Optimization
 [Front-End-Performance-Checklist](https://github.com/thedaviddias/Front-End-Performance-Checklist)

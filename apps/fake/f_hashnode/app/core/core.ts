@@ -5,9 +5,8 @@ import 'app/core/controllers/all';
 import coreModule from './core_module';
 import appEvents from './app_events';
 
-
 // directives
-import {suggestionDirective} from './components/suggestion/suggestion';
+import directiveEntry from './directives';
 
 function noop() {}
 
@@ -17,5 +16,5 @@ export {
     appEvents,
     noop,
     // directives
-    suggestionDirective
+    directiveEntry
 };
