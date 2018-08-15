@@ -13,7 +13,13 @@ export class IndexCtrl {
         $scope.filter = {
             suggText: 'xxxx'
         };
-        // $scope.filter.suggText = "vscode";
+        $scope.addItem = function() {
+            console.log("addItem");
+            $scope.orgList.push({
+                text: '碧桂园',
+                value: '124-532'
+            });
+        };
         $scope.orgList = [
             {
                 text: '链家',

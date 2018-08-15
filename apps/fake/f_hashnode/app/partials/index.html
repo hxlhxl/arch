@@ -1,6 +1,9 @@
 <div ng-show="!loading">
+    <ui-header link="'/login'"></ui-header>
     <ui-helloworld></ui-helloworld>
-    <ui-suggestion v-if="type == 'aaa' && (filter.suggText = 'aaa')"
+    <ui-suggestion 
+        add-item="addItem()"
+        v-if="type == 'aaa'"
         ng-model="filter.suggText" data="orgList"></ui-suggestion>
     <div>
         <a href="/login">Sign in</a>

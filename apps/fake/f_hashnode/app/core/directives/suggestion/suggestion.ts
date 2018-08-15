@@ -39,7 +39,8 @@ export function suggestionDirective() {
         require: '?ngModel',
         scope: {
             ngModel: '=',
-            items: '<data'
+            items: '<data',
+            addItem: '&'
         },
         link: SuggestionLink
     };
