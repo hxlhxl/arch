@@ -14,26 +14,26 @@ export class OauthCtrl {
             `/api/oauth/github?code=${code}`
         ).then(
             res => {
-                if (res.data && res.data.retCode == 0) {
+                if (res.data && res.data.retCode === 0) {
                     $scope.user = res.data.data;
-                    console.log($scope.user, '________________')
+                    console.log($scope.user, '________________');
                     localForage.setItem('oauth:user', $scope.user).then(
                         () => {
                             // appEvents.emit("oauth:success", $scope.user);
-                            console.log("****************")
+                            console.log("****************");
                             $location.path("/");
-                            $location.search('')
+                            $location.search('');
                             $location.replace();
                             $scope.$apply();
                         }
                     ).catch(err => {
-                        console.log(err)
-                    })
-                    
+                        console.log(err);
+                    });
+
                 }
             },
             err => {
-                alert("pull github userinfo failed")
+                alert("pull github userinfo failed");
             }
         );
     }

@@ -1,4 +1,6 @@
 <div ng-show="!loading">
+    <ui-suggestion v-if="type == 'aaa' && (filter.suggText = 'aaa')"
+        ng-model="filter.suggText" data="orgList"></ui-suggestion>
     <div>
         <a href="/login">Sign in</a>
     </div>

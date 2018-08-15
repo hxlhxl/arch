@@ -15,17 +15,19 @@ export class App {
             'hashnode.core',
             'ngRoute',
             'hashnode'
-        ]
+        ];
     }
     init() {
-        
+
         const app = angular.module('hashnode', []);
         // app.config();
         // app.constant()
-        
+
         coreModule.config(setupNgRoutes);
 
         angular.bootstrap(document, this.ngModuleDependecies);
+
+        window.coreModule = coreModule;
     }
 }
 
