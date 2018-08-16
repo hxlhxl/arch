@@ -7,6 +7,14 @@
 [fuzzysort](https://github.com/farzher/fuzzysort): Fast SublimeText-like fuzzy search for JavaScript. https://rawgit.com/farzher/fuzzysort/…
 [fuzzywuzzy](https://github.com/seatgeek/fuzzywuzzy): Fuzzy String Matching in Python http://chairnerd.seatgeek.com/fuzzywu…
 
+
+# CSS
+[BaiduFEX编码规范](https://github.com/fex-team/styleguide/blob/master/css.md)
+
+https://cssreference.io
+https://atomiks.github.io/30-seconds-of-css/#height-transition
+
+
 # Javascript
 ## Optimization
 [Front-End-Performance-Checklist](https://github.com/thedaviddias/Front-End-Performance-Checklist)

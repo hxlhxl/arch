@@ -4,6 +4,26 @@
 pacman -S mongodb
 ```
 # client
+
+## design
+
+### css style
+
+### color
+
+- red
+  `#FB617F`
+  `#FFE0E6`
+  `#FFFFFF`
+- yellow
+  `#FEB64D`
+  `#FFF1DC`
+  `#FFFFFF`
+- blue
+  `#4680FF`
+  `#DBE5FF`
+  `#FFFFFF`
+
 ## dependency
 npm install --save-dev webpack
 npm install --save-dev webpack-merge
