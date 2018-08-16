@@ -2,6 +2,12 @@
 ## Icons
 [feather](https://github.com/feathericons/feather)
 
+# Code
+[ActiveState/code](https://github.com/ActiveState/code): ActiveState Code Recipes 
+https://code.activestate.com
+
+
+
 # Search Algo Lib
 
 [fuzzysort](https://github.com/farzher/fuzzysort): Fast SublimeText-like fuzzy search for JavaScript. https://rawgit.com/farzher/fuzzysort/…

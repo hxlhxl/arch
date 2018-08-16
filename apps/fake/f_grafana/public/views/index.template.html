@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Webpack App</title>
+    <base href="/" />
+  </head>
+  <body ng-cloak>
+    <ui-root-container>
+        <div ng-view></div>
+    </ui-root-container>
+    <script>
+      window.$app = {
+        info: 'awesome app!'
+      };
+    </script>
+  </body>
+</html>
