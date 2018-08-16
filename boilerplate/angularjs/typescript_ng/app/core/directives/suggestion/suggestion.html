@@ -1,0 +1,19 @@
+<div>
+    <input ng-model="suggSelectText" readonly type="text"/>
+    <span>v</span>
+    <div>
+        <button ng-click="addItem({})">add_one_item</button>
+        <input placeholder="杜索" 
+            ng-model="suggInputText"
+            />
+        <ul>
+            <li
+                ng-repeat="item in itemsCopy"
+            >
+                <div ng-click="select(item)">
+                    {{item.text}}
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

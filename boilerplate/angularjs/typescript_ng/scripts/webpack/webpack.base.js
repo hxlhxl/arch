@@ -1,11 +1,10 @@
 const path = require('path');
-const packageJson = require('../../package.json');
-const webpack = require('webpack');
 
 module.exports = {
     target: 'web',
     entry: {
-        app: './app/index.ts'
+        app: './app/index.ts',
+        
     },
     output: {
         path: path.resolve(__dirname, '../../public/build'),
@@ -18,6 +17,7 @@ module.exports = {
             '.tsx',
             '.js',
             '.json',
+            '.scss'
         ],
         alias: {
             'app': path.resolve(__dirname, '../../app'),
@@ -54,7 +54,8 @@ module.exports = {
                     loader: 'tslint-loader',
                     options: {
                         emitErros: true,
-                        typeCheck: false
+                        typeCheck: false,
+                        fix: true
                     }
                 }
             },
@@ -71,6 +72,14 @@ module.exports = {
             {
                 test: /\.html$/,
                 loader: "html-loader"
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    "style-loader", // creates style nodes from JS strings
+                    "css-loader",   // translate CSS info CommonJS
+                    "sass-loader"   // compiles Sass to CSS
+                ]
             }
         ]
     },
@@ -78,8 +87,6 @@ module.exports = {
 
     },
     plugins: [
-        new webpack.DefinePlugin({
-            appName: JSON.stringify(packageJson.name)
-        })
+
     ]
 }

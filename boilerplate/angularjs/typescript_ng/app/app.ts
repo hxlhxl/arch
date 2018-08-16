@@ -4,7 +4,7 @@ import 'angular-route';
 
 import angular from 'angular';
 
-import {coreModule} from './core/core'; // hashnode.core
+import {coreModule} from './core/core'; // myapp.core
 import {setupNgRoutes} from './routes/routes';
 
 export class App {
@@ -12,20 +12,22 @@ export class App {
 
     constructor() {
         this.ngModuleDependecies = [
-            'hashnode.core',
+            'myapp.core',
             'ngRoute',
-            'hashnode'
-        ]
+            'myapp'
+        ];
     }
     init() {
-        
-        const app = angular.module('hashnode', []);
+
+        const app = angular.module('myapp', []);
         // app.config();
         // app.constant()
-        
+
         coreModule.config(setupNgRoutes);
 
         angular.bootstrap(document, this.ngModuleDependecies);
+
+        window.coreModule = coreModule;
     }
 }
 

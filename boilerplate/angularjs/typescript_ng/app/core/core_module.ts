@@ -1,5 +1,5 @@
 import angular from 'angular';
 
 
-export default angular.module('hashnode.core', ['ngRoute']);
-                   
+export default angular.module('myapp.core', ['ngRoute']);
+

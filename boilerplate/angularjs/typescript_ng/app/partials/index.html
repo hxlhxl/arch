@@ -1,3 +1,18 @@
-<div>
-    hello, {{name}} 
+<div ng-show="!loading">
+    <ui-header link="'/login'"></ui-header>
+    <ui-helloworld></ui-helloworld>
+    <ui-suggestion 
+        add-item="addItem()"
+        v-if="type == 'aaa'"
+        ng-model="filter.suggText" data="orgList"></ui-suggestion>
+    <div>
+        <a href="/login">Sign in</a>
+    </div>
+    <div ng-if="user">
+        hello, {{user.login}} 
+        <img ng-src="{{user.avatar_url}}"/>
+    </div>
+</div>
+<div ng-show="loading">
+    Loading...
 </div>

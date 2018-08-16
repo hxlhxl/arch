@@ -1,0 +1,6 @@
+mongodb:
+  host: '192.168.145.132'
+  port: 27017
+debug_proxy_config:
+  host: '127.0.0.1'
+  port: 8888
