@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --progress --colors --mode development --config scripts/webpack/webpack.dev.js",
     "watch": "webpack-dev-server --watch-poll --hot --progress --colors --watch --mode development --config scripts/webpack/webpack.dev.js",
+    "dev-server": "nodemon --watch ./server --exec go run server/main.go",
     "pylint": "pylint server/"
   },
   "author": "",
@@ -18,6 +19,7 @@
     "html-webpack-harddisk-plugin": "^0.2.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.3",
+    "nodemon": "^1.18.3",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",
     "ts-loader": "^4.4.2",

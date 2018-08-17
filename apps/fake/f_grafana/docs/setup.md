@@ -42,6 +42,7 @@ npm install --save-dev typescript
 npm install --save-dev tslint-loader
 npm install --save-dev tslint
 npm install --save-dev ts-loader
+npm install --save-dev nodemon
 npm install --save jquery
 npm install --save angular
 npm install --save angular-route
