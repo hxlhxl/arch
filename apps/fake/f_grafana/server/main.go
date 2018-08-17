@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
+	"strconv"
 
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/setting"
@@ -11,7 +13,7 @@ import (
 
 var version = "1.0.0"
 var commit = "NA"
-var buildstampInt64 int64 = 1235525
+var buildstamp string
 
 func main() {
 	v := flag.Bool("v", false, "prints current version and exists")
@@ -22,9 +24,15 @@ func main() {
 		os.Exit(0)
 	}
 
+	buildstampInt64, _ := strconv.ParseInt(buildstamp, 10, 64)
+	if buildstampInt64 == 0 {
+		buildstampInt64 = time.Now().Unix()
+	}
 	setting.BuildVersion = version
 	setting.BuildCommit = commit
 	setting.BuildStamp = buildstampInt64
 	setting.IsEnterprise = false
+
+
 	api.RunFakeHttpServer()
 }
