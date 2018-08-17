@@ -8,8 +8,5 @@ import (
 
 
 func RunFakeHttpServer() {
-	fmt.Println("server started...")
-	fmt.Println("Server version is", setting.BuildVersion)
-	fmt.Println("Server build stamp is", setting.BuildStamp)
-	fmt.Println("Server build stamp is", setting.BuildStamp)
+	fmt.Println("RunFakeHttpServer\nServer build stamp is", setting.BuildStamp)
 }
