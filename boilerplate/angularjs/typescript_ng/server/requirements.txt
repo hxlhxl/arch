@@ -1,5 +1,0 @@
-elasticsearch==6.3.1
-pymongo==3.7.1
-PyYAML==3.13
-tornado==5.1
-urllib3==1.23

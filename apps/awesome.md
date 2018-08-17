@@ -2,6 +2,14 @@
 ## Icons
 [feather](https://github.com/feathericons/feather)
 
+# bin/exe
+[concurrently](https://github.com/kimmobrunfeldt/concurrently): Run commands concurrently. Like `npm run watch-js & npm run watch-less` but better. https://www.npmjs.com/package/concurr…
+
+
+# OS
+[gesture](https://github.com/iberianpig/fusuma): Multitouch gestures with libinput dirver on X11, Linux
+
+
 # Code
 [ActiveState/code](https://github.com/ActiveState/code): ActiveState Code Recipes 
 https://code.activestate.com
