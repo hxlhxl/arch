@@ -23,7 +23,7 @@ type GrafanaServerImpl struct {
 func NewGrafanaServer() *GrafanaServerImpl{
 
 	return &GrafanaServerImpl {
-
+		
 	}
 }
 

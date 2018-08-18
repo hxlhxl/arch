@@ -1,3 +1,7 @@
+# golang spec
+
+[go spec](https://golang.org/ref/spec)
+[go memory model](https://golang.org/ref/mem)
 # 特性
 - 静态语言
 - 垃圾回收
@@ -64,10 +68,39 @@ go get的本质可以理解为第一步通过源码工具clone代码到src下面
 - var variableName type
 - bool, int, int32, float32, float64, string, errors, ioat,
 - 默认规则：1. 大写字母开头的变量可以到处，也就是其他包可以读取，是公有变量；小写字母开头不可导出，是私有变量2. 大写字母开头的函数也是可以导出的，相当于class中的带public关键词的公有函数；小写字母开头的就是private关键词的私有函数
+- 同一个包内的所有变量、类型、接口可以相互访问，不需要大写字母开头，大写字母是暴露给其他包的
 - array, slice(动态数组), map： 1. 数组作为参数传递给函数是按值传递而不是数组的引用 2. slice是引用类型，所以当引用改变其中元素的值时，其他所有的引用都会改变该值。slice像一个结构体，包含一个指针，长度和最大长度，最大长度可以用数组的切片计算出来，及最开始位置到数组的最后位置。3. map无序，map是引用类型，不是thread-safe，在多个go-routine中存取时，必须使用mutex lock机制
 - len, cap, append, copy
-- make, new: 1. make用于内建类型map, slice和channel的内存分配 2. new用于各种类型的内存分配。 new(T)分配了零值填充的T类型的内存空间，并且返回其地址，即一个*T类型，即返回了一个指针，指向新分配的类型T的零值。 make(T, args)只能用于内建类型。
+- make, new: 1. make用于内建类型map, slice和channel的内存分配 2. new用于各种类型的内存分配。 new(T)分配了零值填充的T类型的内存空间，并且返回其地址，即一个*T类型，即返回了一个指针，指向新分配的类型T的零值。 make(T, args)只能用于内建类型。 3. make(T, 0)的作用在于append的时候不用管默认的跟踪索引特性 (https://www.calhoun.io/how-to-use-slice-capacity-and-length-in-go/)
+    ```
+    // vals := make([]int, 5) -> len: 5, capacity: 5
+    // vals = append(vals, 1)  -> capacity在gi中会自动扩充，一般是当前的两倍
+    // slices := make([]int, 0) -> len: 0, capacity: 0,此时使用append，slice的length会一个一个增加，那么就会正常了
+    package main
+
+    import (
+        "fmt"
+    )
+
+    func main() {
+        vals := make([]int, 5)   
+        for i := 0; i< 5; i++ {   
+            vals = append(vals, i) 
+            fmt.Println(len(vals))
+        } 
+        fmt.Println(vals)  
+    }
+
+    ```
 - delete可以删除map的元素: delete(mapVar, key)
+- 结构体
+  声明：
+  初始化： 
+        ```
+        type logger struct {
+            level 
+        }
+        ```
 
 ## package
 - package main表示这个包将会生成可执行文件，其他的包则会生成.a文件
@@ -355,6 +388,74 @@ type months map[string]int
 - 任意的类型都实现了空interface(interface {}, 包含0个method的interface)
 - interface{}作为函数参数
 - interface{}实现了struct一样的继承关系
+
+
+```
+// _Interfaces_ are named collections of method
+// signatures.
+
+package main
+
+import "fmt"
+import "math"
+
+// Here's a basic interface for geometric shapes.
+type geometry interface {
+    area() float64
+    perim() float64
+}
+
+// For our example we'll implement this interface on
+// `rect` and `circle` types.
+type rect struct {
+    width, height float64
+}
+type circle struct {
+    radius float64
+}
+
+// To implement an interface in Go, we just need to
+// implement all the methods in the interface. Here we
+// implement `geometry` on `rect`s.
+func (r rect) area() float64 {
+    return r.width * r.height
+}
+func (r rect) perim() float64 {
+    return 2*r.width + 2*r.height
+}
+
+// The implementation for `circle`s.
+func (c circle) area() float64 {
+    return math.Pi * c.radius * c.radius
+}
+func (c circle) perim() float64 {
+    return 2 * math.Pi * c.radius
+}
+
+// If a variable has an interface type, then we can call
+// methods that are in the named interface. Here's a
+// generic `measure` function taking advantage of this
+// to work on any `geometry`.
+func measure(g geometry) {
+    fmt.Println(g)
+    fmt.Println(g.area())
+    fmt.Println(g.perim())
+}
+
+func main() {
+    r := rect{width: 3, height: 4}
+    c := circle{radius: 5}
+
+    // The `circle` and `rect` struct types both
+    // implement the `geometry` interface so we can use
+    // instances of
+    // these structs as arguments to `measure`.
+    measure(r)
+    measure(c)
+}
+
+
+```
 
 ## 断言
 
