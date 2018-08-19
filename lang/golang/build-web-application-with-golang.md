@@ -98,8 +98,10 @@ go get的本质可以理解为第一步通过源码工具clone代码到src下面
   初始化： 
         ```
         type logger struct {
-            level 
+            level int
         }
+        var Root *logger    // Root == nil
+        var MyRoot *logger = &logger{}  // MyRoot -> &logger{level 0;}
         ```
 
 ## package

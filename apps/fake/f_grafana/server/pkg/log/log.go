@@ -19,7 +19,12 @@ func init() {
 	// 引入包自动执行
 	loggersToClose = make([]DisposableHandler, 0)
 	// log15 return the root logger defined in root.go func init
-	/**
+	/** log15 root.go
+		var (
+			root          *logger
+			StdoutHandler = StreamHandler(os.Stdout, LogfmtFormat())
+			StderrHandler = StreamHandler(os.Stderr, LogfmtFormat())
+		)
 		type logger struct {
 			ctx []interface{}
 			h   *swapHandler

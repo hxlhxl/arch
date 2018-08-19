@@ -4,7 +4,8 @@
 
 # bin/exe
 [concurrently](https://github.com/kimmobrunfeldt/concurrently): Run commands concurrently. Like `npm run watch-js & npm run watch-less` but better. https://www.npmjs.com/package/concurr…
-
+[rerun](https://github.com/skelterjohn/rerun): Will autobuild and kill/relaunch the target when you update the code.
+[nodemon](https://github.com/remy/nodemon): Monitor for any changes in your node.js application and automatically restart the server - perfect for development http://nodemon.io/
 
 # OS
 [gesture](https://github.com/iberianpig/fusuma): Multitouch gestures with libinput dirver on X11, Linux
