@@ -474,3 +474,40 @@ func main() {
 ## 反射reflection
 
 ## goroutine
+下面的程序会得到结果965,1000,1000等。
+```
+package main
+import (
+	"fmt"
+	"sync"
+	"sync/atomic"
+)
+func main() {
+	var (
+		wg     sync.WaitGroup
+		nA		int64
+		nB		int64
+        nC      int64
+	)
+	// var mu sync.Mutex
+
+	wg.Add(2000)
+	for i := 0; i < 1000; i++ {
+		go func() {
+			// nA++
+			// mu.Lock()
+			nA = nA + 1
+			// mu.Unlock()
+			wg.Done()
+		}()
+	}
+	for i := 0; i < 1000; i++ {
+		go func() {
+			atomic.AddInt64(&nB, 1)
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+	fmt.Println(nA, nB)
+}
+```

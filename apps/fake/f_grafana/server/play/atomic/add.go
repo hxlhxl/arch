@@ -9,11 +9,14 @@ func main() {
 		wg     sync.WaitGroup
 		nA		int64
 		nB		int64
+		nC		int64
 	)
-	wg.Add(2000)
+	var mu sync.Mutex
+
+	wg.Add(3000)
 	for i := 0; i < 1000; i++ {
 		go func() {
-			nA++
+			nA = nA + 1
 			wg.Done()
 		}()
 	}
@@ -23,6 +26,14 @@ func main() {
 			wg.Done()
 		}()
 	}
+	for i := 0; i < 1000; i++ {
+		go func() {
+			mu.Lock()
+			nC = nC + 1
+			mu.Unlock()
+			wg.Done()
+		}()
+	}
 	wg.Wait()
-	fmt.Println(nA, nB)
+	fmt.Println(nA, nB, nC)
 }
