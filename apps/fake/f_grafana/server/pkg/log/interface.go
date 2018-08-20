@@ -4,6 +4,15 @@ import "github.com/inconshreveable/log15"
 
 type Lvl int
 
+
+const (
+	LvlCrit Lvl = iota
+	LvlError
+	LvlWarn
+	LvlInfo
+	LvlDebug
+)
+
 type Logger interface {
 	
 	New(ctx ...interface{}) log15.Logger

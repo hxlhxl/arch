@@ -210,7 +210,14 @@ for sum < 1000 {
 - break,continue
 - _用于丢弃不需要的变量
 - switch语句，不需要break，拥有特殊的fallthrough
-
+- select语句
+    ```
+        Select {
+            case u := <- ch1:
+            case e := <- ch2:
+            default:
+        }
+    ```
 ## 函数
 函数是Go里面的核心设计，它通过关键字`func`来声明，它的格式如下：
 ```Go

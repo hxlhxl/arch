@@ -34,6 +34,15 @@ func init() {
 		}
 	*/
 	Root = log15.Root()
+	/**
+		func (l *logger) GetHandler() Handler {
+			return l.h.Get()
+		}
+
+		func (l *logger) SetHandler(h Handler) {
+			l.h.Swap(h)
+		}
+	*/
 	Root.SetHandler(log15.DiscardHandler())
 }
 
