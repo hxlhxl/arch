@@ -2,6 +2,8 @@
 
 [go spec](https://golang.org/ref/spec)
 [go memory model](https://golang.org/ref/mem)
+[go doc](https://godoc.org)
+
 # 特性
 - 静态语言
 - 垃圾回收
@@ -103,6 +105,18 @@ go get的本质可以理解为第一步通过源码工具clone代码到src下面
         var Root *logger    // Root == nil
         var MyRoot *logger = &logger{}  // MyRoot -> &logger{level 0;}
         ```
+- new的使用
+    new用于给一个结构体分配内存，并把结构体中的成员全部赋为零值
+    ```
+        import "sync/atomic"
+        type Person struct {
+            name    string
+            age     int
+            color   atomic.Value
+        }
+
+        var p *Person = new(Person)
+    ```
 
 ## package
 - package main表示这个包将会生成可执行文件，其他的包则会生成.a文件
@@ -166,6 +180,15 @@ rating := map[string]float32{"C":5, "Go":4.5, "Python":4.5, "C++":2 }
 
 ## 内置基础类型
 
+- 变量类型初始化
+    ```
+        var intVal int64 = int64(1000)  // 
+
+        type myInt  int64
+        var myIntVal myInt = myInt(1000)    // 自定义类型也是这样初始化
+    ```
+
+- 
 ## 流程控制
 
 - if: 1. 不许要括号， 2. 可以声明变量
@@ -391,10 +414,14 @@ type months map[string]int
 
 ## interface
 
+An interface is a kind of contract which the implementing type(s) must fulfill. Interfaces describe the behaviorof types, what they can do. They completely separate the definition of what an object can do from how it does it, allowing distinct implementations to be represented at different times by the same interface variable, which is what polymorphism essentially is.
+Writing functions so that they accept an interface variable as a parameter makes them more general.
+
 - interface是一组method签名的集合
 - interface可以被任意的对象实现
 - 一个对象可以实现任意多个interface
 - 任意的类型都实现了空interface(interface {}, 包含0个method的interface)
+- 任意类型只要实现了interface中的所有方法，那么就可以是interface的“实例”
 - interface{}作为函数参数
 - interface{}实现了struct一样的继承关系
 
@@ -466,7 +493,7 @@ func main() {
 
 ```
 
-## 断言
+## 断言(类型判断)
 
 - comma-ok value, ok = element.(T)
 - switch
@@ -511,3 +538,18 @@ func main() {
 	fmt.Println(nA, nB)
 }
 ```
+
+
+
+# Advance
+
+- context
+- sync
+  1. sync
+  2. sync/atomic
+  3. https://github.com/golang/sync
+    3.1 errgroup
+    3.2 semaphore
+    3.3 singleflight
+    3.4 syncmap
+

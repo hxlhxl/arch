@@ -13,7 +13,7 @@ type GrafanaServerImpl struct {
 	context				context.Context
 	shutdownFn			context.CancelFunc
 	childRoutines		*errgroup.Group
-	log					log.Logger
+	log					log.Logger	// pkg.log.interface
 	cfg					*setting.Cfg
 	shutdownReason		string
 	shutdownInProgress	bool
@@ -23,9 +23,13 @@ type GrafanaServerImpl struct {
 }
 
 func NewGrafanaServer() *GrafanaServerImpl{
-
+	rootCtx, shutdownFn := context.WithCancel(context.Background())
+	childRoutines, childCtx := errgroup.WithContext(rootCtx)	// childRoutines是一组goroutines
 	return &GrafanaServerImpl {
-		
+		context:		childCtx,
+		shutdownFn:		shutdownFn,
+		childRoutines:	childRoutines,
+		log:			log.New("server"),
 	}
 }
 
