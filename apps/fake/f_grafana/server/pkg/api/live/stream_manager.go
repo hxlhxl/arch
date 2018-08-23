@@ -10,6 +10,11 @@ import (
 	// m "github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/models"
 )
 
+type Stream {
+	subscribers	[]*connection
+	name		string
+}
+
 type StreamManager struct {
 	log				log.Logger
 	streams			map[string]*Stream
