@@ -1,7 +1,7 @@
 package live
 
 import (
-	"github.com/gorilla/websoket"
+	"github.com/gorilla/websocket"
 )
 
 type connection struct {
