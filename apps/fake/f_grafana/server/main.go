@@ -52,7 +52,7 @@ func main() {
 	setting.IsEnterprise = false
 
 	server := NewGrafanaServer()
-	go signalHandler()
+	// go signalHandler()
 
 	_ = server.Run()
 

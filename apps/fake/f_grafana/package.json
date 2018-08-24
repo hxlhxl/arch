@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --progress --colors --mode development --config scripts/webpack/webpack.dev.js",
     "watch": "webpack-dev-server --watch-poll --hot --progress --colors --watch --mode development --config scripts/webpack/webpack.dev.js",
+    "build": "webpack --progress --colors --mode development --config scripts/webpack/webpack.dev.js",
     "dev-server": "nodemon --watch ./server --exec go run server/main.go server/server.go",
+    "build-server": "go build -o grafana.exe server/main.go server/server.go",
+    "run-build-server": "npm run build-server && grafana.exe",
     "pylint": "pylint server/"
   },
   "author": "",
