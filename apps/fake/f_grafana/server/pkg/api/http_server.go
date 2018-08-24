@@ -6,6 +6,7 @@ import (
 	"context"
 	"path"
 	"net/http"
+	"errors"
 	
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api/routing"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/log"
@@ -57,10 +58,61 @@ func (hs *HTTPServer) Init() error {
 
 func (hs *HTTPServer) Run(ctx context.Context) error {
 	fmt.Println("starting http_server...")
-	// var err error
+	var err error
 	hs.context = ctx
 
 	hs.applyRoutes()
+	// hs.streamManager.Run(ctx)
+
+	listenAddr := fmt.Sprintf("%s:%s", setting.HttpAddr, setting.HttpPort)
+	hs.log.Info("HTTP Server Listen", "address", listenAddr, "protocol", setting.Protocol, "subUrl", setting.AppSubUrl, "socket", setting.SocketPath)
+
+	hs.httpSrv = &http.Server{Addr: listenAddr, Handler: hs.macaron}
+
+	// handle http shutdown on server context done
+	go func() {
+		<-ctx.Done()
+		// Hacky fix for race condition between ListenAndServe and Shutdown
+		time.Sleep(time.Millisecond * 100)
+		if err := hs.httpSrv.Shutdown(context.Background()); err != nil {
+			hs.log.Error("Failed to shutdown server", "error", err)
+		}
+	}()
+
+	switch setting.Protocol {
+	case setting.HTTP:
+		err = hs.httpSrv.ListenAndServe()
+		if err == http.ErrServerClosed {
+			hs.log.Debug("server was shutdown gracefully")
+			return nil
+		}
+	// case setting.HTTPS:
+	// 	err = hs.listenAndServeTLS(setting.CertFile, setting.KeyFile)
+	// 	if err == http.ErrServerClosed {
+	// 		hs.log.Debug("server was shutdown gracefully")
+	// 		return nil
+	// 	}
+	// case setting.SOCKET:
+	// 	ln, err := net.ListenUnix("unix", &net.UnixAddr{Name: setting.SocketPath, Net: "unix"})
+	// 	if err != nil {
+	// 		hs.log.Debug("server was shutdown gracefully")
+	// 		return nil
+	// 	}
+
+	// 	// Make socket writable by group
+	// 	os.Chmod(setting.SocketPath, 0660)
+
+	// 	err = hs.httpSrv.Serve(ln)
+	// 	if err != nil {
+	// 		hs.log.Debug("server was shutdown gracefully")
+	// 		return nil
+	// 	}
+	default:
+		hs.log.Error("Invalid protocol", "protocol", setting.Protocol)
+		err = errors.New("Invalid Protocol")
+	}
+
+	return err
 	return nil
 }
 
@@ -96,10 +148,10 @@ func (hs *HTTPServer) addMiddlewaresAndStaticRoutes() {
 	// }
 
 	hs.mapStatic(m, setting.StaticRootPath, "build", "public/build")
+	hs.mapStatic(m, setting.StaticRootPath, "views", "public/build")
 	hs.mapStatic(m, setting.StaticRootPath, "", "public")
 	hs.mapStatic(m, setting.StaticRootPath, "robots.txt", "robots.txt")
-
-	fmt.Println(setting.StaticRootPath, "_+_+_+_+_+")
+	fmt.Println(setting.StaticRootPath)
 }
 
 
