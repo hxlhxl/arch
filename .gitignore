@@ -32,7 +32,8 @@ tags
 .DS_Store
 *.test
 *.tmp
-*.ini
+*.exe
+# *.ini
 *.orig
 upload
 ##########

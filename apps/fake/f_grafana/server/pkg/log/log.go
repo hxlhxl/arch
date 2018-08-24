@@ -1,8 +1,8 @@
 package log
 
 import (
-	// "fmt"
-	// "os"
+	"fmt"
+	"os"
 	// "path/filepath"
 	// "strings"
 
@@ -81,3 +81,30 @@ func New(logger string, ctx ...interface{}) Logger {
 	*/
 	return Root.New(params)	// 从root构造出child，但是child的handler仍然是root的handler
 }
+
+func Close() {
+	for _, logger := range loggersToClose {
+		logger.Close()
+	}
+	loggersToClose = make([]DisposableHandler, 0)
+}
+
+func Warn(format string, v ...interface{}) {
+	var message string
+	if len(v) > 0 {
+		message = fmt.Sprintf(format, v...)
+	} else {
+		message = format
+	}
+
+	Root.Warn(message)
+}
+
+func Fatal(skip int, format string, v ...interface{}) {
+	Root.Crit(fmt.Sprintf(format, v))
+	Close()
+	os.Exit(1)
+}
+
+
+

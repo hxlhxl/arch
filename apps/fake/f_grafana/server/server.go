@@ -3,11 +3,18 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
+	"flag"
+	"time"
+	"io/ioutil"
+	"path/filepath"
+	"strconv"
 
 	"golang.org/x/sync/errgroup"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/setting"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/log"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api"
+	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/registry"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api/routing"
 
 )
@@ -38,11 +45,73 @@ func NewGrafanaServer() *GrafanaServerImpl{
 }
 
 func (g *GrafanaServerImpl) Run() error {
-	fmt.Println("server started...")
-	return nil
+	fmt.Println("server starting...")
+	g.loadConfiguration()
+	g.writePIDFile()
+
+	// login.Init()
+	// social.NewOAuthService()
+
+	// serviceGraph := inject.Graph{}
+
+	services := registry.GetServices()
+
+	for _, service := range services {
+		g.log.Info("Initializing " + service.Name)
+
+		if err := service.Instance.Init(); err != nil {
+			return fmt.Errorf("Service init failed: %v", err)
+		}
+	}
+
+	for _, srv := range services {
+		descriptor := srv
+		service, ok := srv.Instance.(registry.BackgroundService)
+		if !ok {
+			continue
+		}
+
+		if registry.IsDisabled(descriptor.Instance) {
+			continue
+		}
+
+		g.childRoutines.Go(func() error {
+			if g.shutdownInProgress {
+				return nil
+			}
+			
+			err := service.Run(g.context)
+
+			if err != context.Canceled && err != nil {
+				g.log.Error("stopped " + descriptor.Name, "reason ", err)
+			} else {
+				g.log.Info("Stopped " + descriptor.Name, "reason ", err)
+			}
+
+			g.shutdownInProgress = true
+			return err
+		})
+	}
+
+	return g.childRoutines.Wait()
 }
 
-func (g *GrafanaServerImpl) loadConfiguration() {}
+func (g *GrafanaServerImpl) loadConfiguration() {
+	fmt.Println("starting load configuration...")
+	err := g.cfg.Load(&setting.CommandLineArgs{
+		Config:		*configFile,
+		HomePath:	*homePath,
+		Args:		flag.Args(),
+	})
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to start grafana. error: %s\n", err.Error())
+		os.Exit(1)
+	}
+
+	g.log.Info("Starting" + setting.ApplicationName, "version", version, "commit", commit, "compiled", time.Unix(setting.BuildStamp, 0))
+	g.cfg.LogConfigSources()
+}
 
 func (g *GrafanaServerImpl) Shutdown(reason string) {}
 
@@ -50,7 +119,26 @@ func (g *GrafanaServerImpl) Exit(reason error) int {
 	return 1
 }
 
-func (g *GrafanaServerImpl) writePIDFile() {}
+func (g *GrafanaServerImpl) writePIDFile() {
+	if *pidFile == "" {
+		return
+	}
+	// Ensure the required directory structure exists.
+	err := os.MkdirAll(filepath.Dir(*pidFile), 0700)	// -rwx------
+	if err != nil {
+		g.log.Error("Failed to verify pid directory", "error", err)
+		os.Exit(1)
+	}
+
+	// Retrieve the PID and write it
+	pid := strconv.Itoa(os.Getpid())
+	if err := ioutil.WriteFile(*pidFile, []byte(pid), 0644); err != nil {	// -rw-r--r--
+		g.log.Error("Failed to wirte pidfile", "error", err)
+		os.Exit(1)
+	}
+
+	g.log.Info("Writing PID file", "path", *pidFile, "pid", pid)
+}
 
 func sendSystemNotification(state string) error {
 	return nil

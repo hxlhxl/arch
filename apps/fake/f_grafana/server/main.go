@@ -17,6 +17,10 @@ var version = "1.0.0"
 var commit = "NA"
 var buildstamp string
 
+var configFile = flag.String("config", "", "path to config file")
+var homePath = flag.String("homepath", "", "path to grafana install/home path, defaults to working directory")
+var pidFile = flag.String("pidfile", "", "path to pid file")
+
 func signalHandler() {
 	signalChan := make(chan os.Signal, 1)
 	ignoreChan := make(chan os.Signal, 1)
@@ -32,7 +36,6 @@ func signalHandler() {
 
 func main() {
 	v := flag.Bool("v", false, "prints current version and exists")
-	// profile := 
 	flag.Parse()
 	if *v {
 		fmt.Printf("Version %s (commit: %s)\n", version, commit)

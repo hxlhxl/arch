@@ -34,6 +34,10 @@ https://atomiks.github.io/30-seconds-of-css/#height-transition
 ## Optimization
 [Front-End-Performance-Checklist](https://github.com/thedaviddias/Front-End-Performance-Checklist)
 
+## Scroll
+[ScrollMagic](https://github.com/janpaepke/ScrollMagic): The javascript library for magical scroll interactions. http://ScrollMagic.io
+
+[aos](https://github.com/michalsnik/aos): Animate on scroll library
 
 ## Animation
 [Velocity.js]
