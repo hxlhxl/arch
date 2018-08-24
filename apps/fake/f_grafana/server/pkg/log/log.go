@@ -1,10 +1,10 @@
 package log
 
 import (
-	"fmt"
-	"os"
-	"path/filepath"
-	"strings"
+	// "fmt"
+	// "os"
+	// "path/filepath"
+	// "strings"
 
 	"github.com/inconshreveable/log15"
 )

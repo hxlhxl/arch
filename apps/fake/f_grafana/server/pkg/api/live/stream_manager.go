@@ -1,7 +1,7 @@
 package live
 
 import (
-	"context"
+	// "context"
 	// "net/http"
 	"sync"
 
@@ -10,7 +10,7 @@ import (
 	// m "github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/models"
 )
 
-type Stream {
+type Stream struct {
 	subscribers	[]*connection
 	name		string
 }
@@ -22,13 +22,13 @@ type StreamManager struct {
 	hub				*hub
 }
 
-// func NewStreamManager() *StreamManager {
-// 	return &StreamManager {
-// 		hub:			newHub(),
-// 		log:			log.New("stream.manager"),
-// 		streams:		make(map[string]*Stream),
-// 		streamRWMutex:	&sync.RWMutex{},
-// 	}
-// }
+func NewStreamManager() *StreamManager {
+	return &StreamManager {
+		hub:			newHub(),
+		log:			log.New("stream.manager"),
+		streams:		make(map[string]*Stream),
+		streamRWMutex:	&sync.RWMutex{},
+	}
+}
 
 // func (sm *StreamManager) Run(context context.Context) {}

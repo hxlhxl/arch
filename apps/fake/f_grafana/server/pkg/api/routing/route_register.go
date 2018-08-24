@@ -1,8 +1,8 @@
 package routing
 
 import (
-	"net/http"
-	"strings"
+	// "net/http"
+	// "strings"
 
 	"gopkg.in/macaron.v1"
 )
@@ -16,7 +16,7 @@ type Router interface {
 // that the web server should serve.
 type RouteRegister interface {
 	Get(string, ...macaron.Handler)
-	Post(string, ...macaron.handler)
+	Post(string, ...macaron.Handler)
 	Delete(string, ...macaron.Handler)
 	Put(string, ...macaron.Handler)
 	Patch(string, ...macaron.Handler)

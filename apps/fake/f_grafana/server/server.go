@@ -7,6 +7,8 @@ import (
 	"golang.org/x/sync/errgroup"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/setting"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/log"
+	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api"
+	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api/routing"
 
 )
 
@@ -20,7 +22,7 @@ type GrafanaServerImpl struct {
 	shutdownInProgress	bool
 
 	RouteRegister		routing.RouteRegister	`inject:""`
-	HttpServer 			*api.HttpServer		`inject:""`
+	HttpServer 			*api.HTTPServer		`inject:""`
 }
 
 func NewGrafanaServer() *GrafanaServerImpl{
@@ -44,8 +46,12 @@ func (g *GrafanaServerImpl) loadConfiguration() {}
 
 func (g *GrafanaServerImpl) Shutdown(reason string) {}
 
-func (g *GrafanaServerImpl) Exit(reason error) int {}
+func (g *GrafanaServerImpl) Exit(reason error) int {
+	return 1
+}
 
 func (g *GrafanaServerImpl) writePIDFile() {}
 
-func sendSystemNotification(state string) error {}
+func sendSystemNotification(state string) error {
+	return nil
+}

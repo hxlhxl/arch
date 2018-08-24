@@ -1,8 +1,8 @@
 package migrator
 
 import (
-	"fmt"
-	"strings"
+	// "fmt"
+	// "strings"
 
 	"github.com/go-xorm/xorm"
 )

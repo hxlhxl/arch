@@ -16,3 +16,10 @@ type Table struct {
 	PrimaryKeys	[]string
 	Indices		[]*Index
 }
+
+type Migration interface {
+	Sql(dialect Dialect) string
+	Id() string
+	SetId() string
+	GetCondition() MigrationCondition
+}

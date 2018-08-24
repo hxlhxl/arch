@@ -11,7 +11,7 @@
 [gesture](https://github.com/iberianpig/fusuma): Multitouch gestures with libinput dirver on X11, Linux
 
 
-# Code
+# Code/Snippets
 [ActiveState/code](https://github.com/ActiveState/code): ActiveState Code Recipes 
 https://code.activestate.com
 
@@ -62,6 +62,8 @@ https://atomiks.github.io/30-seconds-of-css/#height-transition
 
 [Traefic](https://github.com/containous/traefik)
 
+# Test/Benchmarking
+[wrk](https://github.com/wg/wrk): Modern HTTP benchmarking tool
 
 # Container
 
@@ -69,6 +71,9 @@ https://atomiks.github.io/30-seconds-of-css/#height-transition
 [Kubernetes]
 [Mesos]
 
+# Architecture/System Design
+
+[http-api-design](https://github.com/interagent/http-api-design): HTTP API design guide extracted from work on the Heroku Platform API https://www.gitbook.com/read/book/gee…
 
 # Distributed System
 

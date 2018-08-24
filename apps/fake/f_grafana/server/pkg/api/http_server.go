@@ -2,12 +2,15 @@ package api
 
 import (
 	"fmt"
+	"time"
 	"context"
 	"net/http"
 	
+	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api/routing"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/log"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/setting"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/registry"
+	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/bus"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api/live"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/services/rendering"
 	
@@ -37,6 +40,27 @@ type HTTPServer struct {
 	RenderService	rendering.Service		`inject:""`
 	Cfg				*setting.Cfg			`inject:""`
 }
+
+func (hs *HTTPServer) Init() error {
+	hs.log = log.New("http.server")
+	hs.cache = gocache.New(5*time.Minute, 10*time.Minute)
+
+	hs.streamManager = live.NewStreamManager()
+	hs.macaron = hs.newMacaron()
+	hs.registerRoutes()
+
+	return nil
+}
+
+func (hs *HTTPServer) newMacaron() *macaron.Macaron {
+	macaron.Env = setting.Env
+	m := macaron.New()
+	// automatically set HEAD for every GET request
+	m.SetAutoHead(true)
+
+	return m
+}
+
 func RunFakeHttpServer() {
 	fmt.Println("RunFakeHttpServer\nServer build stamp is", setting.BuildStamp)
 }

@@ -7,12 +7,18 @@ import (
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/log"
 )
 
+const (
+	DEV		string = "development"
+)
+
 var (
 	BuildVersion	string
 	BuildCommit		string
 	BuildStamp		int64
 	IsEnterprise	bool
 
+	Env				= DEV
+	logger				log.Logger
 	IsWindows		bool
 )
 

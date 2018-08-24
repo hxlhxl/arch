@@ -21,3 +21,15 @@ type hub struct {
 	streamChannel	chan *dtos.StreamMessage
 	subChannel		chan *streamSubscription
 }
+
+func newHub() *hub {
+	return &hub {
+		connections:	make(map[*connection]bool),
+		streams:		make(map[string]map[*connection]bool),
+		register:		make(chan *connection),
+		unregister:		make(chan *connection),
+		streamChannel:		make(chan *dtos.StreamMessage),
+		subChannel:		make(chan *streamSubscription),
+		log:			log.New("stream.hub"),
+	}
+}
