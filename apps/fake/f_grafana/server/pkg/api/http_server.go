@@ -151,7 +151,7 @@ func (hs *HTTPServer) addMiddlewaresAndStaticRoutes() {
 	hs.mapStatic(m, setting.StaticRootPath, "views", "public/build")
 	hs.mapStatic(m, setting.StaticRootPath, "", "public")
 	hs.mapStatic(m, setting.StaticRootPath, "robots.txt", "robots.txt")
-	fmt.Println(setting.StaticRootPath)
+	fmt.Println(setting.StaticRootPath)	// CWD/public/
 }
 
 
