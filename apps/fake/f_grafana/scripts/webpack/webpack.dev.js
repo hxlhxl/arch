@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(base, {
     output: {
@@ -16,7 +17,7 @@ module.exports = merge(base, {
         hotUpdateMainFilename: './hot/hot-update.json',
     },
     plugins: [
-        
+        new CleanWebpackPlugin('../../public/build', {allowExternal: true}),
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../../public/views/index.html'),
             template: path.resolve(__dirname, '../../public/views/index.template.html'),

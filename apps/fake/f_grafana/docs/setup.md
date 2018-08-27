@@ -36,6 +36,7 @@ npm install --save-dev node-sass
 npm install --save-dev sass-loader
 npm install --save-dev html-webpack-plugin
 npm install --save-dev html-webpack-harddisk-plugin
+npm install --save-dev clean-webpack-plugin
 npm install --save-dev write-file-webpack-plugin
 npm install --save-dev copy-webpack-plugin
 npm install --save-dev typescript

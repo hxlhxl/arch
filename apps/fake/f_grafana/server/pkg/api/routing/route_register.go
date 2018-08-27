@@ -1,15 +1,15 @@
 package routing
 
 import (
-	// "net/http"
+	"net/http"
 	// "strings"
 
 	"gopkg.in/macaron.v1"
 )
 
 type Router interface {
-	Handle()
-	Get()
+	Handle(method, pattern string, handlers []macaron.Handler) *macaron.Route
+	Get(pattern string, handlers... macaron.Handler) *macaron.Route
 }
 
 // RouteRegister allows you to add routes and macaron.Handlers
@@ -41,5 +41,20 @@ type routeRegister struct {
 	namedMiddleware	[]RegisterNamedMiddleware
 	routes			[]route
 	groups			[]*routeRegister
+}
+
+
+func (rr *routeRegister) Register(router Router) {
+	for _, r := range rr.routes {
+		if r.method == http.MethodGet {
+			router.Get(r.pattern, r.handlers...)
+		} else {
+			router.Handle(r.method, r.pattern, r.handlers)
+		}
+	}
+
+	for _, g := range rr.groups {
+		g.Register(router)
+	}
 }
 

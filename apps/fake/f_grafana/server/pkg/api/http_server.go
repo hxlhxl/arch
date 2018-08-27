@@ -51,7 +51,7 @@ func (hs *HTTPServer) Init() error {
 
 	hs.streamManager = live.NewStreamManager()
 	hs.macaron = hs.newMacaron()
-	hs.registerRoutes()
+	hs.registerRoutes()	// 注册路由api.go
 
 	return nil
 }
@@ -61,7 +61,7 @@ func (hs *HTTPServer) Run(ctx context.Context) error {
 	var err error
 	hs.context = ctx
 
-	hs.applyRoutes()
+	hs.applyRoutes()	// 应用路由
 	// hs.streamManager.Run(ctx)
 
 	listenAddr := fmt.Sprintf("%s:%s", setting.HttpAddr, setting.HttpPort)
@@ -128,11 +128,17 @@ func (hs *HTTPServer) newMacaron() *macaron.Macaron {
 func (hs *HTTPServer) applyRoutes() {
 	// start with middlewares & static routes
 	hs.addMiddlewaresAndStaticRoutes()
+	// then add view routes & api routes
+	hs.RouteRegister.Register(hs.macaron)
+	// then custom app proxy routes
+	// hs.initAppPluginRoutes(hs.macaron)
+	// lastly not found route
+	hs.macaron.NotFound(NotFoundHandler)
 }
 
 func (hs *HTTPServer) addMiddlewaresAndStaticRoutes() {
 	m := hs.macaron
-
+	// inject log middleware 
 	m.Use(middleware.Logger())
 
 	// if setting.EnableGzip {
