@@ -41,7 +41,8 @@ type HTTPServer struct {
 
 	RouteRegister	routing.RouteRegister	`inject:""`
 	Bus				bus.Bus					`inject:""`
-	RenderService	rendering.Service		`inject:""`
+	// RenderService	rendering.Service		`inject:""`
+	RenderService	rendering.Service		// 暂时不注入
 	Cfg				*setting.Cfg			`inject:""`
 }
 
@@ -129,7 +130,7 @@ func (hs *HTTPServer) applyRoutes() {
 	// start with middlewares & static routes
 	hs.addMiddlewaresAndStaticRoutes()
 	// then add view routes & api routes
-	// hs.RouteRegister.Register(hs.macaron)
+	hs.RouteRegister.Register(hs.macaron)
 	// then custom app proxy routes
 	// hs.initAppPluginRoutes(hs.macaron)
 	// lastly not found route

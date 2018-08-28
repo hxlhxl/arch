@@ -35,6 +35,11 @@ func New() Bus {
 	return bus
 }
 
+// Want to get rid of global bus
+func GetBus() Bus {
+	return globalBus
+}
+
 type noopTransactionManager struct{}
 
 func (*noopTransactionManager) InTransaction(ctx context.Context, fn func(ctx context.Context) error) error {

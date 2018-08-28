@@ -393,6 +393,10 @@ mark := Student{Human{"Mark", 25, 120}, "Computer Science"}
 
 ```
 
+## Struct_Types(tags)
+https://golang.org/ref/spec#Struct_types
+https://github.com/facebookgo/inject
+依赖注入解释： https://zhuanlan.zhihu.com/p/32689810
 
 ## 面向对象
 

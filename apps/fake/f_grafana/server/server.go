@@ -10,11 +10,15 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/facebookgo/inject"
+
 	"golang.org/x/sync/errgroup"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/setting"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/log"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/registry"
+	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/bus"
+	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/middleware"
 	"github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/api/routing"
 
 )
@@ -52,10 +56,24 @@ func (g *GrafanaServerImpl) Run() error {
 	// login.Init()
 	// social.NewOAuthService()
 
-	// serviceGraph := inject.Graph{}
-
+	// DI facebookgo/inject
+	serviceGraph := inject.Graph{}
+	serviceGraph.Provide(&inject.Object{Value: bus.GetBus()})
+	serviceGraph.Provide(&inject.Object{Value: g.cfg})
+	serviceGraph.Provide(&inject.Object{Value: routing.NewRouteRegister(middleware.RequestMetrics, middleware.RequestTracing)})
+	// self registered service
 	services := registry.GetServices()
-
+	// Add all services to dependency graph
+	for _, service := range services {
+		serviceGraph.Provide(&inject.Object{Value: service.Instance})
+	}
+	serviceGraph.Provide(&inject.Object{Value: g})
+	if err := serviceGraph.Populate(); err != nil {
+		fmt.Println("Populate error!: %v", err)
+		return fmt.Errorf("Failed to populate service dependency: %v", err)
+	}
+	fmt.Println("Init & start services")
+	// Init & start services
 	for _, service := range services {
 		g.log.Info("Initializing " + service.Name)
 

@@ -19,3 +19,7 @@ server.Run()
                 hs.registerRoutes()         
 
             Run()
+
+
+# macaron flow
+https://go-macaron.com/docs/intro/core_concepts#macaron-实例
