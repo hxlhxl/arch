@@ -100,6 +100,17 @@ func Warn(format string, v ...interface{}) {
 	Root.Warn(message)
 }
 
+func Debug(format string, v ...interface{}) {
+	var message string
+	if len(v) > 0 {
+		message = fmt.Sprintf(format, v...)
+	} else {
+		message = format
+	}
+
+	Root.Debug(message)
+}
+
 func Fatal(skip int, format string, v ...interface{}) {
 	Root.Crit(fmt.Sprintf(format, v))
 	Close()

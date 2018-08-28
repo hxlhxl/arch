@@ -385,7 +385,7 @@ type Human struct {
     weight int
 }
 type Student struct {
-    Human   // 匿名字段，那么默认Student就包含了Human的所有字段
+    Human   // 匿名字段，那么默认Student就包含了Human的所有字段 // 继承...不过如此
     speciality string
 }
 

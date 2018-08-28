@@ -129,7 +129,7 @@ func (hs *HTTPServer) applyRoutes() {
 	// start with middlewares & static routes
 	hs.addMiddlewaresAndStaticRoutes()
 	// then add view routes & api routes
-	hs.RouteRegister.Register(hs.macaron)
+	// hs.RouteRegister.Register(hs.macaron)
 	// then custom app proxy routes
 	// hs.initAppPluginRoutes(hs.macaron)
 	// lastly not found route
@@ -153,11 +153,14 @@ func (hs *HTTPServer) addMiddlewaresAndStaticRoutes() {
 	// 	hs.mapStatic(hs.macaron, route.Directory, "", pluginRoute)
 	// }
 
-	hs.mapStatic(m, setting.StaticRootPath, "build", "public/build")
-	hs.mapStatic(m, setting.StaticRootPath, "views", "public/build")
-	hs.mapStatic(m, setting.StaticRootPath, "", "public")
-	hs.mapStatic(m, setting.StaticRootPath, "robots.txt", "robots.txt")
+	// hs.mapStatic(m, setting.StaticRootPath, "build", "public/build")
+	// hs.mapStatic(m, setting.StaticRootPath, "views", "public/build")
+	// hs.mapStatic(m, setting.StaticRootPath, "", "public")
+	// hs.mapStatic(m, setting.StaticRootPath, "robots.txt", "robots.txt")
 	fmt.Println(setting.StaticRootPath)	// CWD/public/
+
+	// inject ctx into ctx.data,在middleware/logger.go中有用到
+	m.Use(middleware.GetContextHandler())
 }
 
 

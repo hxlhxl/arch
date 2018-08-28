@@ -5,5 +5,5 @@ import (
 )
 
 func NotFoundHandler(c *m.ReqContext) {
-	c.HTML(404, "index", data)
+	// c.HTML(404, "index", data)
 }
