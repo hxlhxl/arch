@@ -17,7 +17,7 @@ https://code.activestate.com
 
 
 
-# Search Algo Lib
+# 搜索(Search Algo Lib)
 
 [fuzzysort](https://github.com/farzher/fuzzysort): Fast SublimeText-like fuzzy search for JavaScript. https://rawgit.com/farzher/fuzzysort/…
 [fuzzywuzzy](https://github.com/seatgeek/fuzzywuzzy): Fuzzy String Matching in Python http://chairnerd.seatgeek.com/fuzzywu…
@@ -31,16 +31,72 @@ https://atomiks.github.io/30-seconds-of-css/#height-transition
 
 
 # Javascript
-## Optimization
+## 面试(interview)
+[Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):
+
+## 字体(font)
+
+## 风格(style)
+[airbnb style guide](https://github.com/airbnb/javascript): JavaScript Style Guide
+
+## 文档(document)
+[slate](https://github.com/lord/slate): Beautiful static documentation for your API
+
+[pdf reader](https://github.com/mozilla/pdf.js)
+
+## 框架(frameworks),生态(),工具库
+[jquery](https://github.com/jquery/jquery): jQuery JavaScript Library
+[Vue](https://github.com/vuejs/vue): vulcan_salute A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
+[React](https://github.com/facebook/react): A declarative, efficient, and flexible JavaScript library for building user interfaces. https://reactjs.org
+[Angular.js](https://github.com/angular/angular.js): AngularJS - HTML enhanced for web apps! https://angularjs.org
+[ReactNative](https://github.com/facebook/react-native): A framework for building native apps with React.
+[Meteor](https://github.com/meteor/meteor): Meteor, the JavaScript App Platform
+[Next.js]():
+
+[Redux](https://github.com/reduxjs/redux): Predictable state container for JavaScript apps
+[Reselect](https://github.com/reduxjs/reselect):
+
+[React-Router](https://github.com/ReactTraining/react-router): 
+[story-book](): 
+[gatsby](https://github.com/gatsbyjs/gatsby): 
+
+
+[Lodash](): A modern JavaScript utility library delivering modularity, performance, & extras.
+[Babel](): 
+[](https://github.com/Modernizr/Modernizr): Modernizr is a JavaScript library that detects HTML5 and CSS3 features in the user’s browser.
+
+[剪贴板](https://github.com/zenorocha/clipboard.js): 
+
+
+## 命令行(CLI),构建工具(Build)
+[create-react-app](https://github.com/facebook/create-react-app): Create React apps with no build configuration.
+[Webpack](https://github.com/webpack/webpack): A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AM…
+[Parcel](https://github.com/parcel-bundler/parcel):
+
+[Yarn]
+[Gulp]
+
+## 时间(Time)
+[moment](https://github.com/moment/moment): Parse, validate, manipulate, and display dates in javascript.
+
+## 网络HTTP
+[axios](https://github.com/axios/axios): Promise based HTTP client for the browser and node.js
+
+## 优化(Optimization)
 [Front-End-Performance-Checklist](https://github.com/thedaviddias/Front-End-Performance-Checklist)
+
 
 ## Scroll
 [ScrollMagic](https://github.com/janpaepke/ScrollMagic): The javascript library for magical scroll interactions. http://ScrollMagic.io
 
 [aos](https://github.com/michalsnik/aos): Animate on scroll library
 
-## Animation
+## 动画、图表、图像(Animation,Chart)
 [Velocity.js]
+[d3](https://github.com/d3/d3): Bring data to life with SVG, Canvas and HTML.
+[three.js](https://github.com/mrdoob/three.js): JavaScript 3D library.
+[Chart.js](https://github.com/chartjs/Chart.js): Simple HTML5 Charts using the <canvas> tag
+[](https://github.com/apache/incubator-echarts): 
 
 ## Event
 [eventemitter3](https://github.com/primus/eventemitter3): EventEmitter3 - Because there's also a number 2. And we're faster.
@@ -53,7 +109,6 @@ https://atomiks.github.io/30-seconds-of-css/#height-transition
 [cerberus](https://github.com/pyeve/cerberus): Lightweight, extensible data validation library for Python http://python-cerberus.org
 ## Markdown
 [bisheng]
-
 # Web Server
 ## file server
 [whitenoise](https://github.com/evansd/whitenoise): Radically simplified static file serving for Python web apps http://whitenoise.evans.io/
