@@ -22,14 +22,14 @@ func LoginView(c *m.ReqContext) {
 	// }
 
 	// viewData.Settings["oauth"] = enabledOAuths
-	viewData.Settings["disableUserSignUp"] = !setting.AllowUserSignUp
-	viewData.Settings["loginHint"] = setting.LoginHint
-	viewData.Settings["disableLoginForm"] = setting.DisableLoginForm
+	// viewData.Settings["disableUserSignUp"] = !setting.AllowUserSignUp
+	// viewData.Settings["loginHint"] = setting.LoginHint
+	// viewData.Settings["disableLoginForm"] = setting.DisableLoginForm
 
-	if loginError, ok := c.Session.Get("loginError").(string); ok {
-		c.Session.Delete("loginError")
-		viewData.Settings["loginError"] = loginError
-	}
+	// if loginError, ok := c.Session.Get("loginError").(string); ok {
+	// 	c.Session.Delete("loginError")
+		// viewData.Settings["loginError"] = loginError
+	// }
 
 	if !tryLoginUsingRememberCookie(c) {
 		c.HTML(200, ViewIndex, viewData)
