@@ -82,6 +82,17 @@ func New(logger string, ctx ...interface{}) Logger {
 	return Root.New(params)	// 从root构造出child，但是child的handler仍然是root的handler
 }
 
+func Trace(format string, v ...interface{}) {
+	var message string
+	if len(v) > 0 {
+		message = fmt.Sprintf(format, v...)
+	} else {
+		message = format
+	}
+
+	Root.Debug(message)
+}
+
 func Close() {
 	for _, logger := range loggersToClose {
 		logger.Close()
@@ -109,6 +120,10 @@ func Debug(format string, v ...interface{}) {
 	}
 
 	Root.Debug(message)
+}
+
+func Error(skip int, format string, v ...interface{}) {
+	Root.Error(fmt.Sprintf(format, v...))
 }
 
 func Fatal(skip int, format string, v ...interface{}) {

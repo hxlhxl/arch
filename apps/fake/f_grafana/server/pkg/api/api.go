@@ -11,4 +11,5 @@ func (hs *HTTPServer) registerRoutes()  {
 	// not logged in views
 	fmt.Println(r, r == nil)
 	r.Get("/", reqSignedIn, Index)
+	r.Get("/login", LoginView)
 }

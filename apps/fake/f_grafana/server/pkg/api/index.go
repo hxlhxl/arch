@@ -6,6 +6,10 @@ import (
 	m "github.com/hxlhxl/arch/apps/fake/f_grafana/server/pkg/models"
 )
 
+const (
+	ViewIndex = "index"
+)
+
 func setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, error) {
 	var data = dtos.IndexViewData{
 		User: &dtos.CurrentUser{
