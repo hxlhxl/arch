@@ -7,6 +7,10 @@ export function setupNgRoutes($routeProvider, $locationProvider) {
             template: require('app/partials/index.html'),
             controller: 'IndexCtrl',
         })
+        .when('/public_page', {
+            template: require('app/partials/index.html'),
+            controller: 'IndexCtrl',
+        })
         .when('/login', {
             template: require('app/partials/login.html'),
             controller: 'LoginCtrl'

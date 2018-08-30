@@ -8,4 +8,8 @@ sudo pacman -S archlinux-keyring
 
 MultiLib可以让64位的ArchLinux运行32位程序
 
+4. 列出所有安装的package
+
+pacman -Qe 
+
 
