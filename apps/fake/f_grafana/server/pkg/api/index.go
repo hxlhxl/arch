@@ -32,6 +32,7 @@ func setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, error) {
 		},
 		// Settings:                settings,
 		// Theme:                   prefs.Theme,
+		Theme:						"twilight",
 		// AppUrl:                  appURL,
 		// AppSubUrl:               appSubURL,
 		GoogleAnalyticsId:       setting.GoogleAnalyticsId,
