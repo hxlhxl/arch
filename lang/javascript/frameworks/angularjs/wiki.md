@@ -14,7 +14,7 @@
     Strip `x-` and `data-` from the front of the element/attributes.
     Convert the `:`, `-`, or `_`-delimited name to camelCase.
 - ``Directive``类型
-  $compile match 4 types by using `restrict`:
+  $compile match 4 types by using `restrict`: If omitted, the defaults (elements and attributes) 
     E(Element name)
     A(Attributes)
     C(Class names)

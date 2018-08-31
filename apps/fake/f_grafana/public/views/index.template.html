@@ -7,10 +7,19 @@
   </head>
   <body ng-cloak>
     <ui-root-container>
-        <div ng-view></div>
-    </ui-root-container>
-    <script>
         
+        <ui-sidemenu class="sidemenu"></ui-sidemenu>
+
+        <div class="page-alert-list"></div>
+
+        <div class="main-view">
+            <div ng-view></div>
+            <ui-footer class="footer"></ui-footer>
+        </div>
+    </ui-root-container>
+
+
+    <script>
       window.$app = {
         info: 'awesome app!',
         theme: '[[ .Theme ]]',

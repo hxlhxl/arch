@@ -36,6 +36,8 @@ export GOBIN=~/workspace/goland/bin
 
 ```
 $ go get github.com/grafana/grafana
+$ go get github.com/prometheus/prometheus/cmd/...
+    The ... (ellipsis) tells go get to also fetch the package's subpackages/dependencies.
 ```
 
 go get的本质可以理解为第一步通过源码工具clone代码到src下面，然后执行`go install`
