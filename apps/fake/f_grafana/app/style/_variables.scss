@@ -1,0 +1,95 @@
+// Options
+// 
+// Quickly modify global styling by enabling or disabling optional features
+
+$enable-flex: true !default;
+$enable-hover-media-query: false !default;
+
+// Spacing
+// 
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+$spacer: 1rem !default;
+$spacer-x: $spacer !default;
+$spacer-y: $spacer !default;
+$spacers: (
+    0: (x: 0, y: 0),
+    1: (x: $spacer-x, y: $spacer-y),
+    2: (x: ($spacer-x * 1.5), y: ($spacer-y * 1.5)),
+    3: (x: ($spacer-x * 3), y: ($spacer-y * 3))
+) !default;
+$border-width: 1px !default;
+
+// Grid breakpoints
+// 
+// Define the minimum and maximum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (xs: 0, sm: 554px, md: 768px, lg: 992px, xl: 1200px) !default;
+
+// Grid containers
+// 
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: (sm: 576px, md: 720px, lg: 940px, xl: 1080px) !default;
+
+// Grid columns
+// 
+// Set the number of columns and specify the width of the gutter.
+$grid-columns: 12 !default;
+$grid-gutter-width: 30px !default;
+
+$enable-flex: true;
+
+// Typography 字体
+// -----------------------
+$font-family-sans-serif: 'Roboto', Helvetica, Arial, sans-serif;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif;
+$font-family-monospace: Menlo, Monaco, Consolas, 'Courier New', monospace;
+$font-family-base: $font-family-sans-serif !default;
+
+$font-size-root: 14px !default;
+$font-size-base: 13px !default;
+
+$font-size-lg: 18px !default;
+$font-size-md: 14px !default;
+$font-size-sm: 12px !default;
+$font-size-xs: 10px !default;
+
+$line-height-base: 1.5 !default;
+$font-weight-semi-bold: 500;
+
+$font-size-h1: 2rem !default;
+$font-size-h2: 1.75rem !default;
+$font-size-h3: 1.5rem !default;
+$font-size-h4: 1.3rem !default;
+$font-size-h5: 1.2rem !default;
+$font-size-h6: 1rem !default;
+
+$display1-size: 6rem !default;
+$display2-size: 5.5rem !default;
+$display3-size: 4.5rem !default;
+$display4-size: 3.5rem !default;
+
+$display1-weight: 400 !default;
+$display2-weight: 400 !default;
+$display3-weight: 400 !default;
+$display4-weight: 400 !default;
+
+$lead-font-size: 1.25rem !default;
+$lead-font-weight: 300 !default;
+
+$headings-margin-bottom: ($spacer / 2) !default;
+$headings-font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$headings-font-weight: 400 !default;
+$headings-line-height: 1.1 !default;
+
+$hr-border-width: $border-width !default;
+$dt-font-weight: bold !default;
+
+// Components
+// 
+// Define common padding and border radius sizes and more.
+$line-height-lg: (4 / 3) !default;
+$line-height-sm: 1.5 !default;
+
+

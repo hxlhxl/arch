@@ -27,7 +27,7 @@ export function rootComponent($location) {
                 if (pageClass) {
                     body.removeClass(pageClass);
                 }
-            })
+            });
         }
     };
 }
