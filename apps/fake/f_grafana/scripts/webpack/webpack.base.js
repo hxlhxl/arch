@@ -17,6 +17,7 @@ module.exports = {
             '.tsx',
             '.js',
             '.json',
+            '.css',
             '.scss'
         ],
         alias: {

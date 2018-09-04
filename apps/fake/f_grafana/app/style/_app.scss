@@ -1,3 +1,22 @@
-body {
-    background-color: #fff !important;
-}
+// vendor
+@import '~/app/vendor/css/timepicker.css'; // fix sass-loader的import问题
+@import '~/app/vendor/css/spectrum.css'; // colorpicker
+@import '../vendor/css/rc-cascader.scss'; // 
+
+// MIXINS
+@import 'mixins/mixins';
+
+// BASE
+@import 'base/normalize'; // css reset文件 from: https://github.com/necolas/normalize.css
+
+// UTILS
+@import 'utils/utils';
+
+// LAYOUTS
+@import 'layout/lists';
+
+// COMPONENTS
+// @import 'components/navs';
+
+// PAGES
+@import 'pages/login';
