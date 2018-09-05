@@ -1,7 +1,13 @@
 
 import 'angular';
 import 'angular-route';
+// bootstrap之前引入jQuery
+import 'jquery';
+// 引入bootstrap.js;该路径有webpack的resolve.modules定义
+// bootstrap下载自 http://getbootstrap.com/docs/3.3/getting-started/#download
+import 'vendor/bootstrap/bootstrap';
 
+import $ from 'jquery';
 import angular from 'angular';
 
 import {coreModule} from './core/core'; // grafana.core

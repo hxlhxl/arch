@@ -25,7 +25,7 @@ module.exports = {
         },
         modules: [
             // 项目搜索模块路径
-            path.resolve('./'),
+            path.resolve('./app'),
             path.resolve('node_modules')
         ]
     },
