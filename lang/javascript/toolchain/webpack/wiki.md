@@ -1,5 +1,8 @@
 # devtool(代码调试工具)
 Choose a developer tool to enhance debugging.
+相应的loader的sourceMap也要做相应的设置，否则不会生效。
+默认情况下，sourceMap不会开启，也就导致调试的时候定位源代码的时候会在整个构建后的文件中寻找。
+
 - eval
 - sourcemap
 
@@ -44,3 +47,5 @@ Choose a developer tool to enhance debugging.
     解释： https://medium.com/@rajaraodv/webpack-hot-module-replacement-hmr-e756a726a07
     TroubleShoot: https://medium.com/code-oil/burning-questions-with-answers-to-why-webpack-dev-server-live-reload-does-not-work-6d6390277920
     注意： [angularjs不支持HMR](https://github.com/angular/angular.js/issues/15938)
+- [环境变量](https://github.com/webpack/webpack/issues/6460)
+    process.env.WEBPACK_MODE

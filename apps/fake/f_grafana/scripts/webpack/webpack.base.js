@@ -1,5 +1,9 @@
 const path = require('path');
-const sassRuleLoader = require('./sass.rule')({sourceMap: false, minimize: false, preserveUrl: false});
+const sassRuleLoader = require('./sass.rule')({
+    sourceMap: process.env.WEBPACK_MODE === 'production' ? false : true, 
+    minimize: false, 
+    preserveUrl: false
+});
 
 module.exports = {
     target: 'web',

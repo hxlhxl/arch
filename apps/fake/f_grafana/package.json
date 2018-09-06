@@ -9,7 +9,8 @@
     "dev": "webpack-dev-server --progress --colors --watch --inline --mode development --config scripts/webpack/webpack.hot.js",
     "watch": "webpack --progress --colors --watch --mode development --config scripts/webpack/webpack.dev.js",
     "build": "webpack --progress --colors --mode development --config scripts/webpack/webpack.dev.js",
-    "dev-server": "nodemon --exec go run server/main.go server/server.go",
+    "dev-server": "go run server/main.go server/server.go",
+    "watch-dev-server": "nodemon --exec go run server/main.go server/server.go",
     "build-server": "go build -o grafana.exe server/main.go server/server.go",
     "run-build-server": "npm run build-server && grafana.exe",
     "pylint": "pylint server/"

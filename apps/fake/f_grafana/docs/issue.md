@@ -1,1 +1,2 @@
 - 自己实现的StaticServer在index.template.html文件更新后仍然返回客户端之前的内容;这回严重影响前端开发效率。
+- sass中import css的时候，路径和入口有关。而如果使用`@import '~/app/vender/css/..css'`这种格式最终会转换成为`@import url(/app/vendor/css/timepicker.css);`这种形式，客户端会向服务器发送HTTP请求。
