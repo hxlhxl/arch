@@ -6,7 +6,7 @@
         v-if="type == 'aaa'"
         ng-model="filter.suggText" data="orgList"></ui-suggestion>
     <div>
-        <a href="/login">Sign in</a>
+        <a href="/login">Sign in {{user.login}} </a>
     </div>
     <div ng-if="user">
         hello, {{user.login}} 

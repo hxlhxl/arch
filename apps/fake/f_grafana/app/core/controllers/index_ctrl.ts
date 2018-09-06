@@ -7,9 +7,11 @@ export class IndexCtrl {
     constructor($scope) {
         this.$scope = $scope;
         $scope.loading = true;
-        $scope.name = "World!";
+        $scope.name = "World! x";
         this.getData();
-        $scope.type = 'aaa';
+        $scope.user = {
+            login: "what is this"
+        };
         $scope.filter = {
             suggText: 'xxxx'
         };
@@ -21,6 +23,10 @@ export class IndexCtrl {
             });
         };
         $scope.orgList = [
+            {
+                text: '明源云ss',
+                value: '123462-234'
+            },
             {
                 text: '链家',
                 value: '1234-5678'

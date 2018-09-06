@@ -6,17 +6,22 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(base, {
+    entry: {
+        app: [
+            'webpack-dev-server/client?http://localhost:8090',
+            './app/index.ts',
+        ]
+    },
     output: {
         path: path.resolve(__dirname, '../../public/build'),
         filename: '[name].[hash].js',
         publicPath: '/public/build',
-        hotUpdateChunkFilename: './hot/hot-update.js',
-        hotUpdateMainFilename: './hot/hot-update.json',
+        // hotUpdateChunkFilename: './hot/hot-update.js',
+        // hotUpdateMainFilename: './hot/hot-update.json',
     },
     plugins: [
         new CleanWebpackPlugin('../../public/build', {allowExternal: true}),
@@ -44,9 +49,32 @@ module.exports = merge(base, {
             'process.env': {
                 'NODE_ENV': JSON.stringify('development')
             }
-        }),
-        new BundleAnalyzerPlugin({
-            analyzerPort: 3991
         })
-    ]
+    ],
+    devServer: {
+        historyApiFallback: true,
+        contentBase: [
+            path.join(__dirname, "../../public/views"), //网站的根目录为 根目录/dist，如果配置不对，会报Cannot GET /错误
+            path.join(__dirname, '../../public/build')
+        ],
+        proxy: {
+            '/api/oauth/github': {
+                target: 'http://localhost:8091/',
+                changeOrigin: true,
+                secure: false
+            },
+            '!/public/build': {
+                target: 'http://localhost:3000'
+            }
+        },
+        publicPath: '/public/build',
+        inline: true,
+        // hot: true,
+        allowedHosts: [
+            'app.lilyzt.com',
+            'grafana.lilyzt.com'
+        ],
+        port: 8090, //端口改为9000
+        // open:true // 自动打开浏览器，适合懒人
+    }
 })

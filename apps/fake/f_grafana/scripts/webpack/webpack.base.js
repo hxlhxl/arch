@@ -1,4 +1,5 @@
 const path = require('path');
+const sassRuleLoader = require('./sass.rule')({sourceMap: false, minimize: false, preserveUrl: false});
 
 module.exports = {
     target: 'web',
@@ -74,14 +75,15 @@ module.exports = {
                 test: /\.html$/,
                 loader: "html-loader"
             },
-            {
-                test: /\.scss$/,
-                use: [
-                    "style-loader", // creates style nodes from JS strings
-                    "css-loader",   // translate CSS info CommonJS
-                    "sass-loader"   // compiles Sass to CSS
-                ]
-            }
+            sassRuleLoader,
+            // {
+            //     test: /\.scss$/,
+            //     use: [
+            //         "style-loader", // creates style nodes from JS strings
+            //         "css-loader",   // translate CSS info CommonJS
+            //         "sass-loader"   // compiles Sass to CSS
+            //     ]
+            // }
         ]
     },
     optimization: {
