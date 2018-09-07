@@ -35,7 +35,7 @@ module.exports = merge(base, {
             template: path.resolve(__dirname, '../../public/views/index.template.html'),
             inject: 'body',
             chunks: ['app'],
-            // alwaysWriteToDisk: true
+            alwaysWriteToDisk: true
         }),
         // new CopyWebpackPlugin([{
         //     from: __dirname + '/../../public/views/index.html',

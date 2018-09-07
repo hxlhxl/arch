@@ -76,4 +76,12 @@ server(api): http://localhost:3000/
    出现这个的原因在于scss应用了多个loader规则
 3. [Uncaught RangeError: Maximum call stack size exceeded](https://github.com/webpack/webpack-dev-server/issues/87)
     webpack-dev-server的--hot选项和HotModuleReplacementPlugin有冲突
-4. 
+4. 在开发的时候，采用webpack-dev-server,这个时候如果修改css，页面虽然刷新了，但是没有发生变化。
+   一番查询之后，发现index.html中的js链接没有发生变化，还是修改之前的js。
+   首先猜测是服务器cache，全局搜索发现并没有
+   再次猜测是客户端cache，但是注释了pkg/api/http_server.go中关于cache-control的内容后，仍然不生效
+   接下来就是怀疑go-macaron框架的问题，然后查了半天一无所获。
+   就在心灰意冷的时候，比较了一下grafana的代码，心想为啥会有webpack.dev.js，里面别无二致。
+   最后，还是不甘心的时候，再仔细看了看cache-control部分的代码，看逻辑有setting.DEV这种，尝试修改配置文件，发现真成了。
+
+   最后，我猜测是go-macaron框架自身会有默认的cache-control,只有在development显示覆盖不cache，才不会返回之前的内容.
