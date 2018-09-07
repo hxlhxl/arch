@@ -106,7 +106,6 @@ func prepareStaticOptions(dir string, options []StaticOptions) StaticOptions {
 }
 
 func staticHandler(ctx *macaron.Context, log *log.Logger, opt StaticOptions) bool {
-	log.Println("static handler called")
 	if ctx.Req.Method != "GET" && ctx.Req.Method != "HEAD" {
 		return false
 	}
@@ -163,7 +162,7 @@ func staticHandler(ctx *macaron.Context, log *log.Logger, opt StaticOptions) boo
 	if opt.AddHeaders != nil {
 		opt.AddHeaders(ctx)
 	}
-
+	log.Println("file is:", file)
 	http.ServeContent(ctx.Resp, ctx.Req.Request, file, fi.ModTime(), f)
 	return true
 }

@@ -8,6 +8,60 @@
 
 ## Directives
 
+angularjs1.5之前，directive的this绑定在Window上，如果以ES6 Class作为link的值，不会有预期的效果，正确的应该是如下写法：
+```
+// 这种情况下，link函数返回了实例，会在实例的原型上查找一下属性，比如restrict,link等。
+
+import Viewer from './viewer';
+import './viewer.css';
+
+class ViewerLink {
+    constructor() {
+        this.restrict = 'A';
+    }
+
+    link($scope, element, attrs, $controller) {
+        element.on("click", function(evt) {
+            // xhr动态插入的图片要异步初始化.
+            var viewer = new Viewer(element[0], {
+                url: 'src',
+                title: false,
+                // navbar: false,
+                toolbar: {
+                    oneToOne: true,
+        
+                    prev: function() {
+                        viewer.prev(true);
+                    },
+        
+                    next: function() {
+                        viewer.next(true);
+                    },
+
+                    download: function() {
+                        const a = document.createElement('a');
+            
+                        a.href = viewer.image.src;
+                        a.download = viewer.image.alt;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    },
+                },
+            });
+            viewer.show();
+        });
+    }
+}
+
+export default () => new ViewerLink();
+
+qdgjModule.directive('qdgjPreviewImg', viewerDirective);
+```
+
+~~angularjs1.5之后，原生支持ES Class,在link函数中，this指向的是directive返回对象.~~这里其实自己也不是特别理解，只是发现在没有使用babel转译的时候(比如typestript)，类就是单纯的函数，而在babel环境下，转译后的代码会首先检查this是不是Class的instance。
+
+
 - 什么是``Directives``
 - ``Directives`` ``Matching``
 - ``Normalization`` 归一

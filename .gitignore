@@ -1,5 +1,6 @@
 imitate/cspider
 apps/fake/f_hashnode/public/build/*
+apps/fake/f_grafana/public/build/
 apps/fake/f_hashnode/server/venv
 interview/Resumes
 interview/Corp
