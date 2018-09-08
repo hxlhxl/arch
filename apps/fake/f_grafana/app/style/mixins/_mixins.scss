@@ -5,3 +5,69 @@
         clear: both;
     }
 }
+
+// Box sizing
+@mixin box-sizing($boxmodel) {
+    box-sizing: $boxmodel;
+}
+
+@mixin tab-focus {
+    // Default
+    outline: thin dotted;
+    // Webkit
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+// Center-align a block level element
+@mixin center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Sizing shortcuts
+@mixin size($height, $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin square($size) {
+    @include size($size, $size);
+}
+
+// Placeholder text
+@mixin placeholder($color: $placeholderText) {
+    &:-moz-placeholder {
+        color: $color;
+    }
+    &:ms-input-placeholder {
+        color: $color;
+    }
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
+}
+
+// Text overflow
+// Requires inline-block or block for proper styling
+@mixin text-overflow() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+// CSS image replacement
+// Source: https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757
+.hide-text {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+// FONTS
+@mixin font-family-serif {
+    font-family: $font-family-serif;
+}

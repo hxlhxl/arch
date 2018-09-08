@@ -8,6 +8,7 @@
 
 // BASE
 @import 'base/normalize'; // css reset文件 from: https://github.com/necolas/normalize.css
+@import 'base/reboot';  // bootstrap.v4 reboot.css
 
 // UTILS
 @import 'utils/utils';

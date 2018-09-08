@@ -61,9 +61,10 @@ npm install --save localforage
 # development
 
 ```
+// 修改app_mode为development
 npm run dev
 npm run dev-server
-client: http://localhost:8090/
+client: http://localhost:8090/  []
 server(api): http://localhost:3000/
 ```
 
