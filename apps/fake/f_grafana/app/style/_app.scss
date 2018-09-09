@@ -5,10 +5,14 @@
 
 // MIXINS
 @import 'mixins/mixins';
+@import 'mixins/hover';
 
 // BASE
 @import 'base/normalize'; // css reset文件 from: https://github.com/necolas/normalize.css
 @import 'base/reboot';  // bootstrap.v4 reboot.css
+@import 'base/type'; // 
+@import 'base/fonts'; // font-awesome, grafana_icons...
+@import 'base/icons';
 
 // UTILS
 @import 'utils/utils';
@@ -18,6 +22,7 @@
 @import 'layout/page';
 
 // COMPONENTS
+@import 'components/footer';
 // @import 'components/navs';
 
 // PAGES

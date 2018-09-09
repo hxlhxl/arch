@@ -1,3 +1,6 @@
+# git
+CommitID: 72af8a70440761a470a9804fea5b367b0aff953c
+
 # server
 ## prerequirement(ArchLinux)
 ```
@@ -86,3 +89,6 @@ server(api): http://localhost:3000/
    最后，还是不甘心的时候，再仔细看了看cache-control部分的代码，看逻辑有setting.DEV这种，尝试修改配置文件，发现真成了。
 
    最后，我猜测是go-macaron框架自身会有默认的cache-control,只有在development显示覆盖不cache，才不会返回之前的内容.
+5. grafana中有一个不好的设计是static资源都使用public,这个不是特别的好，客户端可以随意知道前端的代码，所以这里自定义了其他的静态目录，相关代码在pkg/api/http_server.go的mapStatic部分。
+   这里还有一点是，在开发环境下，webpack-dev-server所有的资源都是在/public/build下访问，所以即使是url()这种资源，也会以该路径为起始路径，所以为了最小化资源权限，font-awesome/_variables.scss以`../`表示tff等字体访问`/public/build/../**.ttf`，而http_server中建立`WEBROOT/app/fonts`静态资源的映射。
+

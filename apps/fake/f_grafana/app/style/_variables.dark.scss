@@ -82,6 +82,7 @@ $page-gradient: linear-gradient(180deg, #222426 10px, rgb(22, 23, 25) 100px);
 // Links
 // -------------------------------------------------------------------------------
 $link-color: darken($white, 11%);
+$link-hover-color: $white;
 $abbr-border-color: $dark-3 !default;
 $text-muted: $text-color-weak;
 

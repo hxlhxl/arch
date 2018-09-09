@@ -57,7 +57,7 @@ module.exports = merge(base, {
         historyApiFallback: true,
         contentBase: [
             path.join(__dirname, "../../public/views"), //网站的根目录为 根目录/dist，如果配置不对，会报Cannot GET /错误
-            // path.join(__dirname, '../../public/build')
+            path.join(__dirname, '../../public/build')
         ],
         proxy: {
             '/api/oauth/github': {
