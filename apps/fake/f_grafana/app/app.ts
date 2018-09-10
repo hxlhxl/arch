@@ -10,7 +10,7 @@ import 'vendor/bootstrap/bootstrap';
 import $ from 'jquery';
 import angular from 'angular';
 
-import {coreModule} from './core/core'; // grafana.core
+import {coreModule} from './core/core'; // grafana.core: components/directives/services
 import {setupNgRoutes} from './routes/routes';
 
 export class App {

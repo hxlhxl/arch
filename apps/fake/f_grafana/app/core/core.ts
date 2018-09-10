@@ -7,6 +7,8 @@ import appEvents from './app_events';
 import componentEntry from './components';
 // directives
 import directiveEntry from './directives';
+// services
+import serviceEntry from './services';
 
 function noop() {}
 
@@ -17,5 +19,7 @@ export {
     // components
     componentEntry,
     // directives
-    directiveEntry
+    directiveEntry,
+    // services
+    serviceEntry,
 };

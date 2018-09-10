@@ -25,10 +25,11 @@ export class RootCtrl {
 export function rootComponent(playlistSrv, contextSrv, $timeout, $rootScope, $location) {
     return {
         restrict: 'E',
-        controller: RootCtrl,
+        controller: RootCtrl, // attaches a controller to the template of a directive
         link: (scope, elem) => {
             var sidemenuOpen;
             var body = $('body');
+            console.log(scope);
 
             $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 
@@ -61,6 +62,7 @@ export function rootComponent(playlistSrv, contextSrv, $timeout, $rootScope, $lo
             // manage page classes
             var pageClass;
             scope.$on('$routeChangeSuccess', function(evt, data) {
+                console.log(evt, data);
                 if (pageClass) {
                     body.removeClass(pageClass);
                 }
@@ -199,7 +201,8 @@ export function rootComponent(playlistSrv, contextSrv, $timeout, $rootScope, $lo
                     popover.hide();
                 }
             });
-        }
+        },
+        // template: '', // empty string by default.
     };
 }
 
