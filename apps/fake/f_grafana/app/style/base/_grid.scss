@@ -5,3 +5,20 @@
     @include make-container();
     @include make-container-max-widths();
 }
+
+// Fluid container
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+.container-fluid {
+    @include make-container();
+}
+
+// Row
+// Row contain and clear the floats of your columns.
+.row {
+    @include make-row();
+}
+
+// COlumns
+// Common styles for small and large grid columns
+@include make-grid-columns();
