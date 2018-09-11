@@ -71,3 +71,33 @@
 @mixin font-family-serif {
     font-family: $font-family-serif;
 }
+
+
+// Gradient Bar Colors for buttons and alerts
+@mixin gradientBar($primaryColor, $secondaryColor, $text-color: #fff, $textShadow: 0 -1px 0 rgba(0, 0, 0, .25)) {
+    color: $text-color;
+    text-shadow: $textShadow;
+    @include gradient-vertical($primaryColor, $secondaryColor);
+    border-color: $primaryColor;
+}
+
+// Gradients
+@mixin gradient-horizontal($startColor: #555, $endColor: #333) {
+    background-color: $endColor;
+    background-image: linear-gradient(
+        to right,
+        $startColor,
+        $endColor
+    ); // Standard, IE10
+    background-repeat: repeat-x;
+}
+  
+@mixin gradient-vertical($startColor: #555, $endColor: #333) {
+    background-color: mix($startColor, $endColor, 60%);
+    background-image: linear-gradient(
+        to bottom,
+        $startColor,
+        $endColor
+    ); // Standard, IE10
+    background-repeat: repeat-x;
+}

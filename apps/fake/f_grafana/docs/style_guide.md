@@ -1,5 +1,15 @@
 
 # css书写风格
+https://github.com/fex-team/styleguide
+属性书写顺序： 布局方式、位置 -> 尺寸 -> 文本 -> 视觉效果 
+
+
+
+Formatting Model 相关属性包括：position / top / right / bottom / left / float / display / overflow 等
+Box Model 相关属性包括：border / margin / padding / width / height 等
+Typographic 相关属性包括：font / line-height / text-align / word-wrap 等
+Visual 相关属性包括：background / color / transition / list-style 等
+
 # sass文件组织架构
 # css最佳实践
 

@@ -1,1 +1,27 @@
 $login-border: #8daac5;
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 85vh;
+    min-width: 100%;
+    margin-left: 0;
+
+    color: #d8d9da;
+    background-color: $black;
+    background-image: url("../img/cesar-couto-420982-unsplash.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    & a {
+        color: #d8d9da !important;
+    }
+
+    & .btn-primary {
+        @include buttonBackground(#ff6600, #bc3e06);
+    }
+
+}
