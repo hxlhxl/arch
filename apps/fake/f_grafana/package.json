@@ -51,6 +51,7 @@
     "eventemitter3": "^3.1.0",
     "jquery": "^3.3.1",
     "localforage": "^1.7.2",
+    "moment": "^2.22.2",
     "tether-drop": "^1.4.2"
   }
 }

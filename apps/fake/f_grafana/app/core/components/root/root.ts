@@ -19,6 +19,7 @@ export class RootCtrl {
             $scope.contextSrv = contextSrv;
             $scope.appSubUrl = config.appSubUrl;
         };
+        $scope.init();
     }
 }
 
@@ -29,7 +30,6 @@ export function rootComponent(playlistSrv, contextSrv, $timeout, $rootScope, $lo
         link: (scope, elem) => {
             var sidemenuOpen;
             var body = $('body');
-            console.log(scope);
 
             $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 

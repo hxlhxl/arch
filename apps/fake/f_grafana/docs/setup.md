@@ -60,6 +60,9 @@ npm install --save angular
 npm install --save angular-route
 npm install --save eventemitter3
 npm install --save localforage
+npm install --save moment
+npm install --save tether-drop
+
 
 # development
 
@@ -92,4 +95,6 @@ server(api): http://localhost:3000/
 5. grafana中有一个不好的设计是static资源都使用public,这个不是特别的好，客户端可以随意知道前端的代码，所以这里自定义了其他的静态目录，相关代码在pkg/api/http_server.go的mapStatic部分。
    这里还有一点是，在开发环境下，webpack-dev-server所有的资源都是在/public/build下访问，所以即使是url()这种资源，也会以该路径为起始路径，所以为了最小化资源权限，font-awesome/_variables.scss以`../`表示tff等字体访问`/public/build/../**.ttf`，而http_server中建立`WEBROOT/app/fonts`静态资源的映射。
 6. angularjs directive中controller和controllerAs的区别: https://stackoverflow.com/a/41825900
+7. angularjs的directive中，如何在scope上注入service？
+   这个问题在开发的时候大概阻塞了大半天，一般情况下，directive中的link函数中，是可以直接访问注入的service的，但是如果想要把service绑定到link中的scope上，就要在controller中注入，即`$scope.xSrv = srv`,因为这个directive受控于这个controller，所以在`$scope`上的注入会反映在link上.代码见`app\core\components\root\root.ts`。
 

@@ -11,6 +11,7 @@ const (
 )
 
 func setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, error) {
+	settings, _ := getFrontendSettingsMap(c);
 	var data = dtos.IndexViewData{
 		User: &dtos.CurrentUser{
 			Id:                         c.UserId,
@@ -30,7 +31,7 @@ func setIndexViewData(c *m.ReqContext) (*dtos.IndexViewData, error) {
 			HelpFlags1:                 c.HelpFlags1,
 			// HasEditPermissionInFolders: hasEditPermissionInFoldersQuery.Result,
 		},
-		// Settings:                settings,
+		Settings:                settings,
 		// Theme:                   prefs.Theme,
 		Theme:						"twilight",
 		// AppUrl:                  appURL,

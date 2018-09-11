@@ -23,3 +23,10 @@ server.Run()
 
 # macaron flow
 https://go-macaron.com/docs/intro/core_concepts#macaron-实例
+
+
+# 常见问题
+
+1. 在什么地方往前端js注入了配置数据？
+   /pkg/api/index.go中的setIndexViewData
+2. 
