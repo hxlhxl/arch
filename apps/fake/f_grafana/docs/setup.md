@@ -1,3 +1,8 @@
+# TODO
+
+1. login页iconfont的处理 icon-gf icon-gf-grafana_wordmark
+2. 
+
 # git
 CommitID: 72af8a70440761a470a9804fea5b367b0aff953c
 
@@ -40,6 +45,7 @@ npm install --save-dev postcss-loader
 npm install --save-dev node-sass
 npm install --save-dev sass-loader
 npm install --save-dev expose-loader
+npm install --save-dev file-loader
 npm install --save-dev html-webpack-plugin
 npm install --save-dev html-webpack-harddisk-plugin
 npm install --save-dev clean-webpack-plugin
@@ -99,4 +105,18 @@ server(api): http://localhost:3000/
 6. angularjs directive中controller和controllerAs的区别: https://stackoverflow.com/a/41825900
 7. angularjs的directive中，如何在scope上注入service？
    这个问题在开发的时候大概阻塞了大半天，一般情况下，directive中的link函数中，是可以直接访问注入的service的，但是如果想要把service绑定到link中的scope上，就要在controller中注入，即`$scope.xSrv = srv`,因为这个directive受控于这个controller，所以在`$scope`上的注入会反映在link上.代码见`app\core\components\root\root.ts`。
+8. ng-router的html中报错(参考： https://vuejs-templates.github.io/webpack/static.html)
+   ```
+    ERROR in ./app/partials/login.html
+    Module not found: Error: Can't resolve './app/img/logo.png' in 'e:\workspace\goland\src\github.als'
+   ```
+   这个还是自身对webpack不熟悉。
+   静态资源的解析规则如下：所以统一改为
 
+   Relative URLs, e.g. ./assets/logo.png will be interpreted as a module dependency. They will be replaced with an auto-generated URL based on your Webpack output configuration.
+
+    Non-prefixed URLs, e.g. assets/logo.png will be treated the same as the relative URLs and translated into ./assets/logo.png.
+
+    URLs prefixed with ~ are treated as a module request, similar to require('some-module/image.png'). You need to use this prefix if you want to leverage Webpack's module resolving configurations. For example if you have a resolve alias for assets, you need to use <img src="~assets/logo.png"> to ensure that alias is respected.
+
+    Root-relative URLs, e.g. /assets/logo.png are not processed at all.

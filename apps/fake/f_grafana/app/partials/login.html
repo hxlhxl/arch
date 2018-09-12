@@ -1,10 +1,41 @@
 <div class="login container">
     <div class="login-content">
         <div class="login-branding">
-
+            <img class="logo-icon" src="~app/img/logo.png" alt="Grafana" />
+            <i class="icon-gf icon-gf-grafana_wordmark"></i>
         </div>
         <div class="login-outer-box">
-            
+            <div class="login-inner-box" id="login-view">
+                <form name="loginForm" class="login-form-group gf-form-group" ng-hide="disableLoginForm">
+                    <div class="login-form">
+                        <input type="text" name="username" class="gf-form-input login-form-input" required 
+                            autofocus ng-model="formModel.user" placeholder="{{loginHint}}" />
+                    </div>
+                    <div class="login-form">
+                        <input type="password" name="password" class="gf-form-input login-form-input" required
+                        ng-model="formModel.password" id="inputPassword" placeholder="password" />
+                    </div>
+                    <div class="login-button-group">
+                        <button type="submit" class="btn btn-large p-x-2" ng-click="submit();"
+                            ng-class="{'btn-inverse': !loginForm.$valid, 'btn-primary': loginForm.$valid}">
+                            Log In
+                        </button>
+                        <div class="small login-button-forgot-password">
+                            <a href="user/password/send-reset-email">
+                                Forgot your password?
+                            </a>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-center login-divider" ng-show="oauthEnabled">
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="text-center login-oauth" ng-show="oauthEnabled"></div>
+                <div class="login-signup-box" ng-show="!disableUserSignUp"></div>
+            </div>
+            <div class="login-inner-box remove hidden" id="change-password-view"></div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

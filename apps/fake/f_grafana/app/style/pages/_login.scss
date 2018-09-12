@@ -25,3 +25,70 @@ $login-border: #8daac5;
     }
 
 }
+
+.login-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    z-index: 1;
+
+    max-width: 700px;
+    min-height: 320px;
+}
+
+.login-branding {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+
+    padding-top: 2rem;
+
+    .logo-icon {
+        width: 70px;
+        margin-bottom: 15px;
+    }
+
+    .icon-gf-grafana_wordmark {
+        color: darken($white, 11%);
+        position: relative;
+        font-size: 2rem;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
+    }
+}
+
+.login-outer-box {
+    display: flex;
+    overflow-y: hidden;
+}
+
+.login-inner-box {
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 415px;
+    transform: translate(0px, 0px);
+    transition: 0.25s ease;
+
+    &.add {
+        transform: translate(0px, -320px);
+        &.hidden {
+            display: none;
+        }
+    }
+
+    &.remove {
+        transform: translate(0px, 320px);
+        &.hidden {
+            display: none;
+        }
+    }
+}

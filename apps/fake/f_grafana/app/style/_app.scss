@@ -6,6 +6,7 @@
 // MIXINS
 @import 'mixins/mixins';
 @import 'mixins/buttons';
+@import 'mixins/forms';
 @import 'mixins/breakpoints';
 @import 'mixins/grid';
 @import 'mixins/grid-framework';
@@ -28,6 +29,7 @@
 
 // COMPONENTS
 @import 'components/footer';
+@import 'components/gf-form';
 // @import 'components/navs';
 
 // PAGES
