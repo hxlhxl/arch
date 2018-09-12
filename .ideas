@@ -1,0 +1,43 @@
+RoadMap
+    Docker
+        C/C++ High Perf
+        Process/Thread
+            Python Crawler  非小号
+                Crawling Data
+                    Sync/Store Big Data(MySQL,Posgresql,Redis,MongoDB)
+                        Webapp(React,Vue,Angular)
+                        Android
+                        iOS
+                    Architecture/DevOps/System Design
+
+    logging
+        arch
+    learning
+        bisheng
+        data-dog
+
+RoadMap_resource
+    Android: https://github.com/codepath/android_guides
+    
+Redesign
+
+Design
+    devRant
+    小米商城
+    
+
+
+Idea
+    Nginx Configuration management
+        /etc/nginx/nginx.conf
+        /etc/nginx/conf.d/vhosts
+    Frontend Develop Environment Setup based on Webpack,Babel,CSS,mobile...
+
+
+0. cloud.lilyzt.com(ucloud)
+1. 前端项目管理平台
+2. 前端API mock、test平台
+3. 服务器监控平台
+4. windows port killer
+5. git relay
+    本地_远程_公司git
