@@ -1,3 +1,20 @@
+
+
+# think&thoughts
+为什么停止f_grafana的开发？
+  当开发到login.html页面的时候，遇到以下阻塞性问题：
+  1. iconfont设计
+  2. 背景图片的设计
+  这两个问题直接导致自己无法写出漂亮的页面，遂放弃在工作时间继续的想法，改为去学习系统设计，私下好好学习设计。
+  现在设定如下目标:
+    Adobe Photoshop
+    Adobe Illustrator
+    Sketch
+    先从PS学起，在来AI，最后Sketch，目标过年前有所领悟，能够自己设计图片和字体。
+    所以接下来就开始f_yapi的工作。
+    
+# self-way
+
 RoadMap
     Docker
         C/C++ High Perf

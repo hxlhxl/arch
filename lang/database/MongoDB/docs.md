@@ -7,3 +7,18 @@
     此外，mongod还会默认监听28017端口，同样是绑定所有ip。这是一个mongod自带的web监控界面。从中可以获取到数据库当前连接、log、状态、运行系统等信息。如果你开启了–rest参数，甚至可以直接通过web界面查询数据，执行mongod命令。
 
     其实MongoDB本身有非常详细的安全配置准则，显然开发者也是想到了，然而他是将安全的任务推给用户去解决，这本身的策略就是偏向易用性的，对于安全性，则得靠边站了。
+
+
+# MongoDB vs MySQL
+
+term                MongoDB             explanation
+database            database            数据库
+table               collection          表/集合
+row                 document            行/文档
+column              filed               字段/域
+index               index               索引
+primaryKey          primaryKey          主键/_id
+
+
+
+# 
