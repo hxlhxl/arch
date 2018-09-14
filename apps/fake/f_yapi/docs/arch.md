@@ -41,4 +41,10 @@ models/*
 
 1. 在user collection创建管理员账户
 2. 在user collection的username、email(unique index) field设置index,参见MongoDB Driver API： http://mongodb.github.io/node-mongodb-native/2.0/api/Collection.html#createIndex
-3. 
+3. 在创建索引的阶段，实际上就是已经成功连接，mongoose.connection.db.collection('user').createIndex({})，顺便会创建表(Collection)
+4. 2,3两步会创建Collection和amdin账户，然后就退出了
+
+# runtime
+node server/app.js
+
+1. 

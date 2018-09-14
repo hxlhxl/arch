@@ -47,6 +47,7 @@ Model.prototype.save
 
 
 # Connection
+Mongoose允许在连接没有建立之前就映射Schema，而有些操作是需要到连接之后才能使用的，Connection就是其中之一，在没有成功建立connection之前，以下引用都是undefined.
 
 Connection.prototype.db
     The mongodb.Db instance, set when the connection is opened(具体可看MongoDB Driver文档： http://mongodb.github.io/node-mongodb-native/3.1/api/Db.html)
