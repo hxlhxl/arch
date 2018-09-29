@@ -16,6 +16,7 @@
 # self-way
 
 RoadMap
+    iOS+Swift: Paul Hegarty’s Stanford iOS 10 Course
     Docker
         C/C++ High Perf
         Process/Thread
@@ -62,3 +63,13 @@ Idea
 6. two-factor authentication demo
 7. Demo平台
 8. 权限管理平台
+
+
+
+
+Todo
+    1. Promise的实现： bluebird
+    2. ImageViewer的实现
+    3. HttpLib的实现： axios + request
+    4. 表单校验实现： Yup + Formik
+    5. 
