@@ -13,5 +13,9 @@ sudo systemctl start vsftpd
 
 # 上传
 
+4. filezilla
 
+在FileZilla 中： 
+- 用sftp协议连接Server ，需要用port 22 
+- 用ftp协议连接Server, 用port21
  

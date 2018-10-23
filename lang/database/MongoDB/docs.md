@@ -21,4 +21,11 @@ primaryKey          primaryKey          主键/_id
 
 
 
-# 
+# 参考文档
+
+http://mongodb.github.io/node-mongodb-native/2.0/api/index.html
+
+http://mongodb.github.io/node-mongodb-native/3.1/api/index.html
+
+https://mongoosejs.com/docs/api.html
+
