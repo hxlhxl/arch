@@ -1,5 +1,18 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+    require('load-grunt-tasks')(grunt);
+
     grunt.initConfig({
+        babel: {
+            options: {
+                sourceMap: true,
+                presets: ['@babel/preset-env']
+            },
+            dist: {
+                files: {
+                    'dist/app.js': 'src/app.js'
+                }
+            }
+        },
         jshint: {
             all: ['src/**/*.js'],
             options: {
@@ -15,20 +28,24 @@ module.exports = function(grunt) {
                     sinon: false,
                 },
                 browser: true,
-                devel: true
+                devel: true,
+                esversion: 6,
             }
         },
         testem: {
             unit: {
-                src: [
+                src_files: [
+                    'src/**/*.js',
                     'test/**/*.js'
                 ],
-                options:{
+                options: {
                     debug: true,
                     framework: 'jasmine2',
                     launch_in_dev: ['PhantomJS'],
-                    before_tests: 'grunt jshint',
+                    // before_tests: 'grunt jshint',
                     serve_files: [
+                        'node_modules/lodash/lodash.min.js',
+                        'node_modules/jquery/dist/jquery.js',
                         'node_modules/sinon/pkg/sinon.js',
                         'src/**/*.js',
                         'test/**/*.js'
@@ -45,4 +62,6 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-testem');
+    grunt.registerTask('babel', ['babel']);
+    grunt.registerTask('default', ['testem:run:unit']);
 }
