@@ -1,3 +1,8 @@
+# 参考文档
+    http://nqdeng.github.io/7-days-nodejs/#4.2.3
+    
+
+
 # module-模块
 
 每个js文件都是一个模块。

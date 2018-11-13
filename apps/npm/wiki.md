@@ -17,3 +17,13 @@
 ```
 [husa@ArchLinux-husa ~]$ sudo npm uninstall swagger-editor swagger-server  swagger-ui -g
 ```
+
+## 查看发布的包的版本
+
+```
+husa$ npm show @angular/cli@* version               
+@angular/cli@1.0.0 '1.0.0'
+@angular/cli@1.0.1 '1.0.1'
+@angular/cli@1.0.2 '1.0.2'
+...
+```
