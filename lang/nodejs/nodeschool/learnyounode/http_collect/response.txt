@@ -1,0 +1,9 @@
+{
+  "args": {}, 
+  "headers": {
+    "Connection": "close", 
+    "Host": "httpbin.org"
+  }, 
+  "origin": "112.95.161.96", 
+  "url": "http://httpbin.org/get"
+}

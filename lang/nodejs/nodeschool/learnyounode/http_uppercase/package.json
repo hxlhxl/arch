@@ -1,0 +1,17 @@
+{
+  "name": "http_uppercase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "http_uppercase.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^1.2.1",
+    "querystring": "^0.2.0",
+    "through2-map": "^3.0.0"
+  }
+}

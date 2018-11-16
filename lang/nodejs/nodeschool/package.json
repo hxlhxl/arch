@@ -1,0 +1,16 @@
+{
+  "name": "nodeschool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "learnyounode": "learnyounode"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "learnyounode": "^3.5.10"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "juggling_async",
+  "version": "1.0.0",
+  "description": "",
+  "main": "async-juggling_async.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "node-fetch": "^2.3.0"
+  }
+}

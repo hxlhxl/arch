@@ -1,12 +1,10 @@
 
 # Flow
 
-
 router
 
 router.use(query middleware)
 router.use(init middleware)
-
 
 
 # 中间件
@@ -117,8 +115,13 @@ app.settings = {
     有path和handler的时候，
 - app.set(setting, val)
     在app.settings上设置kv，如果只有setting，则返回对应的value
+    如果setting为`etag`,`query parser`和`trust proxy`的时候，还会再app.settings上设置对应的函数比如： app.settings['etag fn'] = compileETag(val)
+- app.enable(setting)
+    本质为 this.set(setting, true);
 
 - app.lazyrouter()
+    再app添加一个Router实例到_router上
+
     ```
     if (!this._router) {
       this._router = new Router({
@@ -134,139 +137,70 @@ app.settings = {
 - app.handle(req, res, callback)
     Dispatch a req, res pair into the application. Starts pipeline processing.
     最终是调用route上path对应的处理函数
+    每当客户端发送一个请求，服务端都会使用app.router上对应path的handler去处理请求
+    ```
+      var router = this._router;
+
+      // final handler
+      var done = callback || finalhandler(req, res, {
+        env: this.get('env'),
+        onerror: logerror.bind(this)
+      });
+
+      // no routes
+      if (!router) {
+        debug('no routes defined on app');
+        done();
+        return;
+      }
+
+      router.handle(req, res, done);
+    ```
 
 - app.use(fn)
+    调用app.lazyrouter()
+    应用中间件
+      如果是普通中间件，那么会直接router.use(path, fn), path默认为'/'
+      如果中间件是一个express app，那么会存在paranet app, emit('mount')事件等
+
+    0. 应用级中间件
+      ```
+        app.use(function (req, res, next) {
+          console.log('Time:', Date.now())
+          next()
+        })
+      ```
+      在
     1. app.use(express.static(...))
       在'/'上使用中间件
     2. app.use('/user', fn);
       在'/user'上使用中间件
 
+
+- app.listen()
+
+  ```
+  server = http.createServer(this);
+  return server.listen.apply(server, arguments);
+  ```
 # Router
 
-
-``` next
-
-function next(err) {
-    var layerError = err === 'route'
-      ? null
-      : err;
-
-    // remove added slash
-    if (slashAdded) {
-      req.url = req.url.substr(1);
-      slashAdded = false;
-    }
-
-    // restore altered req.url
-    if (removed.length !== 0) {
-      req.baseUrl = parentUrl;
-      req.url = protohost + removed + req.url.substr(protohost.length);
-      removed = '';
-    }
-
-    // signal to exit router
-    if (layerError === 'router') {
-      setImmediate(done, null)
-      return
-    }
-
-    // no more matching layers
-    if (idx >= stack.length) {
-      setImmediate(done, layerError);
-      return;
-    }
-
-    // get pathname of request
-    var path = getPathname(req);
-
-    if (path == null) {
-      return done(layerError);
-    }
-
-    // find next matching layer
-    var layer;
-    var match;
-    var route;
-
-    while (match !== true && idx < stack.length) {
-      layer = stack[idx++];
-      match = matchLayer(layer, path);
-      route = layer.route;
-
-      if (typeof match !== 'boolean') {
-        // hold on to layerError
-        layerError = layerError || match;
-      }
-
-      if (match !== true) {
-        continue;
-      }
-
-      if (!route) {
-        // process non-route handlers normally
-        continue;
-      }
-
-      if (layerError) {
-        // routes do not match with a pending error
-        match = false;
-        continue;
-      }
-
-      var method = req.method;
-      var has_method = route._handles_method(method);
-
-      // build up automatic options response
-      if (!has_method && method === 'OPTIONS') {
-        appendMethods(options, route._options());
-      }
-
-      // don't even bother matching route
-      if (!has_method && method !== 'HEAD') {
-        match = false;
-        continue;
-      }
-    }
-
-    // no match
-    if (match !== true) {
-      return done(layerError);
-    }
-
-    // store route for dispatch on change
-    if (route) {
-      req.route = route;
-    }
-
-    // Capture one-time layer values
-    req.params = self.mergeParams
-      ? mergeParams(layer.params, parentParams)
-      : layer.params;
-    var layerPath = layer.path;
-
-    // this should be done for the layer
-    self.process_params(layer, paramcalled, req, res, function (err) {
-      if (err) {
-        return next(layerError || err);
-      }
-
-      if (route) {
-        return layer.handle_request(req, res, next);
-      }
-
-      trim_prefix(layer, layerError, layerPath, path);
-    });
-  }
-
 ```
+function router(req, res, next) {
+  router.handle(req, res, next);
+}
+```
+
 ## Attributes
 - stack
     [],layer栈
 ## API
 
+- router.handle(fn)
 - router.use(fn)
     路由中间件设置函数
-    
+    对于每个函数，都会在`router.stack`变量上如栈一个`Layer`实例，这个`layer`和`path`与`fn`绑定， 默认`path`为'/'
+- router.handle(req, res, out)
 
 ## Layer
 
@@ -301,3 +235,10 @@ exports.init = function(app){
 
 ## query
 返回 解析客户端query string 的中间件
+
+
+# Layer
+
+
+
+
