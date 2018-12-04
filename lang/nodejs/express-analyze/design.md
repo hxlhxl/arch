@@ -9,6 +9,19 @@ router.use(init middleware)
 
 # 中间件
 
+app.use(function(req, res, next) {})  // 默认path为`/`,会匹配所有路由
+app.use() only see whether url starts with specified path where app.all() will match complete path.
+
+
+next() call inside a middleware invokes the next middleware or route handler depending on whichever is declared next. But next() call inside a route handler invokes the next route handler only. If there is a middleware next then it’s skipped. Therefore middlewares must be declared above all route handlers.
+
+
+
+middleware和router之间存在顺序，一般时middleware位于最前面
+middleware和router中如果不调用next或者end,那么express会阻塞，客户端最终获得empty response
+middleware和router调用next，则会最终把req，res传递到下一个middleware或者router
+next('route')只对router(app.get, app.post等)有作用，表示跳过下一个route callback，middleware仍然会执行。
+如果next()之后还有代码，而不是`return next()`或者`next(); return;`，那么这个middleware next之后的代码在请求结束之后还会执行。
 
 
 - 应用级中间件

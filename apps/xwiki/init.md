@@ -1,3 +1,7 @@
+0. 解压gz文件
+
+zcat xwiki.sql.gz > xwiki.sql
+
 1. 下载war包
 地址： http://www.xwiki.org/xwiki/bin/view/Download/
 版本为： 	xwiki-enterprise-web-7.1.1.war

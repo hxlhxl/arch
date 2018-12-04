@@ -42,6 +42,7 @@ mock
 refs
 labs
 docs/*
+dist
 setup
 #################
 *.private
