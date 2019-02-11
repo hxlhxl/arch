@@ -246,7 +246,7 @@ Build an image from a Dockerfile
 ### 指令
 
 - FROM
-- RUN
+- RUN： 容器构建期间运行指定的命令
 - COPY: 从context复制文件到引擎
      COPY <源路径>...<目标路径>
      COPY ["<源路径1>",..."<目标路径>"]

@@ -1,4 +1,11 @@
 
+# reference
+
+https://github.com/withspectrum/spectrum
+    huaxiong[google]
+    hxlhxl[github]
+https://github.com/devhubapp/devhub
+
 
 # think&thoughts
 为什么停止f_grafana的开发？
@@ -63,11 +70,14 @@ Idea
 6. two-factor authentication demo
 7. Demo平台
 8. 权限管理平台
-9. 基于Web的文件\字符同步
+9. 基于Web的文件\字符同步 pastebin
 10. 利用工作时间在Leetcode摸鱼而不被发现.
-11. UI 套路
+11. UI 套路 blueprint
 12. Blog平台
-
+13. 小米 open-falcon使用
+14. local proxy command(proxychains)
+    vps: git clone '...'
+    local: 
 
 Todo
     1. Promise的实现： bluebird
@@ -75,3 +85,18 @@ Todo
     3. HttpLib的实现： axios + request
     4. 表单校验实现： Yup + Formik
     5. 
+
+
+
+需求評審
+    博客、論壇平臺
+        登錄、註冊、個人中心、設置等
+        權限
+        操作日誌、登錄日誌等
+        寫文章、瀏覽次數、修改文章
+        評論+回覆、關注、收藏、點讚、分享
+        搜索
+
+        私信、消息
+        群組、聊天
+        

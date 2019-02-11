@@ -108,6 +108,8 @@ qdgjModule.directive('qdgjPreviewImg', viewerDirective);
                 footer: '?paneFooter'
             }
         ```
+        有子元素的时候，需要再父组件中添加`ng-transclue`指令。
+        
     require: 该directive必须在指定的directive出现下才能运行
         ```
             require: 'myTabs'   // self only

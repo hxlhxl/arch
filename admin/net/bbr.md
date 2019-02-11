@@ -8,3 +8,21 @@ sysctl net.ipv4.tcp_congestion_control
 
 lsmod | grep bbr
 ```
+
+
+
+```
+$ su
+$ touch /etc/sysctl.conf
+$ echo "net.core.default_qdisc=fq" >> /etc/sysctl.d/bbr.conf
+$ echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.d/bbr.conf
+$ sysctl -p
+$ sysctl net.ipv4.tcp_available_congestion_control
+$ sysctl net.ipv4.tcp_congestion_control
+
+$ reboot
+
+$ lsmod | grep bbr
+
+```
+

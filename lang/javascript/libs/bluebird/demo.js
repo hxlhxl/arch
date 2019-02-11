@@ -95,6 +95,7 @@ ps.then(res => {
 # Anti-Pattern
 
 ```
+// 这种写法是正确的，但是总感觉怪怪的
 function badAsyncCall() {
     var promise = Promise.resolve(100);
     promise.then(function(val) {
@@ -106,6 +107,25 @@ function badAsyncCall() {
 
 badAsyncCall().then(res => console.log(res));
 
+
+
+
+var p = new Promise((res, rej) => {
+    res(1);
+    rej(2);
+    res(3);
+  });
+  
+  p.then(x => console.log('resolved to '+x))
+  .catch(x => console.log('never called '+x));
+  
+  p.then(x => console.log("one more "+ x));
+  p.then(x => console.log("two more "+ x));
+  p.then(x => console.log("three more "+ x));
+  
+
+  
+  
 function anAsyncCall() {
     var promise = Promise.resolve();
     return promise.then(function() {

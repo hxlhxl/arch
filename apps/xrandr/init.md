@@ -1,3 +1,12 @@
+# 让DP-1-1和LVDS2一模一样
+xrandr --output LVDS2 --same-as DP-1-1
+
+# 让DP-1-1在LVDS2的右边
+xrandr --output LVDS2 --left-of DP-1-1
+
+
+
+
 ```
 Screen 0: minimum 8 x 8, current 1600 x 900, maximum 32767 x 32767
 LVDS1 connected primary 1600x900+0+0 (normal left inverted right x axis y axis) 310mm x 170mm

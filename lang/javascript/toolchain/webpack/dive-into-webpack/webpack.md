@@ -71,11 +71,12 @@ chunkId就是这些module组成的chunk的一个webpack的内部索引。
 
 
 **chunk naming**
-动态引入的chunk，可以命名，其中`index`和`request`可以作为变量使用
+动态引入的chunk，可以命名，其中`index`和`request`可以作为变量使用,但是在Webpack中配置`chunkFilename: '[name].[chunkhash].chunk.js'`.
 
 ```
 import(/* webpackChunkName: "[index].[request]" */ `./${btn_module}`);
 ```
+
 
 **chunk loading**
 这个和`webpack.config.target`有关，如果`target`为`web`，那么这些chunk会以`jsonp`的形式请求获取。

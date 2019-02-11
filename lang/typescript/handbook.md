@@ -390,6 +390,146 @@ square.sideLength = 10;
 
 # Classes
 
+- 
+- Inherits(继承)
+- (多态)
+- (修饰符)
+    public by default
+    private:
+        实例无法直接访问
+        有private修饰的类型，比较一定不相同
+    protected：
+        子类方法可以访问
+        修饰 构造函数 时，只能从子类实例化调用
+    readonly:
+        必须在 构造函数 或者 声明 时直接初始化，实例无法修改
+- Parameter properties
+    直接在构造函数中隐式地初始化
+    
+    ```
+    class Octopus {
+        readonly numberOfLegs: number = 8;
+        constructor(readonly name: string) {
+        }
+    }
+    ```
+
+- getter/setter
+- static
+    类上的变量，只能通过类名访问，无法通过实例访问
+
+- Abstract class(抽象类)
 
 
 
+
+# Modules
+
+Modules are executed within their own scope, not in the global scope.
+This means that variables, functions, classes, etc declared in a module are not visible outside the module unless they are explicitly exported using one of the `export forms`.
+Conversely, to consume a variable, function, class, interface, etc. exported from a different module, it has to be imported using one of the `import forms`.
+Any file containing a top-level `import` or `export` is considered a module.
+
+## Export
+
+- export a declaration
+
+```
+export interface StringValidator {
+    isAcceptable(s: string): boolean;
+}
+
+export const numberRegexp = /^[0-9]+$/;
+
+export class ZipCodeValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}
+```
+
+- export statements
+
+export statements are handy when exports need to be renamed for consumers, so the above example can be written as:
+带有中括号的export和普通的export没有区别，都是把变量挂载在exports之上。
+
+```
+class ZipCodeValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}
+export { ZipCodeValidator }
+export { ZipCodeValidator as mainValidator }
+```
+
+
+- Re-exports
+
+``` ParseIntBasedZipCodeValidator.ts
+export class ParseIntBasedZipCodeValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && parseInt(s).toString() === s;
+    }
+}
+
+export { ZipCodeValidator as RegExpBasedZipCodeValidator} from './ZipCodeValidator';
+```
+
+在我理解下，`export * from 'xxx'`相当于把`xxx`中所有export的变量原封不动的再次export了一遍。
+
+``` AllValidator.ts
+export * from './StringValidator';
+export * from './LettersOnlyValidator';
+export * from './ZipCodeValidator';
+```
+
+- Default Exports
+
+每个模块可以有且仅有一个`default exports`,其作用在于使用者可以随意对引入的变量命名。
+class和funtion以及值(values)可以直接被`default export`
+
+```
+declare let $: JQuery;
+export default $;
+--
+import jQuery from 'JQuery';
+```
+
+```
+export default "124";
+```
+
+
+## Import
+
+- import a single export from a module
+- import as rename
+- import the entire module into a single variable
+- default import
+
+
+
+# Type
+
+- Union Type
+    |
+- Intersection Type
+    &
+- as
+
+    ```
+        interface Foo {
+            bar: number;
+            bas: string;
+        }
+        var foo = <Foo>{};  // var foo = {} as Foo;
+        foo.bar = 123;
+        foo.bas = 'hello';
+    ```
+- literal
+    ```
+        let foo: 'Hello';
+    ```
+
+    
