@@ -78,6 +78,7 @@ Idea
 14. local proxy command(proxychains)
     vps: git clone '...'
     local: 
+15. 本地markdown文件web化，支持搜索编辑等...
 
 Todo
     1. Promise的实现： bluebird
